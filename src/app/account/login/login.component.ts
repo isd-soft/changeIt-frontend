@@ -5,7 +5,11 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../../services';
 
-@Component({ templateUrl: 'login.component.html',  styleUrls: ['./login.component.css'] })
+@Component({
+  selector: 'app-login',
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.css']
+})
 export class LoginComponent implements OnInit {
     form: FormGroup;
     loading = false;
@@ -46,11 +50,11 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    const returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
-                    this.alertService.error(error);
+                    this.alertService.error();
                     this.loading = false;
                 }
             });

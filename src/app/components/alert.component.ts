@@ -23,10 +23,10 @@ export class AlertComponent implements OnInit, OnDestroy {
                 // clear alerts when an empty alert is received
                 if (!alert.message) {
                     // filter out alerts without 'keepAfterRouteChange' flag
-                    this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
+                    this.alerts = this.alerts.filter(x => x.message);
 
                     // remove 'keepAfterRouteChange' flag on the rest
-                    this.alerts.forEach(x => delete x.keepAfterRouteChange);
+                    this.alerts.forEach(x => delete x.message);
                     return;
                 }
 
