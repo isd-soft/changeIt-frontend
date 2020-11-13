@@ -8,7 +8,8 @@ import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
 import { HomeComponent } from './home';;
-import { MenuComponent } from './menu/menu.component'
+import { MenuComponent } from './menu/menu.component';
+import { WelcomeComponent } from './welcome/welcome.component'
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { MenuComponent } from './menu/menu.component'
         AlertComponent,
         HomeComponent
 ,
-        MenuComponent
+        MenuComponent,
+        WelcomeComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
