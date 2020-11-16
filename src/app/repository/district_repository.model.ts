@@ -5,10 +5,12 @@ import {DistrictService} from '../services/district.service';
 @Injectable()
 export class DistrictModel {
   private district: District[] = new Array<District>();
-  private locator = (d: District, id: number) => d.district_id === id;
+  private locator = (d: District, id: number) => d.district_id == id;
 
   constructor(private districtService: DistrictService) {
-    this.districtService.getAllDistricts().subscribe(district => this.district = district);
+    this.districtService.getAllDistricts().subscribe(district => {
+      this.district = district
+    });
   }
 
   getAllDistricts(): District[]{

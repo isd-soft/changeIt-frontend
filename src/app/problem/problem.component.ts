@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Problem} from '@app/models/problem';
-import {ProblemModel} from '@app/repository/problem_repository.model';
-import {Subscription} from 'rxjs';
-import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
+import {Problem} from "@app/models/problem";
+import {ProblemModel} from "@app/repository/problem_repository.model";
 
 @Component({
   selector: 'app-problem',

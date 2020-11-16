@@ -7,7 +7,8 @@ import {WelcomeComponent} from '@app/welcome/welcome.component';
 import {LoginComponent} from '@app/account/login/login.component';
 import {RegisterComponent} from '@app/account/register/register.component';
 import {ProblemComponent} from '@app/problem/problem.component';
-import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
+import {ProblemModelResolver} from "@app/problem/problem_model.resolver";
+
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
