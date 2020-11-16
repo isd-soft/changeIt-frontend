@@ -13,6 +13,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ProblemComponent } from './problem/problem.component';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
+import {UserPageComponent} from '@app/user-page/user-page.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
         MenuComponent,
         WelcomeComponent,
         ProblemComponent,
+        UserPageComponent,
     ],
     providers: [
         ProblemModel, ProblemModelResolver,
