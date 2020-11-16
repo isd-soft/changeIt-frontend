@@ -8,7 +8,8 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-    problems: Problem[];
+
+    voteSorting = true;
 
     constructor(private problemModel: ProblemModel) { }
 
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit{
   }
 
   getProblems(): Problem[] {
-    return this.problemModel.getProblems();
+    return this.problemModel.getProblems(this.voteSorting);
   }
 
   deleteProblem(key: number): void {
@@ -32,5 +33,9 @@ export class HomeComponent implements OnInit{
 
   createProblem(problem: Problem): void {
     this.problemModel.saveProblem(problem);
+  }
+
+  toggleVoteSorting(): void {
+      this.voteSorting = !this.voteSorting;
   }
 }

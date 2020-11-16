@@ -11,8 +11,12 @@ export class ProblemModel {
     this.problemService.getData().subscribe(data => this.problem = data);
   }
 
-  getProblems(): Problem[] {
-    return this.problem;
+  getProblems(voteSorting: boolean): Problem[] {
+    if (voteSorting) {
+      return this.problem.sort((a, b) => b.votes - a.votes);
+    } else {
+      return this.problem.sort((a, b) => a.votes - b.votes);
+    }
   }
 
   getProblem(id: number): Problem {
