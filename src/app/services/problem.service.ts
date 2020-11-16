@@ -32,8 +32,13 @@ export class ProblemService {
     return this.sendRequest<Problem>('DELETE', `${environment.apiUrl}/problem/${id}`);
   }
 
-  private sendRequest<T>(verb: string, url: string, body?: Problem)
-    : Observable<T> {
+  vote(problem: Problem): Observable<Problem> {
+    return this.sendRequest<Problem>('POST', `${environment.apiUrl}/problem/${problem.problem_id}`, problem);
+  }
+
+  private sendRequest<T>(verb: string, url: string, body?: Problem): Observable<T> {
+
+    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProblemComponent } from './problem/problem.component';
 import {ProblemModel} from '@app/repository/problem_repository.model';
+import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
 
 @NgModule({
     imports: [
@@ -29,7 +30,7 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
         ProblemComponent,
     ],
     providers: [
-        ProblemModel,
+        ProblemModel, ProblemModelResolver,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],

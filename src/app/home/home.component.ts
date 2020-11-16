@@ -1,5 +1,4 @@
 ﻿import {Component, OnInit} from '@angular/core';
-
 import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 
