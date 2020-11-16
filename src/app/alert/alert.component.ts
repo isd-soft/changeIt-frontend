@@ -23,10 +23,10 @@ export class AlertComponent implements OnInit, OnDestroy {
                 // clear alerts when an empty alert is received
                 if (!alert.message) {
                     // filter out alerts without 'keepAfterRouteChange' flag
-                    this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
+                    this.alerts = this.alerts.filter(x => x.message);
 
                     // remove 'keepAfterRouteChange' flag on the rest
-                    this.alerts.forEach(x => delete x.keepAfterRouteChange);
+                    this.alerts.forEach(x => delete x.message);
                     return;
                 }
 
@@ -55,7 +55,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     removeAlert(alert: Alert) {
         // check if already removed to prevent error on auto close
-        if (!this.alerts.includes(alert)) return;
+        if (!this.alerts.includes(alert)) { return; }
 
         if (this.fade) {
             // fade out alert
@@ -72,7 +72,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     cssClass(alert: Alert) {
-        if (!alert) return;
+        if (!alert) { return; }
 
         const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
 
@@ -81,7 +81,7 @@ export class AlertComponent implements OnInit, OnDestroy {
             [AlertType.Error]: 'alert alert-danger',
             [AlertType.Info]: 'alert alert-info',
             [AlertType.Warning]: 'alert alert-warning'
-        }
+        };
 
         classes.push(alertTypeClass[alert.type]);
 
