@@ -1,18 +1,37 @@
-﻿import { Component } from '@angular/core';
+﻿import {Component, OnInit} from '@angular/core';
 
-import { User } from '@app/models';
-import { AccountService } from '@app/services';
+import {Problem} from '@app/models/problem';
+import {ProblemModel} from '@app/repository/problem_repository.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-    user: User;
+export class HomeComponent implements OnInit{
+    problems: Problem[];
 
-    constructor(private accountService: AccountService) {
-        this.user = this.accountService.userValue;
-        console.log(this.user);
-    }
+    constructor(private problemModel: ProblemModel) { }
+
+    ngOnInit(): void { }
+
+  getProblem(key: number): Problem {
+    return this.problemModel.getProblem(key);
+  }
+
+  getProblems(): Problem[] {
+    return this.problemModel.getProblems();
+  }
+
+  deleteProblem(key: number): void {
+    this.problemModel.deleteProblem(key);
+  }
+
+  editProblem(problem: Problem): void {
+    this.problemModel.saveProblem(problem);
+  }
+
+  createProblem(problem: Problem): void {
+    this.problemModel.saveProblem(problem);
+  }
 }

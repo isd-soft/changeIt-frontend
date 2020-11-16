@@ -2,7 +2,18 @@
   <div class="filter col-2">
     <h1>Filter</h1>
   </div>
+
   <div class="problems col-10">
     <h1>Problems</h1>
+    <div class="card m-3" *ngFor="let problem of getProblems()" [routerLink]= "['/problem/', problem?.problem_id]" >
+      <div class="card-header">
+        <h5>{{ problem?.title }}</h5>
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">{{ problem?.description }}</p>
+
+      </div>
+    </div>
   </div>
 </div>

@@ -6,16 +6,17 @@ import { AuthGuard } from './helpers';
 import {WelcomeComponent} from '@app/welcome/welcome.component';
 import {LoginComponent} from '@app/account/login/login.component';
 import {RegisterComponent} from '@app/account/register/register.component';
+import {ProblemComponent} from '@app/problem/problem.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
-    { path: '', component: WelcomeComponent },
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'problem/:id' , component: ProblemComponent, canActivate: [AuthGuard]},
+  { path: '', component: WelcomeComponent, },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
