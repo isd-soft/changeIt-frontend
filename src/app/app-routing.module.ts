@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'problem/:id' , component: ProblemComponent, canActivate: [AuthGuard], resolve: { model: ProblemModelResolver }},
   { path: 'tables', component: TablesComponent},
-  { path: '', component: WelcomeComponent, },
+  { path: '', component: WelcomeComponent},
   { path: 'user-page', component: UserPageComponent},
   { path: '**', redirectTo: '' }
 ];

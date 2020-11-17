@@ -44,7 +44,7 @@ export class TablesComponent implements OnInit {
     const district: District = this.getDistrict(districtId);
     district.districtName = districtName;
     this.districtService.updateDistrict(district).subscribe( );
-    }
+  }
 
   createDistrict(districtName: string): void {
     const district: District = new District();
@@ -91,15 +91,14 @@ export class TablesComponent implements OnInit {
   editLocation(locationId: number, locationName: string, districtId: number): void {
     const location: Location = this.getLocation(locationId);
     location.locationName = locationName;
-    location.district_id = districtId;
+    location.district.district_id = districtId;
     this.locationService.updateLocation(location).subscribe( );
   }
 
   createLocation(locationName: string, districtId: number): void {
     const location: Location = new Location();
-    const district: District = this.getDistrict(districtId);
     location.locationName = locationName;
-    district.district_id = districtId;
+    location.district = this.getDistrict(districtId);
     this.locationService.saveLocation(location).subscribe( );
   }
 }
