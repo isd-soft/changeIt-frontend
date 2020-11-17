@@ -14,7 +14,7 @@ export class ProblemModel {
   getProblems(voteSorting?: boolean): Problem[] {
     if (voteSorting) {
       return this.problem.sort((a, b) => b.votes - a.votes);
-    } else if(!voteSorting){
+    } else if (!voteSorting){
       return this.problem.sort((a, b) => a.votes - b.votes);
     }
     return this.problem;

@@ -15,6 +15,9 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
 import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
 import {UserPageComponent} from '@app/user-page/user-page.component';
 import { AddProblemComponent } from './add-problem/add-problem.component';
+import { DistrictComponent } from './district/district.component';
+import { DomainComponent } from './domain/domain.component';
+import {LocationComponent} from '@app/location/location.component';
 
 @NgModule({
     imports: [
@@ -31,7 +34,10 @@ import { AddProblemComponent } from './add-problem/add-problem.component';
         WelcomeComponent,
         ProblemComponent,
         UserPageComponent,
-        AddProblemComponent
+        AddProblemComponent,
+        DistrictComponent,
+        DomainComponent,
+        LocationComponent
     ],
     providers: [
         ProblemModel, ProblemModelResolver,
