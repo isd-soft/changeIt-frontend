@@ -12,7 +12,7 @@ import {LocationModel} from "@app/repository/location_repository.model";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private district: District;
+  selectedDistrict: District;
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel) {
@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
     return this.locationModel.getAllLocations();
   }
 
-
+  display(){
+    console.log(this.selectedDistrict)
+  }
 
 }
