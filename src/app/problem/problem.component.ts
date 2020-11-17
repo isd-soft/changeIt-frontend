@@ -24,7 +24,6 @@ export class ProblemComponent implements OnInit {
     private accountService: AccountService,
   ) {
     route.params.subscribe(params => {
-
       const id = params.id;
       if (id != null) {
         Object.assign(this.problem, problemModel.getProblem(id));
