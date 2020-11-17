@@ -5,6 +5,9 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {Domain} from '@app/models/domain';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {Location} from '@app/models/location';
+import {DistrictService} from '@app/services/district.service';
+import {DomainService} from '@app/services/domain.service';
+import {LocationService} from '@app/services/location.service';
 
 
 @Component({
@@ -16,7 +19,11 @@ export class TablesComponent implements OnInit {
 
   constructor(private districtModel: DistrictModel,
               private domainModel: DomainModel,
-              private locationModel: LocationModel) {
+              private locationModel: LocationModel,
+              private districtService: DistrictService,
+              private domainService: DomainService,
+              private locationService: LocationService,
+  ) {
   }
 
   ngOnInit(): void { }
@@ -33,12 +40,16 @@ export class TablesComponent implements OnInit {
     this.districtModel.deleteDistrict(key);
   }
 
-  editDistrict(district: District): void {
-    this.districtModel.saveDistrict(district);
-  }
+  editDistrict(districtId: number, districtName: string): void {
+    const district: District = this.getDistrict(districtId);
+    district.districtName = districtName;
+    this.districtService.updateDistrict(district).subscribe( );
+    }
 
-  createDistrict(district: District): void {
-    this.districtModel.saveDistrict(district);
+  createDistrict(districtName: string): void {
+    const district: District = new District();
+    district.districtName = districtName;
+    this.districtService.saveDistrict(district).subscribe( );
   }
 
   getDomain(key: number): Domain {
@@ -53,12 +64,16 @@ export class TablesComponent implements OnInit {
     this.domainModel.deleteDomain(key);
   }
 
-  editDomain(domain: Domain): void {
-    this.domainModel.saveDomain(domain);
+  editDomain(domainId: number, domainName: string): void {
+    const domain: Domain = this.getDomain(domainId);
+    domain.domainName = domainName;
+    this.domainService.updateDomain(domain).subscribe( );
   }
 
-  createDomain(domain: Domain): void {
-    this.domainModel.saveDomain(domain);
+  createDomain(domainName: string): void {
+    const domain: Domain = new Domain();
+    domain.domainName = domainName;
+    this.domainService.saveDomain(domain).subscribe( );
   }
 
   getLocation(key: number): Location {
@@ -73,11 +88,18 @@ export class TablesComponent implements OnInit {
     this.locationModel.deleteLocation(key);
   }
 
-  editLocation(location: Location): void {
-    this.locationModel.saveLocation(location);
+  editLocation(locationId: number, locationName: string, districtId: number): void {
+    const location: Location = this.getLocation(locationId);
+    location.locationName = locationName;
+    location.district_id = districtId;
+    this.locationService.updateLocation(location).subscribe( );
   }
 
-  createLocation(location: Location): void {
-    this.locationModel.saveLocation(location);
+  createLocation(locationName: string, districtId: number): void {
+    const location: Location = new Location();
+    const district: District = this.getDistrict(districtId);
+    location.locationName = locationName;
+    district.district_id = districtId;
+    this.locationService.saveLocation(location).subscribe( );
   }
 }
