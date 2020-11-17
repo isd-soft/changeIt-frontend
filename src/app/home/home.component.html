@@ -1,7 +1,6 @@
 ﻿<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
-
       <h3>Filter</h3>
       <div>
         <p>Select a district</p>
@@ -14,7 +13,21 @@
        <p>Select  location</p>
         <label>
           <select [(ngModel)]='selectedLocation'>
-            <option *ngFor="let location of getAllLocations()">{{location.locationName}}</option>
+            <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
+          </select>
+        </label>
+
+        <p>Select  domain</p>
+        <label>
+          <select [(ngModel)]='selectedDomain'>
+            <option *ngFor="let domain of getAllDomains()" [ngValue]="domain">{{domain.domainName}}</option>
+          </select>
+        </label>
+
+        <p>Select problem status</p>
+        <label>
+          <select [(ngModel)]='problemStatus'>
+            <option *ngFor="let status of problemStatuses" [value]="status">{{status}}</option>
           </select>
         </label>
       </div>
@@ -25,8 +38,14 @@
         Problems
       </h3>
 
-      <div class="card bg-light m-3" *ngFor="let problem of getProblems()"
-           [routerLink]="['/problem/', problem?.problem_id]">
+
+      <div>
+        <button class="btn btn-primary" (click)="toggleVoteSorting()">
+          Sort by votes
+        </button>
+      </div>
+
+      <div class="card bg-light m-3" *ngFor="let problem of getProblems()" [routerLink]= "['/problem/', problem?.problem_id]" >
         <h5 class="card-header">
           <h5>{{ problem?.title }}</h5>
           <p><i>{{ problem?.created_at }}</i></p>

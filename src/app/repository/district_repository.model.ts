@@ -8,7 +8,7 @@ export class DistrictModel {
   private locator = (d: District, id: number) => d.district_id == id;
 
   constructor(private districtService: DistrictService) {
-    this.districtService.getAllDistricts().subscribe(district => {
+    this.districtService.getData().subscribe(district => {
       this.district = district
     });
   }

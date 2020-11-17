@@ -18,8 +18,8 @@ export class ProblemService {
     return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem');
   }
 
-  saveProblem(article: Problem): Observable<Problem> {
-    return this.sendRequest<Problem>('POST', environment.apiUrl + '/problem', article);
+  saveProblem(problem: Problem): Observable<Problem> {
+    return this.sendRequest<Problem>('POST', environment.apiUrl + '/problem', problem);
   }
 
   updateProblem(problem: Problem): Observable<Problem> {

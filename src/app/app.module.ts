@@ -14,10 +14,13 @@ import { ProblemComponent } from './problem/problem.component';
 import {DistrictModel} from '@app/repository/district_repository.model';
 import {AlertComponent} from '@app/alert';
 import {ProblemModel} from '@app/repository/problem_repository.model';
-import {ProblemModelResolver} from "@app/problem/problem_model.resolver";
+import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
+import {UserPageComponent} from '@app/user-page/user-page.component';
+import { DistrictComponent } from './district/district.component';
+import { DomainComponent } from './domain/domain.component';
+import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from "@app/repository/location_repository.model";
-import {Callback} from "@app/pipe/callback";
-
+import {DomainModel} from "@app/repository/domain_repository.model";
 
 @NgModule({
     imports: [
@@ -34,10 +37,13 @@ import {Callback} from "@app/pipe/callback";
         MenuComponent,
         WelcomeComponent,
         ProblemComponent,
-        Callback
+        UserPageComponent,
+        DistrictComponent,
+        DomainComponent,
+        LocationComponent
     ],
     providers: [
-        ProblemModel, ProblemModelResolver, DistrictModel, LocationModel,
+        ProblemModel, ProblemModelResolver, DistrictModel, LocationModel, DomainModel,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
