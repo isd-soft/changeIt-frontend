@@ -1,51 +1,22 @@
 ﻿<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
+
       <h3>Filter</h3>
       <div>
         <p>Select a district</p>
         <label>
-          <select [(ngModel)]="selectedDistrict" >
-            <option  *ngFor="let district of getDistricts()" [ngValue]="district">{{district.districtName}}</option>
+          <select [(ngModel)]='selectedDistrict' >
+            <option  *ngFor="let district of getDistricts()" [ngValue]="district" > {{district.districtName}} </option>
           </select>
         </label>
 
-        <p>Select a location</p>
+       <p>Select  location</p>
         <label>
-          <select >
-            <option *ngFor="let location of getAllLocations()">{{location.location_name}}</option>
+          <select [(ngModel)]='selectedLocation'>
+            <option *ngFor="let location of getAllLocations()">{{location.locationName}}</option>
           </select>
         </label>
-
-        <button (click)="display()">Search</button>
-
-        <!--        <div>
-                  <button  class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
-                          aria-haspopup="false" aria-expanded="false">
-                    Choose district
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item">
-                      <div class="custom-control custom-checkbox" *ngFor="let district of getDistricts()">
-                        <input type="checkbox" class="custom-control-input" id="checkbox1">
-                        <label class="custom-control-label" for="checkbox1">{{ district?.districtName }}</label>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div>
-                  <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                    Choose location
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" *ngFor="let location of getAllLocations()">
-                      <div class="custom-control custom-checkbox">
-                        <input type="radio" class="custom-control-input" id="checkbox2">
-                        <label class="custom-control-label" for="checkbox2">{{ location?.location_name }}</label>
-                      </div>
-                    </a>
-                  </div>
-                </div>-->
       </div>
     </div>
 

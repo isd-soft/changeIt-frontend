@@ -13,6 +13,7 @@ import {LocationModel} from "@app/repository/location_repository.model";
 })
 export class HomeComponent implements OnInit {
   selectedDistrict: District;
+  selectedLocation: Location;
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel) {
@@ -31,11 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllLocations(): Location[]{
-    return this.locationModel.getAllLocations();
+    return this.locationModel.getAllLocations().filter(location =>
+      location.district.district_id === this.selectedDistrict.district_id);
   }
-
-  display(){
-    console.log(this.selectedDistrict)
-  }
-
 }

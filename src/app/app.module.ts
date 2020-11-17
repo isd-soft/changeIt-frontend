@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import {AlertComponent} from '@app/alert';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {ProblemModelResolver} from "@app/problem/problem_model.resolver";
 import {LocationModel} from "@app/repository/location_repository.model";
-
+import {Callback} from "@app/pipe/callback";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {LocationModel} from "@app/repository/location_repository.model";
         MenuComponent,
         WelcomeComponent,
         ProblemComponent,
+        Callback
     ],
     providers: [
         ProblemModel, ProblemModelResolver, DistrictModel, LocationModel,

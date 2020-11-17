@@ -1,5 +1,7 @@
+import {District} from "@app/models/district";
+
 export class Location {
   location_id: number;
-  location_name: string;
-  district_id: number;
+  locationName: string;
+  district: District;
 }
