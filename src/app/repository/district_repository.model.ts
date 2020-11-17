@@ -15,6 +15,10 @@ export class DistrictModel {
     return this.district.find(d => this.locator(d, id));
   }
 
+  getDistricts(): District[]{
+    return this.district;
+  }
+
   saveDistrict(district: District): void {
     if (district.district_id == 0 || district.district_id == null) {
       this.districtService.saveDistrict(district)

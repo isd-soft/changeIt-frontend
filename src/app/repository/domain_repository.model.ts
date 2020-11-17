@@ -15,6 +15,10 @@ export class DomainModel {
     return this.domain.find(d => this.locator(d, id));
   }
 
+  getDomains(): Domain[]{
+    return this.domain;
+  }
+
   saveDomain(domain: Domain): void {
     if (domain.domain_id == 0 || domain.domain_id == null) {
       this.domainService.saveDomain(domain)

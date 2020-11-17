@@ -15,6 +15,10 @@ export class LocationModel {
     return this.location.find(l => this.locator(l, id));
   }
 
+  getLocations(): Location[]{
+    return this.location;
+  }
+
   saveLocation(location: Location): void {
     if (location.location_id == 0 || location.location_id == null) {
       this.locationService.saveLocation(location)
