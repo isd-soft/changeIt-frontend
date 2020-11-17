@@ -1,0 +1,55 @@
+<div class="p-4">
+
+  <div class="container">
+    <h1>Create a problem</h1>
+
+
+<!--    <form #problemForm="ngForm">-->
+    <form [formGroup]="addProblemForm" (ngSubmit)="onSubmit(addProblemForm.value)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="description" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="district">District</label>
+        <select class="form-control" id="district" formControlName="district" required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="domain">Domain</label>
+        <select class="form-control selectpicker" id="domain" formControlName="domain" multiple required>
+          <option>Mustard</option>
+          <option>Ketchup</option>
+          <option>Relish</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+<!--        <input type="file" (change)="onFileSelected($event)" formControlName="file">-->
+        <input type="file" formControlName="file">
+        <!--    <button type="button" (click)="onUpload()">Upload</button>-->
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+<!--<div>-->
+<!--  {{myFirstReactiveForm.value | json}}-->
+<!--</div>-->
+<script>
+  $(document).ready(function () {
+    $('.selectpicker').selectpicker();
+  });
+
+</script>

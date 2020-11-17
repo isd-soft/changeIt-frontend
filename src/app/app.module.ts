@@ -14,6 +14,7 @@ import { ProblemComponent } from './problem/problem.component';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
 import {UserPageComponent} from '@app/user-page/user-page.component';
+import { AddProblemComponent } from './add-problem/add-problem.component';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import {UserPageComponent} from '@app/user-page/user-page.component';
         WelcomeComponent,
         ProblemComponent,
         UserPageComponent,
+        AddProblemComponent
     ],
     providers: [
         ProblemModel, ProblemModelResolver,
