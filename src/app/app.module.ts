@@ -17,6 +17,10 @@ import {UserPageComponent} from '@app/user-page/user-page.component';
 import { DistrictComponent } from './district/district.component';
 import { DomainComponent } from './domain/domain.component';
 import {LocationComponent} from '@app/location/location.component';
+import { TablesComponent } from './tables/tables.component';
+import {DistrictModel} from '@app/repository/district_repository.model';
+import {LocationModel} from '@app/repository/location_repository.model';
+import {DomainModel} from '@app/repository/domain_repository.model';
 
 @NgModule({
     imports: [
@@ -35,10 +39,11 @@ import {LocationComponent} from '@app/location/location.component';
         UserPageComponent,
         DistrictComponent,
         DomainComponent,
-        LocationComponent
+        LocationComponent,
+        TablesComponent
     ],
     providers: [
-        ProblemModel, ProblemModelResolver,
+        ProblemModel, ProblemModelResolver, DistrictModel, LocationModel, DomainModel,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],

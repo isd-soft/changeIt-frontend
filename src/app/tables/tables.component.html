@@ -1,0 +1,55 @@
+
+<div class="container">
+  <p>Districts:</p>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">District Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let district of getDistricts()" [routerLink]= "['/district/', district?.district_id]">
+        <th scope="row"> {{ district?.district_id }} </th>
+        <td>{{ district?.districtName }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Locations:</p>
+  <table class="table table-striped table-dark">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Location Name</th>
+      <th scope="col">District id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text" *ngFor="let location of getLocations() let district of getDistricts()"
+        [routerLink]= "['/location/', location?.location_id]">
+      <th scope="row">{{ location?.location_id }} </th>
+      <td>{{ location?.locationName }}</td>
+      <td>{{ district?.district_id}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <p>Domains:</p>
+  <table class="table table-striped table-dark">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Domain Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text" *ngFor="let domain of getDomains()" [routerLink]= "['/domain/', domain?.domain_id]">
+      <th scope="row">{{ domain?.domain_id }} </th>
+      <td>{{ domain?.domainName }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>
