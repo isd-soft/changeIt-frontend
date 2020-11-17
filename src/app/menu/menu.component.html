@@ -22,7 +22,7 @@
         <a class="nav-link" routerLink="/register">Register</a>
       </li>
       <li class="nav-item" *ngIf="user">
-        <a class="nav-link" href="user-page">Profile</a>
+        <a class="nav-link" routerLink="/user-page">Profile</a>
       </li>
       <li class="nav-item" *ngIf="user">
         <a class="nav-link" (click)="logout()">Logout</a>
