@@ -13,7 +13,6 @@ export class UserPageComponent implements OnInit {
 
   constructor(private accountService: AccountService) {
     this.user = this.accountService.userValue;
-    console.log(this.user);
   }
 
   ngOnInit(): void {
