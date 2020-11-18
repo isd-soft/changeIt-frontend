@@ -6,4 +6,5 @@ export class Problem {
   created_at: string;
   updated_at: string;
   status: string;
+  locations: Location;
 }

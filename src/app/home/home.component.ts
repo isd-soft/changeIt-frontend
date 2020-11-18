@@ -15,11 +15,8 @@ import {DomainModel} from "@app/repository/domain_repository.model";
 })
 export class HomeComponent implements OnInit{
   voteSorting = true;
-  problemStatuses: Array<string>[] = ['ACTIVE', `IN_PROGRESS`, 'DONE', 'REJECTED'];
   selectedDistrict: District;
   selectedLocation: Location;
-  selectedDomain: Domain;
-  problemStatus: string;
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel) {

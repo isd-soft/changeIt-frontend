@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-2">
       <h3>Filter</h3>
-      <div>
+      <div class="border">
         <p>Select a district</p>
         <label>
           <select [(ngModel)]='selectedDistrict' >
@@ -16,20 +16,6 @@
             <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
           </select>
         </label>
-
-        <p>Select  domain</p>
-        <label>
-          <select [(ngModel)]='selectedDomain'>
-            <option *ngFor="let domain of getAllDomains()" [ngValue]="domain">{{domain.domainName}}</option>
-          </select>
-        </label>
-
-        <p>Select problem status</p>
-        <label>
-          <select [(ngModel)]='problemStatus'>
-            <option *ngFor="let status of problemStatuses" [value]="status">{{status}}</option>
-          </select>
-        </label>
       </div>
     </div>
 
@@ -37,7 +23,6 @@
       <h3>
         Problems
       </h3>
-
 
       <div>
         <button class="btn btn-primary" (click)="toggleVoteSorting()">
