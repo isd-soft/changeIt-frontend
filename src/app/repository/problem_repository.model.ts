@@ -24,11 +24,11 @@ export class ProblemModel {
 
   getProblemsByDate(dateSorting?: boolean): Problem[] {
     if (dateSorting) {
-      return this.problem.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+      return this.problems.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
     } else if (!dateSorting) {
-      return this.problem.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+      return this.problems.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
     }
-    return this.problem;
+    return this.problems;
   }
 
   getProblem(id: number): Problem {
