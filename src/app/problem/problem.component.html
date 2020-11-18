@@ -1,7 +1,7 @@
 <div class="container">
   <div class="title text-center m-4">
     <h1>{{ problem?.title }}</h1>
-    <p><i>{{ problem?.created_at }}</i></p>
+    <p><i>{{ problem?.created_at | date: 'medium' }}</i></p>
   </div>
   <div class="description p-5">
     <p>{{ problem?.description }}</p>

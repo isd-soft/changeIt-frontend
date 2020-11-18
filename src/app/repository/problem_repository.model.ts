@@ -9,7 +9,6 @@ export class ProblemModel {
 
   constructor(private problemService: ProblemService) {
     problemService.getData().subscribe(data => {
-      console.log(data);
       this.problems = data;
     });
   }
