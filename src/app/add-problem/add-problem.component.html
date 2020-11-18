@@ -1,55 +1,103 @@
-<div class="p-4">
+<div class="p-4" xmlns="http://www.w3.org/1999/html">
 
   <div class="container">
     <h1>Create a problem</h1>
+    <hr/>
+    <br>
 
-
-<!--    <form #problemForm="ngForm">-->
     <form [formGroup]="addProblemForm" (ngSubmit)="onSubmit(addProblemForm.value)">
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" formControlName="title" required>
+<!--               minlength="4" appForbiddenName="bob"-->
+<!--               [(ngModel)]="addProblemForm.title" #title="ngModel" >-->
+
+<!--        <div *ngIf="title.invalid && (title.dirty || title.touched)"-->
+<!--             class="alert alert-danger">-->
+
+<!--          <div *ngIf="title.errors.required">-->
+<!--            Title is required.-->
+<!--          </div>-->
+<!--          <div *ngIf="title.errors.minlength">-->
+<!--            Title must be at least 4 characters long.-->
+<!--          </div>-->
+<!--&lt;!&ndash;          <div *ngIf="title.errors.forbiddenName">&ndash;&gt;-->
+<!--&lt;!&ndash;            Title cannot be Bob.&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        </div>-->
+
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="3" formControlName="description" required></textarea>
+        <!--                <textarea class="form-control" id="description" rows="3" formControlName="description" required></textarea>-->
+        <editor id="description"
+                apiKey="1kl2nktawu3cy22qxlsuab5vl6kmq19itn7tp3wzagaukz8i"
+                formControlName="description"
+                [init]="{
+     height: 400,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+     toolbar:
+       'undo redo | formatselect | bold italic backcolor | \
+       alignleft aligncenter alignright alignjustify | \
+       bullist numlist outdent indent | removeformat | help'
+   }"
+        ></editor>
+
       </div>
+
 
       <div class="form-group">
         <label for="district">District</label>
-        <select class="form-control" id="district" formControlName="district" required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+        <select class="form-control selectpicker" id="district" formControlName="district" required>
+          <option data-hidden="true"></option>
+          <option *ngFor="let district of getDistricts()"
+                  value="{{district.district_id}}">{{district.districtName}}</option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <select class="form-control selectpicker" id="location" formControlName="location" required>
+          <option data-hidden="true"></option>
+          <option *ngFor="let location of getLocations()"
+                  value="{{location.location_id}}">{{location.locationName}}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="domain">Domain</label>
         <select class="form-control selectpicker" id="domain" formControlName="domain" multiple required>
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
+          <option *ngFor="let domain of getDomains()" value="{{domain.domain_id}}">{{domain.domainName}}</option>
+
         </select>
 
       </div>
 
       <div class="form-group">
-<!--        <input type="file" (change)="onFileSelected($event)" formControlName="file">-->
-        <input type="file" formControlName="file">
-        <!--    <button type="button" (click)="onUpload()">Upload</button>-->
+<!--        <label class="custom-file-upload">-->
+<!--          <input type="file"/>-->
+          <input type="file" formControlName="file">
+
+<!--          Upload file-->
+<!--        </label>-->
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </div>
-<!--<div>-->
-<!--  {{myFirstReactiveForm.value | json}}-->
-<!--</div>-->
+
 <script>
   $(document).ready(function () {
     $('.selectpicker').selectpicker();
+    getTinymce().init();
   });
+
 
 </script>

@@ -10,7 +10,9 @@ export class LocationModel {
   constructor(private locationService: LocationService) {
     this.locationService.getData().subscribe(data => this.location = data);
   }
-
+  getLocations(): Location[] {
+    return this.location;
+  }
   getLocation(id: number): Location {
     return this.location.find(l => this.locator(l, id));
   }

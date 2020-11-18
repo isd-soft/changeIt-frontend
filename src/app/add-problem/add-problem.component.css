@@ -1,6 +1,46 @@
-input.ng-touched.ng-invalid{
-  border-color: red;
+/*input.ng-touched.ng-invalid {*/
+/*  border-color: red;*/
+/*}*/
+
+/*input.ng-untouched.ng-valid {*/
+/*  border-color: forestgreen;*/
+/*}*/
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
 }
-input.ng-untouched.ng-valid{
-  border-color: forestgreen;
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+h1 {
+  color: cadetblue;
+}
+
+label {
+  /*color: #B4886B;*/
+  color: cadetblue;
+  font-weight: bold;
+  display: block;
+  width: 150px;
+  /*float: left;*/
+}
+
+button {
+  background-color: cadetblue;
+}
+
+/*input[type="file"] {*/
+/*  display: none;*/
+/*}*/
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: cadetblue;
+  color: white;
+  width: auto;
 }

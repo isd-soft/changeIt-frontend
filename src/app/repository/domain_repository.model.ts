@@ -11,6 +11,11 @@ export class DomainModel {
     this.domainService.getData().subscribe(data => this.domain = data);
   }
 
+
+  getDomains(): Domain[] {
+    return this.domain;
+  }
+
   getDomain(id: number): Domain {
     return this.domain.find(d => this.locator(d, id));
   }
