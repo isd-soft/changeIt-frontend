@@ -12,11 +12,14 @@ import {catchError} from 'rxjs/operators';
 export class ProblemService {
 
   constructor(private http: HttpClient, ) {
-    // http.get<Problem[]>(`${environment.apiUrl}/problem`);
   }
 
   getData(): Observable<Problem[]> {
     return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem');
+  }
+
+  getVote(id: number): Observable<number> {
+    return this.sendRequest<number>('GET', `${environment.apiUrl}/problem/${id}/votes`);
   }
 
   saveProblem(problem: Problem): Observable<Problem> {
@@ -32,9 +35,6 @@ export class ProblemService {
     return this.sendRequest<Problem>('DELETE', `${environment.apiUrl}/problem/${id}`);
   }
 
-  vote(problem: Problem): Observable<Problem> {
-    return this.sendRequest<Problem>('POST', `${environment.apiUrl}/problem/${problem.problem_id}`, problem);
-  }
 
   private sendRequest<T>(verb: string, url: string, body?: Problem): Observable<T> {
 
