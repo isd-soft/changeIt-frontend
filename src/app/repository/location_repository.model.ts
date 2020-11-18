@@ -21,7 +21,7 @@ export class LocationModel {
 
   saveLocation(location: Location): void {
     if (location.location_id == 0 || location.location_id == null) {
-      this.locationService.saveLocation(location)
+      this.locationService.createLocation(location)
         .subscribe(l => this.location.push(l));
     } else {
       this.locationService.updateLocation(location).subscribe(l => {

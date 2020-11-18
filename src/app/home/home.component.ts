@@ -10,6 +10,8 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
 export class HomeComponent implements OnInit{
 
     voteSorting = true;
+    dateSorting = true;
+    sort: string;
 
     constructor(
       private problemModel: ProblemModel,
@@ -18,12 +20,22 @@ export class HomeComponent implements OnInit{
     ngOnInit(): void { }
 
 
-    getProblems(): Problem[] {
-      return this.problemModel.getProblems(this.voteSorting);
+    getProblems(some: string): Problem[] {
+      if (some == 'vote'){
+        return this.problemModel.getProblems(this.voteSorting);
+      } else {
+        return this.problemModel.getProblemsByDate(this.dateSorting);
+      }
     }
 
     toggleVoteSorting(): void {
-        this.voteSorting = !this.voteSorting;
+      this.sort = 'vote';
+      this.voteSorting = !this.voteSorting;
+    }
+
+    toggleDateSorting(): void {
+      this.sort = 'date';
+      this.dateSorting = !this.dateSorting;
     }
 
 }

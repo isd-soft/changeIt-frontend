@@ -17,7 +17,7 @@ export class DistrictService {
     return this.sendRequest<District[]>('GET', environment.apiUrl + '/district');
   }
 
-  saveDistrict(article: District): Observable<District> {
+  createDistrict(article: District): Observable<District> {
     return this.sendRequest<District>('POST', environment.apiUrl + '/district', article);
   }
 

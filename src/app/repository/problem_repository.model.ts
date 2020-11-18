@@ -20,6 +20,15 @@ export class ProblemModel {
     return this.problem;
   }
 
+  getProblemsByDate(dateSorting?: boolean): Problem[] {
+    if (dateSorting) {
+      return this.problem.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+    } else if (!dateSorting) {
+      return this.problem.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+    }
+    return this.problem;
+  }
+
   getProblem(id: number): Problem {
     return this.problem.find(p => this.locator(p, id));
   }

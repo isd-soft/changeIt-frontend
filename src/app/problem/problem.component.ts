@@ -5,6 +5,7 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
 import {CommentService} from '@app/services/comment.service';
 import {Comment} from '@app/models/comment';
 import {AccountService} from '@app/services';
+import {ProblemService} from '@app/services/problem.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ProblemComponent implements OnInit {
   comments: Comment[];
 
   constructor(
+    private problemService: ProblemService,
     private route: ActivatedRoute,
     private problemModel: ProblemModel,
     private commentService: CommentService,
@@ -52,4 +54,13 @@ export class ProblemComponent implements OnInit {
     this.comments.push(comment);
   }
 
+  getProblem(key: number): Problem {
+    return this.problemModel.getProblem(key);
+  }
+
+  changeStatus(problemId: number, status: string): void{
+    const problem: Problem = this.getProblem(problemId);
+    problem.status = status;
+    this.problemService.updateProblem(problem).subscribe();
+  }
 }

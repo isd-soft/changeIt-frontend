@@ -21,7 +21,7 @@ export class DomainModel {
 
   saveDomain(domain: Domain): void {
     if (domain.domain_id == 0 || domain.domain_id == null) {
-      this.domainService.saveDomain(domain)
+      this.domainService.createDomain(domain)
         .subscribe(d => this.domain.push(d));
     } else {
       this.domainService.updateDomain(domain).subscribe(d => {

@@ -17,7 +17,7 @@ export class DomainService {
     return this.sendRequest<Domain[]>('GET', environment.apiUrl + '/domain');
   }
 
-  saveDomain(article: Domain): Observable<Domain> {
+  createDomain(article: Domain): Observable<Domain> {
     return this.sendRequest<Domain>('POST', environment.apiUrl + '/domain', article);
   }
 

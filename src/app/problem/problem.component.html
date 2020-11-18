@@ -1,7 +1,19 @@
 <div class="container">
   <div class="title text-center m-4">
     <h1>{{ problem?.title }}</h1>
-    <p><i>{{ problem?.created_at }}</i></p>
+    <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
+    <h4 class="d-flex justify-content-end">{{ problem?.status}}</h4>
+    <div class="d-flex justify-content-end">
+      <select id="changeStatus" class="form-control changeStatus" #problemStatus>
+        <option selected>Choose status</option>
+        <option>DONE</option>
+        <option>IN_PROGRESS</option>
+        <option>ACTIVE</option>
+        <option>REJECTED</option>
+      </select>
+      <button type="submit" class="btn btn-primary"
+              (click)="changeStatus(problem.problem_id, problemStatus.value)">Submit</button>
+    </div>
   </div>
   <div class="description p-5">
     <p>{{ problem?.description }}</p>
@@ -37,7 +49,7 @@
                 </i>
               </p>
               <span class="date sub-text">
-                {{ comment?.created_at | date: 'medium' }}
+                {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
               </span>
 
             </div>
