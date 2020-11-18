@@ -1,3 +1,5 @@
+import {Location} from "@app/models/location"
+
 export class Problem {
   problem_id: number;
   title: string;
@@ -6,5 +8,5 @@ export class Problem {
   created_at: string;
   updated_at: string;
   status: string;
-  locations: Location;
+  location: Location;
 }

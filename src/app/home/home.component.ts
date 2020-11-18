@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel) {
+    //this.selectedDistrict = new District();
   }
 
   ngOnInit(): void {
@@ -34,11 +35,25 @@ export class HomeComponent implements OnInit{
   }
 
   getAllLocations(): Location[]{
+    if(!this.selectedDistrict){
+      return this.locationModel.getAllLocations();
+    }
     return this.locationModel.getAllLocations().filter(location =>
       location.district.district_id === this.selectedDistrict.district_id);
   }
     getProblems(): Problem[] {
+      if(!this.selectedDistrict && !this.selectedLocation)
       return this.problemModel.getProblems(this.voteSorting);
+
+      if(!this.selectedLocation && this.selectedDistrict){
+        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
+          problem?.location?.district?.district_id === this.selectedDistrict.district_id)
+      }
+      if(this.selectedLocation && this.selectedDistrict){
+        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
+          (problem?.location.location_id === this.selectedLocation.location_id &&
+            problem?.location?.district?.district_id === this.selectedDistrict.district_id))
+      }
     }
 
     toggleVoteSorting(): void {
