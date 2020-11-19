@@ -18,11 +18,11 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'problem/add', component: AddProblemComponent},
+  {path: 'problem/add', component: AddProblemComponent, canActivate: [AuthGuard]},
   {path: 'problem/:id', component: ProblemComponent, canActivate: [AuthGuard], resolve: {model: ProblemModelResolver}},
-  { path: 'tables', component: TablesComponent},
+  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard]},
   {path: '', component: WelcomeComponent},
-  {path: 'user-page', component: UserPageComponent},
+  {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
 
 ];
