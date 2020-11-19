@@ -4,44 +4,55 @@ import {ProblemService} from '../services/problem.service';
 
 @Injectable()
 export class ProblemModel {
-  private problem: Problem[] = new Array<Problem>();
+  private problems: Problem[] = new Array<Problem>();
   private locator = (p: Problem, id: number) => p.problem_id == id;
 
   constructor(private problemService: ProblemService) {
-    this.problemService.getData().subscribe(data => this.problem = data);
+    problemService.getData().subscribe(data => {
+      this.problems = data;
+    });
   }
 
   getProblems(voteSorting?: boolean): Problem[] {
     if (voteSorting) {
-      return this.problem.sort((a, b) => b.votes - a.votes);
+      return this.problems.sort((a, b) => b.votesCount - a.votesCount);
     } else if (!voteSorting) {
-      return this.problem.sort((a, b) => a.votes - b.votes);
+      return this.problems.sort((a, b) => a.votesCount - b.votesCount);
     }
-    return this.problem;
+    return this.problems;
+  }
+
+  getProblemsByDate(dateSorting?: boolean): Problem[] {
+    if (dateSorting) {
+      return this.problems.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+    } else if (!dateSorting) {
+      return this.problems.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+    }
+    return this.problems;
   }
 
   getProblem(id: number): Problem {
-    return this.problem.find(p => this.locator(p, id));
+    return this.problems.find(p => this.locator(p, id));
   }
 
   saveProblem(problem: Problem): void {
     if (problem.problem_id == 0 || problem.problem_id == null) {
       this.problemService.saveProblem(problem)
-        .subscribe(p => this.problem.push(p));
+        .subscribe(p => this.problems.push(p));
     } else {
       this.problemService.updateProblem(problem).subscribe(p => {
-        const index = this.problem
+        const index = this.problems
           .findIndex(item => this.locator(item, p.problem_id));
-        this.problem.splice(index, 1, p);
+        this.problems.splice(index, 1, p);
       });
     }
   }
 
   deleteProblem(id: number): void {
     this.problemService.deleteProblem(id).subscribe(() => {
-      const index = this.problem.findIndex(p => this.locator(p, id));
+      const index = this.problems.findIndex(p => this.locator(p, id));
       if (index > -1) {
-        this.problem.splice(index, 1);
+        this.problems.splice(index, 1);
       }
     });
   }

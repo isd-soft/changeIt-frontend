@@ -17,7 +17,7 @@ export class LocationService {
     return this.sendRequest<Location[]>('GET', environment.apiUrl + '/location');
   }
 
-  saveLocation(article: Location): Observable<Location> {
+  createLocation(article: Location): Observable<Location> {
     return this.sendRequest<Location>('POST', environment.apiUrl + '/location', article);
   }
 

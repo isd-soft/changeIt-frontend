@@ -14,20 +14,21 @@
         <td>{{ district?.district_id }}</td>
         <td>{{ district?.districtName }}</td>
         <td width="10%">
+          <button class="btn btn-primary m-1" (click)="editDistrict(district?.district_id,districtName.value)">Update</button>
+        </td>
+        <td width="10%">
           <button class="btn btn-primary m-1" (click)="deleteDistrict(district?.district_id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-end">
     <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="number" placeholder="District Id" #districtId/>
       <input class="form-control" type="text" placeholder="District Name" #districtName/>
     </div>
     <div class="btn-group" data-toggle="buttons">
       <button class="btn btn-primary m-1" (click)="createDistrict(districtName.value)">Insert</button>
-      <button class="btn btn-primary m-1" (click)="editDistrict(districtId.value,districtName.value)">Update</button>
     </div>
   </div>
 
@@ -46,21 +47,24 @@
           <td>{{ location?.locationName }}</td>
           <td>{{ location?.district.district_id}}</td>
           <td width="10%">
+            <button class="btn btn-primary m-1" (click)="editLocation(location?.location_id,locationName.value,locationDistrictName.value)">Update</button>
+          </td>
+          <td width="10%">
             <button class="btn btn-primary m-1" (click)="deleteLocation(location?.location_id)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-end">
     <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="number" placeholder="Location Id" #locationId/>
       <input class="form-control" type="text" placeholder="Location Name" #locationName/>
-      <input class="form-control" type="number" placeholder="District Id" #locationDistrictId/>
+      <select class="form-control" #locationDistrictName>
+        <option *ngFor="let district of getDistricts()">{{district.districtName}}</option>
+      </select>
     </div>
     <div class="btn-group" data-toggle="buttons">
-      <button class="btn btn-primary m-1" (click)="createLocation(locationName.value, locationDistrictId.value)">Insert</button>
-      <button class="btn btn-primary m-1" (click)="editLocation(locationId.value,locationName.value,locationDistrictId.value)">Update</button>
+      <button class="btn btn-primary m-1" (click)="createLocation(locationName.value, locationDistrictName.value)">Insert</button>
     </div>
   </div>
 
@@ -77,20 +81,21 @@
       <td>{{ domain?.domain_id }}</td>
       <td>{{ domain?.domainName }}</td>
       <td width="10%">
+        <button class="btn btn-primary m-1" (click)="editDomain(domain?.domain_id,domainName.value)">Update</button>
+      </td>
+      <td width="10%">
         <button class="btn btn-primary m-1" (click)="deleteDomain(domain?.domain_id)">Delete</button>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-end">
     <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="number" placeholder="Domain Id" #domainId/>
       <input class="form-control" type="text" placeholder="Domain Name" #domainName/>
     </div>
     <div class="btn-group" data-toggle="buttons">
       <button class="btn btn-primary m-1" (click)="createDomain(domainName.value)">Insert</button>
-      <button class="btn btn-primary m-1" (click)="editDomain(domainId.value,domainName.value)">Update</button>
     </div>
   </div>
 

@@ -6,6 +6,7 @@ import {DistrictService} from '../services/district.service';
 export class DistrictModel {
   private district: District[] = new Array<District>();
   private locator = (d: District, id: number) => d.district_id == id;
+  private locatorByName = (d: District, name: string) => d.districtName == name;
 
   constructor(private districtService: DistrictService) {
     this.districtService.getData().subscribe(data => this.district = data);
@@ -16,10 +17,13 @@ export class DistrictModel {
   getDistrict(id: number): District {
     return this.district.find(d => this.locator(d, id));
   }
+  getDistrictByName(districtName: string): District {
+    return this.district.find(d => this.locatorByName(d, districtName));
+  }
 
   saveDistrict(district: District): void {
     if (district.district_id == 0 || district.district_id == null) {
-      this.districtService.saveDistrict(district)
+      this.districtService.createDistrict(district)
         .subscribe(d => this.district.push(d));
     } else {
       this.districtService.updateDistrict(district).subscribe(d => {

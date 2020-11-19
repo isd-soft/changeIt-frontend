@@ -16,15 +16,21 @@
       </h3>
 
       <div>
-        <button class="btn btn-primary" (click)="toggleVoteSorting()">
+        <button class="btn btn-primary m-1" (click)="toggleVoteSorting()">
           Sort by votes
+        </button>
+        <button class="btn btn-primary m-1" (click)="toggleDateSorting()" >
+          Sort by date
         </button>
       </div>
 
-      <div class="card bg-light m-3" *ngFor="let problem of getProblems()" [routerLink]= "['/problem/', problem?.problem_id]" >
+      <div class="card bg-light m-3" *ngFor="let problem of getProblems(sort)" [routerLink]= "['/problem/', problem?.problem_id]" >
         <h5 class="card-header">
-          <h5>{{ problem?.title }}</h5>
-          <p><i>{{ problem?.created_at }}</i></p>
+          <div class="d-flex justify-content-between">
+            <h5>{{ problem?.title }}</h5>
+            <h5>{{ problem?.status}}</h5>
+          </div>
+          <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
         </h5>
         <div class="card-body">
           <p class="card-text">
@@ -32,7 +38,7 @@
           </p>
         </div>
         <div class="card-footer">
-          Votes: {{ problem?.votes }}
+          Votes: {{ problem?.votesCount }}
         </div>
       </div>
       <nav>
