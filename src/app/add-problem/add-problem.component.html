@@ -1,0 +1,127 @@
+<div class="p-4" xmlns="http://www.w3.org/1999/html">
+
+  <div class="container">
+    <h1>Create a problem</h1>
+    <hr/>
+    <br>
+
+    <form [formGroup]="addProblemForm" (ngSubmit)="onSubmit(addProblemForm.value)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title" required
+               minlength="4">
+
+        <!--Validation of title input-->
+        <div
+          *ngIf="addProblemForm.controls['title'].invalid && (addProblemForm.controls['title'].dirty || addProblemForm.controls['title'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="addProblemForm.controls['title'].errors.required">
+            Title is required.
+          </div>
+          <div *ngIf="addProblemForm.controls['title'].errors.minlength">
+            Title must be at least 4 characters long.
+          </div>
+          <!--&lt;!&ndash;          <div *ngIf="title.errors.forbiddenName">&ndash;&gt;-->
+          <!--&lt;!&ndash;            Title cannot be Bob.&ndash;&gt;-->
+          <!--&lt;!&ndash;          </div>&ndash;&gt;-->
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <!--                <textarea class="form-control" id="description" rows="3" formControlName="description" required></textarea>-->
+        <editor required id="description"
+                apiKey="1kl2nktawu3cy22qxlsuab5vl6kmq19itn7tp3wzagaukz8i"
+                formControlName="description"
+                minlength="10"
+                appForbiddenName=""
+                [init]="{
+     height: 400,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+     toolbar:
+       'undo redo | formatselect | bold italic backcolor | \
+       alignleft aligncenter alignright alignjustify | \
+       bullist numlist outdent indent | removeformat | help'
+   }"
+        ></editor>
+
+        <!--        Validation of description in editor block-->
+        <div
+          *ngIf="addProblemForm.controls['description'].invalid && (addProblemForm.controls['description'].dirty || addProblemForm.controls['description'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="addProblemForm.controls['description'].errors.required">
+            Description is required.
+          </div>
+          <div *ngIf="addProblemForm.controls['description'].errors.minlength">
+            Description must be at least 4 characters long.
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="district">District</label>
+        <select class="form-control" id="district" formControlName="district" (ngModelChange)="changeLocation($event)"
+                required>
+          <option hidden value="0"></option>
+          <option *ngFor="let district of getDistricts()"
+                  value="{{district.district_id}}">{{district.districtName}}</option>
+        </select>
+
+        <!--        Validation of district selected value-->
+        <div
+          *ngIf="addProblemForm.controls['district'].invalid && (addProblemForm.controls['district'].dirty || addProblemForm.controls['district'].touched)"
+          class="alert alert-danger">
+          District is required.
+        </div>
+      </div>
+
+
+      <div class="form-group" *ngIf="show">
+        <label for="location">Location</label>
+        <select class="form-control" id="location" formControlName="location" required>
+          <option hidden value="0"></option>
+          <ng-container *ngFor="let location of getLocations()">
+
+          <option  *ngIf="location.district.district_id == addProblemForm.value.district"
+                  value="{{location.location_id}}">{{location.locationName}}</option>
+          </ng-container>
+        </select>
+        <div
+          *ngIf="addProblemForm.controls['location'].invalid && (addProblemForm.controls['location'].dirty || addProblemForm.controls['location'].touched)"
+          class="alert alert-danger">
+          Location is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="domain">Domain</label>
+        <select class="form-control selectpicker" id="domain" formControlName="domain" multiple required>
+          <option *ngFor="let domain of getDomains()" value="{{domain.domain_id}}">{{domain.domainName}}</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <input type="file" formControlName="file">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('.selectpicker').selectpicker();
+    getTinymce().init();
+  });
+</script>

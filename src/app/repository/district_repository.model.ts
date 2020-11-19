@@ -11,17 +11,14 @@ export class DistrictModel {
   constructor(private districtService: DistrictService) {
     this.districtService.getData().subscribe(data => this.district = data);
   }
-
+  getDistricts(): District[] {
+    return this.district;
+  }
   getDistrict(id: number): District {
     return this.district.find(d => this.locator(d, id));
   }
-
   getDistrictByName(districtName: string): District {
     return this.district.find(d => this.locatorByName(d, districtName));
-  }
-
-  getDistricts(): District[]{
-    return this.district;
   }
 
   saveDistrict(district: District): void {
