@@ -30,15 +30,16 @@
             <h5>{{ problem?.title }}</h5>
             <h5>{{ problem?.status}}</h5>
           </div>
-          <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
+          <p></p>
         </h5>
         <div class="card-body">
           <p class="card-text">
             {{ problem?.description }}
           </p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-flex justify-content-between">
           Votes: {{ problem?.votesCount }}
+          <i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i>
         </div>
       </div>
       <nav>
