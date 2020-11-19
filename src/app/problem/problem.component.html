@@ -14,4 +14,43 @@
       Vote for this problem
     </button>
   </div>
+
+
+  <div class="comments d-flex justify-content-center">
+    <div class="detailBox">
+      <div class="titleBox d-flex justify-content-center">
+        <label>Comments</label>
+      </div>
+      <div class="actionBox">
+        <ul class="commentList">
+          <li *ngFor="let comment of comments" class="p-1">
+            <div class="commenterName">
+              <b>
+                {{ comment?.user?.firstName }}
+                {{ comment?.user?.lastName }}
+              </b>
+            </div>
+            <div class="commentText">
+              <p class="">
+                <i>
+                  {{ comment?.content }}
+                </i>
+              </p>
+              <span class="date sub-text">
+                {{ comment?.created_at | date: 'medium' }}
+              </span>
+
+            </div>
+          </li>
+        </ul>
+        <div class="addcomment">
+          <input class="form-control" type="text" placeholder="Your comments" #content/>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary m-1" (click)="addComment(content.value)">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

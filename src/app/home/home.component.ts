@@ -11,31 +11,19 @@ export class HomeComponent implements OnInit{
 
     voteSorting = true;
 
-    constructor(private problemModel: ProblemModel) { }
+    constructor(
+      private problemModel: ProblemModel,
+) { }
 
     ngOnInit(): void { }
 
-  getProblem(key: number): Problem {
-    return this.problemModel.getProblem(key);
-  }
 
-  getProblems(): Problem[] {
-    return this.problemModel.getProblems(this.voteSorting);
-  }
+    getProblems(): Problem[] {
+      return this.problemModel.getProblems(this.voteSorting);
+    }
 
-  deleteProblem(key: number): void {
-    this.problemModel.deleteProblem(key);
-  }
+    toggleVoteSorting(): void {
+        this.voteSorting = !this.voteSorting;
+    }
 
-  editProblem(problem: Problem): void {
-    this.problemModel.saveProblem(problem);
-  }
-
-  createProblem(problem: Problem): void {
-    this.problemModel.saveProblem(problem);
-  }
-
-  toggleVoteSorting(): void {
-      this.voteSorting = !this.voteSorting;
-  }
 }

@@ -22,6 +22,7 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
+import { TablesComponent } from './tables/tables.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import {EditorModule} from '@tinymce/tinymce-angular';
     HttpClientModule,
     AppRoutingModule,
     EditorModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     AppComponent,
@@ -43,7 +44,9 @@ import {EditorModule} from '@tinymce/tinymce-angular';
     AddProblemComponent,
     DistrictComponent,
     DomainComponent,
-    LocationComponent
+    LocationComponent,
+    TablesComponent
+
   ],
   providers: [
     ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel,
