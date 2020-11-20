@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AfterRegistrationComponent } from './after-registration/after-registration.component';
+import { AfterConfirmEmailComponent } from './after-confirm-email/after-confirm-email.component';
 
 @NgModule({
     imports: [
@@ -12,7 +14,9 @@ import { RegisterComponent } from './register/register.component';
     ],
     declarations: [
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AfterRegistrationComponent,
+        AfterConfirmEmailComponent
     ]
 })
 export class AccountModule { }

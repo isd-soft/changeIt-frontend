@@ -23,6 +23,7 @@ import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
 import { TablesComponent } from './tables/tables.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { TablesComponent } from './tables/tables.component';
     AppRoutingModule,
     EditorModule,
     FormsModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
@@ -45,7 +47,7 @@ import { TablesComponent } from './tables/tables.component';
     DistrictComponent,
     DomainComponent,
     LocationComponent,
-    TablesComponent
+    TablesComponent,
 
   ],
   providers: [
