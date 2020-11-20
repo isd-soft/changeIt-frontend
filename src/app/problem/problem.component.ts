@@ -73,6 +73,8 @@ export class ProblemComponent implements OnInit {
     this.comments.push(comment);
   }
 
+
+
   getProblem(key: number): Problem {
     return this.problemModel.getProblem(key);
   }

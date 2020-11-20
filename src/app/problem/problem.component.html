@@ -51,10 +51,12 @@
                   {{ comment?.content }}
                 </i>
               </p>
-              <span class="date sub-text">
+              <div class="d-flex justify-content-between">
+                <span class="date sub-text">
                 {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
-              </span>
-
+                </span>
+                {{ comment?.votes }}
+              </div>
             </div>
           </li>
         </ul>
