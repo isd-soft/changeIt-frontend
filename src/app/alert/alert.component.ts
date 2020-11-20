@@ -3,7 +3,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Alert, AlertType } from '@app/models';
-import { AlertService } from '@app/services';
+import { AlertService } from '@app/service';
 
 @Component({ selector: 'alert', templateUrl: 'alert.component.html' })
 export class AlertComponent implements OnInit, OnDestroy {
@@ -16,7 +16,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     constructor(private router: Router, private alertService: AlertService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // subscribe to new alert notifications
         this.alertSubscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
@@ -47,13 +47,13 @@ export class AlertComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         // unsubscribe to avoid memory leaks
         this.alertSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
     }
 
-    removeAlert(alert: Alert) {
+    removeAlert(alert: Alert): void {
         // check if already removed to prevent error on auto close
         if (!this.alerts.includes(alert)) { return; }
 
@@ -71,7 +71,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         }
     }
 
-    cssClass(alert: Alert) {
+    cssClass(alert: Alert): void {
         if (!alert) { return; }
 
         const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];

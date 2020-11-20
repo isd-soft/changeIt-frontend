@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Domain} from '../models/domain';
-import {DomainService} from '../services/domain.service';
+import {DomainService} from '../service/domain.service';
 
 @Injectable()
 export class DomainModel {

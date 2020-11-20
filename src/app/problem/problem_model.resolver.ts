@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {ProblemModel} from '../repository/problem_repository.model';
-import {ProblemService} from '../services/problem.service';
+import {ProblemService} from '../service/problem.service';
 import {Problem} from '../models/problem';
 
 
