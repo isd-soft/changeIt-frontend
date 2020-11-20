@@ -62,6 +62,10 @@ export class ProblemModel {
         const index = this.problems
           .findIndex(item => this.locator(item, p.problem_id));
         this.problems.splice(index, 1, p);
+        this.problemsByVoteAsc.splice(index, 1, p);
+        this.problemsByVoteDesc.splice(index, 1, p);
+        this.problemsByDateAsc.splice(index, 1, p);
+        this.problemsByDateDesc.splice(index, 1, p);
       });
     }
   }
@@ -71,6 +75,10 @@ export class ProblemModel {
       const index = this.problems.findIndex(p => this.locator(p, id));
       if (index > -1) {
         this.problems.splice(index, 1);
+        this.problemsByVoteAsc.splice(index, 1);
+        this.problemsByVoteDesc.splice(index, 1);
+        this.problemsByDateAsc.splice(index, 1);
+        this.problemsByDateDesc.splice(index, 1);
       }
     });
   }
