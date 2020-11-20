@@ -141,7 +141,10 @@ export class AddProblemComponent implements OnInit {
     //   // alert('Domain is empty');
     // }
     data.status = 'ACTIVE';
-    this.problemModel.saveProblem(data);
+    data.votesCount = 0;
+    data.location = '{ "location_id": ' + data.location + ', "district": { "district_id": ' + data.district + ' }}';
+    // data.splice('district', 1);
+    data.domain = '[]';    this.problemModel.saveProblem(data);
   }
 
   changeLocation(disctrictID): any {
@@ -153,7 +156,7 @@ export class AddProblemComponent implements OnInit {
     this.addProblemForm.get('location').markAsUntouched();
     this.addProblemForm.get('location').markAsPristine();
     this.addProblemForm.get('location').setErrors({incorrect: true});
-    console.log(disctrictID);
+    // console.log(disctrictID);
 
   }
 
