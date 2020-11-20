@@ -22,7 +22,7 @@ export class AddProblemComponent implements OnInit {
   problem: Problem = new Problem();
   location: Location = new Location();
   district: District = new District();
-  domain: Domain = new Domain();
+  domains: Domain = new Domain();
 
   constructor(private fb: FormBuilder,
               private problemModel: ProblemModel,
@@ -66,7 +66,7 @@ export class AddProblemComponent implements OnInit {
         Validators.required
       ]
       ],
-      domain: ['', [
+      domains: ['', [
         Validators.required
       ]
       ],
@@ -102,46 +102,25 @@ export class AddProblemComponent implements OnInit {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
     }
-
-    // /** TODO: Обработка данных формы */
-    // console.log(this.addProblemForm.value);
-    //
-    // if (typeof data.title !== 'undefined' && data.title) {
-    //   console.log('not empty');
-    // } else {
-    //   console.log('empty');
-    //   // alert('Title is empty');
-    // }
-    //
-    // if (typeof data.description !== 'undefined' && data.description) {
-    //   console.log('not empty');
-    // } else {
-    //   console.log('empty');
-    //   // alert('Description is empty');
-    // }
-    //
-    // if (typeof data.location !== 'undefined' && data.location) {
-    //   console.log('not empty');
-    // } else {
-    //   console.log('empty');
-    //   // alert('Location is empty');
-    // }
-    //
-    // if (typeof data.district !== 'undefined' && data.district) {
-    //   console.log('not empty');
-    // } else {
-    //   console.log('empty');
-    //   // alert('District is empty');
-    // }
-    //
-    // if (typeof data.domain !== 'undefined' && data.domain) {
-    //   console.log('not empty');
-    // } else {
-    //   console.log('empty');
-    //   // alert('Domain is empty');
-    // }
     data.status = 'ACTIVE';
+    data.votesCount = 0;
+    data.location = JSON.parse('{ "location_id": ' + data.location + ', "district": { "district_id": ' + data.district + ' }}');
+    delete data.district;
+    let domn: string;
+    domn = '[';
+    let lenght = data.domains.length - 1;
+    for (let key in data.domains) {
+      let value = data.domains[key];
+      domn += '{"domain_id": ' + value + '}';
+      // @ts-ignore
+      if (lenght != key) {
+        domn += ',';
+      }
+    }
+    domn += ']';
+    data.domains = JSON.parse(domn);
     this.problemModel.saveProblem(data);
+    document.location.href = '/home';
   }
 
   changeLocation(disctrictID): any {
@@ -153,7 +132,7 @@ export class AddProblemComponent implements OnInit {
     this.addProblemForm.get('location').markAsUntouched();
     this.addProblemForm.get('location').markAsPristine();
     this.addProblemForm.get('location').setErrors({incorrect: true});
-    console.log(disctrictID);
+    // console.log(disctrictID);
 
   }
 
