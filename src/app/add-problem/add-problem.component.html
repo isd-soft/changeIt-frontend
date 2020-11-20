@@ -102,8 +102,8 @@
       </div>
 
       <div class="form-group">
-        <label for="domain">Domain</label>
-        <select class="form-control selectpicker" id="domain" formControlName="domain" multiple required>
+        <label for="domains">Domain</label>
+        <select class="form-control selectpicker" id="domains" formControlName="domains" multiple required>
           <option *ngFor="let domain of getDomains()" value="{{domain.domain_id}}">{{domain.domainName}}</option>
 
         </select>
