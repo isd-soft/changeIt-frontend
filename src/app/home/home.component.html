@@ -6,6 +6,7 @@
         <p>Select a district</p>
         <label>
           <select class="mat-form-field" [(ngModel)]='selectedDistrict' (change)="onChange()">
+            <option [ngValue]=null >----</option>
             <option  *ngFor="let district of getDistricts()"  [ngValue]="district" > {{district.districtName}} </option>
           </select>
         </label>
@@ -13,7 +14,7 @@
        <p>Select  location</p>
         <label>
           <select [(ngModel)]='selectedLocation'>
-            <option hidden value="0"></option>
+            <option [ngValue]=null >----</option>
             <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
           </select>
         </label>

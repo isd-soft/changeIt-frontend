@@ -57,12 +57,15 @@ export class HomeComponent implements OnInit{
       }
     }
 
-    toggleVoteSorting(): void {
-        this.voteSorting = !this.voteSorting;
-    }
+  toggleVoteSorting(): void {
+    this.voteSorting = !this.voteSorting;
+  }
 
-    onChange(){
-      this.selectedLocation = null;
-    }
+  onChange() {
+    this.selectedLocation = null;
+  }
 
+  onNullLocation() {
+    this.selectedLocation = null;
+  }
 }
