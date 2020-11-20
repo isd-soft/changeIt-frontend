@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
-import {CommentService} from '@app/services/comment.service';
+import {CommentService} from '@app/service/comment.service';
 import {Comment} from '@app/models/comment';
-import {AccountService} from '@app/services';
+import {AccountService} from '@app/service';
 import {User} from '@app/models';
-import {ProblemService} from '@app/services/problem.service';
-import {VoteService} from '@app/services/vote.service';
+import {ProblemService} from '@app/service/problem.service';
+import {VoteService} from '@app/service/vote.service';
 import {Vote} from '@app/models/Vote';
+import {UserService} from '@app/service/user.service';
 
 @Component({
   selector: 'app-problem',
@@ -27,8 +28,9 @@ export class ProblemComponent implements OnInit {
     private route: ActivatedRoute,
     private problemModel: ProblemModel,
     private commentService: CommentService,
-    private accountService: AccountService,
     private voteService: VoteService,
+    private userService: UserService,
+    private accountService: AccountService,
   ) {
     route.params.subscribe(params => {
       const id = params.id;
@@ -36,8 +38,7 @@ export class ProblemComponent implements OnInit {
         Object.assign(this.problem, problemModel.getProblem(id));
       }
 
-      this.user = this.accountService.userValue;
-      console.log('user : ', this.user);
+      this.user = accountService.userValue;
 
       this.getVote();
     });
@@ -66,8 +67,8 @@ export class ProblemComponent implements OnInit {
   addComment(content: string): void {
     const comment: Comment = new Comment();
     comment.content = content;
-    comment.user = this.accountService.userValue;
     comment.problem = this.problem;
+    comment.user = this.user;
     this.commentService.saveComment( comment ).subscribe( );
     this.comments.push(comment);
   }

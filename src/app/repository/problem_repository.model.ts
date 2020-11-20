@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Problem} from '../models/problem';
-import {ProblemService} from '../services/problem.service';
+import {ProblemService} from '../service/problem.service';
 
 @Injectable()
 export class ProblemModel {

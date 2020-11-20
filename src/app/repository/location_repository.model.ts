@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Location} from '../models/location';
-import {LocationService} from '../services/location.service';
+import {LocationService} from '../service/location.service';
 
 @Injectable()
 export class LocationModel {

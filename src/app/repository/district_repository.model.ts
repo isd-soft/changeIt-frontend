@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {District} from '../models/district';
-import {DistrictService} from '../services/district.service';
+import {DistrictService} from '../service/district.service';
 
 @Injectable()
 export class DistrictModel {

@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit{
 
     voteSorting = true;
     dateSorting = true;
-    sort: string;
+    sort = 'vote';
 
     constructor(
       private problemModel: ProblemModel,
