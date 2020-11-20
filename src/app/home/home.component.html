@@ -5,14 +5,15 @@
       <div class="border">
         <p>Select a district</p>
         <label>
-          <select [(ngModel)]='selectedDistrict' >
-            <option  *ngFor="let district of getDistricts()" [ngValue]="district" > {{district.districtName}} </option>
+          <select class="mat-form-field" [(ngModel)]='selectedDistrict' (change)="onChange()">
+            <option  *ngFor="let district of getDistricts()"  [ngValue]="district" > {{district.districtName}} </option>
           </select>
         </label>
 
        <p>Select  location</p>
         <label>
           <select [(ngModel)]='selectedLocation'>
+            <option hidden value="0"></option>
             <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
           </select>
         </label>
@@ -30,7 +31,8 @@
         </button>
       </div>
 
-      <div class="card bg-light m-3" *ngFor="let problem of getProblems()" [routerLink]= "['/problem/', problem?.problem_id]" >
+      <div class="card bg-light m-3" *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict:selectedLocation "
+           [routerLink]= "['/problem/', problem?.problem_id]" >
         <h5 class="card-header">
           <h5>{{ problem?.title }}</h5>
           <p><i>{{ problem?.created_at }}</i></p>

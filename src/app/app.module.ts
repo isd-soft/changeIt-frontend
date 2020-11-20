@@ -21,6 +21,8 @@ import { DomainComponent } from './domain/domain.component';
 import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from "@app/repository/location_repository.model";
 import {DomainModel} from "@app/repository/domain_repository.model";
+import {ProblemPipe} from "@app/pipe/problem-pipe.pipe";
+
 
 @NgModule({
     imports: [
@@ -40,7 +42,8 @@ import {DomainModel} from "@app/repository/domain_repository.model";
         UserPageComponent,
         DistrictComponent,
         DomainComponent,
-        LocationComponent
+        LocationComponent,
+        ProblemPipe
     ],
     providers: [
         ProblemModel, ProblemModelResolver, DistrictModel, LocationModel, DomainModel,

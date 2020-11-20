@@ -1,4 +1,5 @@
 import {Location} from "@app/models/location"
+import {District} from "@app/models/district";
 
 export class Problem {
   problem_id: number;
@@ -9,4 +10,5 @@ export class Problem {
   updated_at: string;
   status: string;
   location: Location;
+  district: District;
 }
