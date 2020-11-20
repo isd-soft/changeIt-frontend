@@ -18,6 +18,22 @@ export class ProblemService {
     return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem');
   }
 
+  getDataByVoteAsc(): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByVoteAsc');
+  }
+
+  getDataByVoteDesc(): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByVoteDesc');
+  }
+
+  getDataByDateAsc(): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByDateAsc');
+  }
+
+  getDataByDateDesc(): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByDateDesc');
+  }
+
   getVote(id: number): Observable<number> {
     return this.sendRequest<number>('GET', `${environment.apiUrl}/problem/${id}/votes`);
   }

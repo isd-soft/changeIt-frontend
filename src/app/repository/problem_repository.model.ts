@@ -5,30 +5,48 @@ import {ProblemService} from '../services/problem.service';
 @Injectable()
 export class ProblemModel {
   private problems: Problem[] = new Array<Problem>();
+  private problemsByVoteAsc: Problem[] = new Array<Problem>();
+  private problemsByVoteDesc: Problem[] = new Array<Problem>();
+  private problemsByDateAsc: Problem[] = new Array<Problem>();
+  private problemsByDateDesc: Problem[] = new Array<Problem>();
   private locator = (p: Problem, id: number) => p.problem_id == id;
 
   constructor(private problemService: ProblemService) {
-    problemService.getData().subscribe(data => {
+    problemService.getDataByDateAsc().subscribe(data => {
       this.problems = data;
+    });
+    problemService.getDataByVoteAsc().subscribe(data => {
+      this.problemsByVoteAsc = data;
+    });
+    problemService.getDataByVoteDesc().subscribe(data => {
+      this.problemsByVoteDesc = data;
+    });
+    problemService.getDataByDateAsc().subscribe(data => {
+      this.problemsByDateAsc = data;
+    });
+    problemService.getDataByDateDesc().subscribe(data => {
+      this.problemsByDateDesc = data;
     });
   }
 
-  getProblems(voteSorting?: boolean): Problem[] {
+  getProblems(): Problem[]{
+    return this.problemsByDateDesc;
+  }
+
+  getProblemsByVote(voteSorting?: boolean): Problem[] {
     if (voteSorting) {
-      return this.problems.sort((a, b) => b.votesCount - a.votesCount);
+      return this.problemsByVoteDesc;
     } else if (!voteSorting) {
-      return this.problems.sort((a, b) => a.votesCount - b.votesCount);
+      return this.problemsByVoteAsc;
     }
-    return this.problems;
   }
 
   getProblemsByDate(dateSorting?: boolean): Problem[] {
     if (dateSorting) {
-      return this.problems.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+      return this.problemsByDateAsc;
     } else if (!dateSorting) {
-      return this.problems.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+      return this.problemsByDateDesc;
     }
-    return this.problems;
   }
 
   getProblem(id: number): Problem {

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit{
 
     getProblems(some: string): Problem[] {
       if (some == 'vote'){
-        return this.problemModel.getProblems(this.voteSorting);
+        return this.problemModel.getProblemsByVote(this.voteSorting);
       } else {
         return this.problemModel.getProblemsByDate(this.dateSorting);
       }
