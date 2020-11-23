@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Vote} from '@app/models/Vote';
 import {environment} from '@environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
 
@@ -15,13 +15,29 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  getUser(user: User): Observable<User> {
-    return this.sendRequest<User>('GET', `${environment.apiUrl}/user`, user);
+  confirmEmail(token: string): Observable<any> {
+    const myParams = new HttpParams().set('token', token);
+    return this.sendRequest('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );
   }
 
-  private sendRequest<T>(verb: string, url: string, body?: User): Observable<T> {
+  resetPassword(email: string): Observable<boolean> {
+    const myParams = new HttpParams().set('userEmail', email);
+    return this.sendRequest('POST', `${environment.apiUrl}/user/resetPassword`, myParams );
+  }
 
-    console.log('\n\n---Request ', verb, url, body);
+  savePassword(id: string, token: string, password: string, passwordConfirmation: string): Observable<any> {
+    const myParams = new HttpParams()
+                      .set('id', id)
+                      .set('token', token)
+                      .set('password', password)
+                      .set('passwordConfirmation', passwordConfirmation);
+    return this.sendRequest('POST', `${environment.apiUrl}/user/savePassword`, myParams);
+  }
+
+
+  private sendRequest<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
+
+    console.log('\n\n---Request ', verb, url, myParams);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',
@@ -29,8 +45,8 @@ export class UserService {
     });
 
     return this.http.request<T>(verb, url, {
-      body,
-      headers: myHeaders
+      headers: myHeaders,
+      params: myParams
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
