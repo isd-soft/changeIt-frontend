@@ -13,10 +13,12 @@ import {DomainModel} from "@app/repository/domain_repository.model";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   voteSorting = true;
   selectedDistrict: District;
   selectedLocation: Location;
+  selectedDomains: Domain[] = [];
+
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel) {
@@ -29,43 +31,58 @@ export class HomeComponent implements OnInit{
     return this.districtModel.getAllDistricts();
   }
 
-  getAllDomains(): Domain[]{
+  getAllDomains(): Domain[] {
     return this.domainModel.getAllDomains();
   }
 
-  getAllLocations(): Location[]{
-    if(!this.selectedDistrict){
-      return this.locationModel.getAllLocations();
+  getAllLocations(): Location[] {
+    if (!this.selectedDistrict) {
+      return null;
     }
     return this.locationModel.getAllLocations().filter(location =>
       location.district.district_id === this.selectedDistrict.district_id);
   }
 
-    getProblems(): Problem[] {
-      if(!this.selectedDistrict && !this.selectedLocation){
-        return this.problemModel.getProblems(this.voteSorting);
-      }
-
-      if(!this.selectedLocation && this.selectedDistrict){
-        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
-          problem?.location?.district?.district_id === this.selectedDistrict.district_id)
-      }
-      if(this.selectedLocation && this.selectedDistrict){
-        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
-          (problem?.location.location_id === this.selectedLocation.location_id &&
-            problem?.location?.district?.district_id === this.selectedDistrict.district_id))
+  onSelectDomain(status: any, domain: Domain): Domain[] {
+    if (status.target.checked) {
+      this.selectedDomains.push(domain);
+    }
+    if (!status.target.checked) {
+      const index: number = this.selectedDomains.indexOf(domain);
+      if (index !== -1) {
+        this.selectedDomains.splice(index, 1);
       }
     }
+    return this.selectedDomains;
+  }
+
+  getProblems(): Problem[] {
+    return this.problemModel.getProblems(this.voteSorting);
+    /*if (!this.selectedDistrict && !this.selectedLocation
+      && (!Array.isArray(this.selectedDomains) || !this.selectedDomains.length)) {
+      return this.problemModel.getProblems(this.voteSorting);
+    }
+
+    if (Array.isArray(this.selectedDomains) && this.selectedDomains.length > 0) {
+      if (!this.selectedLocation && this.selectedDistrict) {
+        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
+          problem?.location?.district?.district_id === this.selectedDistrict.district_id
+          && problem?.domains === this.selectedDomains)
+      }
+      if (this.selectedLocation && this.selectedDistrict) {
+        return this.problemModel.getProblems(this.voteSorting).filter(problem =>
+          (problem?.location.location_id === this.selectedLocation.location_id &&
+            problem?.location?.district?.district_id === this.selectedDistrict.district_id
+            && problem?.domains === this.selectedDomains))
+      }
+    }*/
+  }
 
   toggleVoteSorting(): void {
     this.voteSorting = !this.voteSorting;
   }
 
   onChange() {
-    this.selectedLocation = null;
-  }
-
-  onNullLocation() {
     this.selectedLocation = null;
   }
 }

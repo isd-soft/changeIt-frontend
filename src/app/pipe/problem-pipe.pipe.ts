@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {District} from "@app/models/district";
 import {Location} from "../models/location"
 import {Problem} from "@app/models/problem";
+import {Domain} from "@app/models/domain";
 
 @Pipe({
   name: 'problemFilter'
@@ -13,9 +14,10 @@ export class ProblemPipe implements PipeTransform {
       return values;
     }
 
-    if(!location && district){
+
+    if(!location && district ){
       return values.filter(value =>
-        value?.location?.district?.district_id === district.district_id)
+        value?.location?.district?.district_id === district.district_id);
     }
 
     if(location && district){

@@ -1,5 +1,6 @@
 import {Location} from "@app/models/location"
 import {District} from "@app/models/district";
+import {Domain} from "@app/models/domain";
 
 export class Problem {
   problem_id: number;
@@ -11,4 +12,5 @@ export class Problem {
   status: string;
   location: Location;
   district: District;
+  domains: Domain[];
 }

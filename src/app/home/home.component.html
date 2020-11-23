@@ -11,13 +11,19 @@
           </select>
         </label>
 
-       <p>Select  location</p>
+        <p>Select location</p>
         <label>
           <select [(ngModel)]='selectedLocation'>
-            <option [ngValue]=null >----</option>
+            <option [ngValue]=null>----</option>
             <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
           </select>
         </label>
+
+        <p>Select domain</p>
+        <div *ngFor="let domain of getAllDomains()">
+          <input type="checkbox" id="domains" (change)="onSelectDomain($event, domain)">
+          <label for="domains" >{{domain.domainName}}</label>
+        </div>
       </div>
     </div>
 
@@ -32,8 +38,9 @@
         </button>
       </div>
 
-      <div class="card bg-light m-3" *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict:selectedLocation "
-           [routerLink]= "['/problem/', problem?.problem_id]" >
+      <div class="card bg-light m-3"
+           *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict: selectedLocation"
+           [routerLink]="['/problem/', problem?.problem_id]">
         <h5 class="card-header">
           <h5>{{ problem?.title }}</h5>
           <p><i>{{ problem?.created_at }}</i></p>
