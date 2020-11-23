@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Location} from '../models/location';
 import {LocationService} from '../service/location.service';
 
+
 @Injectable()
 export class LocationModel {
   private location: Location[] = new Array<Location>();
@@ -39,4 +40,7 @@ export class LocationModel {
     });
   }
 
+  getAllLocations() {
+    return this.location;
+  }
 }

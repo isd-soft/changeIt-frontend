@@ -11,6 +11,7 @@ export class DistrictModel {
   constructor(private districtService: DistrictService) {
     this.districtService.getData().subscribe(data => this.district = data);
   }
+
   getDistricts(): District[] {
     return this.district;
   }
@@ -34,13 +35,8 @@ export class DistrictModel {
     }
   }
 
-  deleteDistrict(id: number): void {
-    this.districtService.deleteDistrict(id).subscribe(() => {
-      const index = this.district.findIndex(d => this.locator(d, id));
-      if (index > -1) {
-        this.district.splice(index, 1);
-      }
-    });
+  deleteDistrict(key: number) {
+    return this.districtService.deleteDistrict(key);
   }
 
 }

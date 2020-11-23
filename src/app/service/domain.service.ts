@@ -10,7 +10,7 @@ import {catchError} from 'rxjs/operators';
 })
 export class DomainService {
 
-  constructor(private http: HttpClient, ) {
+  constructor(private http: HttpClient) {
   }
 
   getData(): Observable<Domain[]> {

@@ -10,7 +10,10 @@ import {catchError} from 'rxjs/operators';
 })
 export class LocationService {
 
-  constructor(private http: HttpClient, ) {
+  constructor(private http: HttpClient) {}
+
+  getAllLocations(): Observable<Location[]> {
+    return this.sendRequest<Location[]>('GET', environment.apiUrl + '/location');
   }
 
   getData(): Observable<Location[]> {

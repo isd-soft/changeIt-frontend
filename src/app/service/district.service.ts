@@ -10,8 +10,7 @@ import {catchError} from 'rxjs/operators';
 })
 export class DistrictService {
 
-  constructor(private http: HttpClient, ) {
-  }
+  constructor(private http: HttpClient) { }
 
   getData(): Observable<District[]> {
     return this.sendRequest<District[]>('GET', environment.apiUrl + '/district');
