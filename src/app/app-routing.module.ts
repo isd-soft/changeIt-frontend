@@ -13,6 +13,8 @@ import {AddProblemComponent} from '@app/add-problem/add-problem.component';
 import {TablesComponent} from '@app/tables/tables.component';
 import {AfterRegistrationComponent} from '@app/account/after-registration/after-registration.component';
 import {AfterConfirmEmailComponent} from '@app/account/after-confirm-email/after-confirm-email.component';
+import {ResetPasswordComponent} from '@app/account/reset-password/reset-password.component';
+import {NewPasswordComponent} from '@app/account/new-password/new-password.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'register/confirm', component: AfterRegistrationComponent},
-  {path: 'register/complete', component: AfterConfirmEmailComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'user/savePassword', component: NewPasswordComponent},
+  {path: 'api/v1/user/registrationConfirm', component: AfterConfirmEmailComponent},
   {path: 'problem/add', component: AddProblemComponent, canActivate: [AuthGuard]},
   {path: 'problem/:id', component: ProblemComponent, canActivate: [AuthGuard], resolve: {model: ProblemModelResolver}},
   {path: 'tables', component: TablesComponent, canActivate: [AuthGuard]},
