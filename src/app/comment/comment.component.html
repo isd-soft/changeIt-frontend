@@ -1,28 +1,28 @@
 <li>
   <div class="commenterName">
   <b>
-    {{ myComment?.user?.firstName }}
-    {{ myComment?.user?.lastName }}
+    {{ comment?.user?.firstName }}
+    {{ comment?.user?.lastName }}
   </b>
   </div>
   <div class="commentText">
     <p class="">
       <i>
-        {{ myComment?.content }}
+        {{ comment?.content }}
       </i>
     </p>
     <div class="d-flex justify-content-between">
                 <span class="date sub-text">
-                {{ myComment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
+                {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
                 </span>
       <div>
-        <button class="btn btn-primary" *ngIf="user && !commentVote" (click)="voteCommentOnClick(myComment)"  [disabled]="commentVote">
+        <button class="btn btn-primary" *ngIf="user && !commentVote" (click)="voteCommentOnClick()" [disabled]="commentVote">
           Plus
         </button>
-        <button class="btn btn-secondary" *ngIf="user && commentVote"  [disabled]="commentVote">
+        <button class="btn btn-danger" *ngIf="user && commentVote"  [disabled]="!commentVote">
           Minus
         </button>
-        {{ myComment?.votes }}
+        {{ comment?.votes }}
       </div>
     </div>
   </div>

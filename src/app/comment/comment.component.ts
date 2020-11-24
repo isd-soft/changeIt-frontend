@@ -17,7 +17,7 @@ import {AccountService} from '@app/service';
 })
 export class CommentComponent implements OnInit {
 
-  @Input() myComment: Comment;
+  @Input() comment: Comment;
   commentVote: CommentVote;
   user: User;
 
@@ -29,25 +29,21 @@ export class CommentComponent implements OnInit {
     private commentVoteService: CommentVoteService,
     private accountService: AccountService,
   ) {
-      console.log(this.myComment);
       this.user = accountService.userValue;
-      this.getVote();
   }
 
   ngOnInit(): void {
+    this.getVote();
   }
 
   getVote(): void {
-    console.log(this.myComment);
-    this.commentVoteService.getVote(this.myComment.comment_id, this.user.user_id).subscribe(data => this.commentVote = data);
+    this.commentVoteService.getVote(this.comment.comment_id, this.user.user_id).subscribe(data => this.commentVote = data);
   }
 
-  voteCommentOnClick(comment: Comment): void{
-    this.myComment = comment;
-    console.log(this.myComment);
-    this.commentVote = new CommentVote(comment, this.user);
+  voteCommentOnClick(): void{
+    this.commentVote = new CommentVote(this.comment, this.user);
     this.commentVoteService.vote(this.commentVote).subscribe();
-    comment.votes++;
-    this.commentService.updateComment(comment).subscribe();
+    this.comment.votes++;
+    this.commentService.updateComment(this.comment).subscribe();
   }
 }

@@ -37,8 +37,8 @@
         <label>Comments</label>
       </div>
       <div class="actionBox" >
-        <ul class="commentList" *ngIF="comments">
-          <app-comment *ngFor="let comment of comments" [myComment]="comment"></app-comment>
+        <ul class="commentList" *ngIf="canLoadComments">
+          <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
         </ul>
         <div class="addcomment">
           <input class="form-control" type="text" placeholder="Your comments" #content/>
