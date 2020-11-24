@@ -1,4 +1,4 @@
-﻿import {NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -24,6 +24,7 @@ import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { CommentComponent } from './comment/comment.component';
     LocationComponent,
     TablesComponent,
     CommentComponent,
+    ProblemPipe,
 
   ],
   providers: [

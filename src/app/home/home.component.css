@@ -1,3 +1,16 @@
 .card {
   cursor: pointer;
 }
+
+.border{
+  border-style: groove;
+  background-color: rgba(0,0,0,.03);
+}
+
+select{
+  width: 150px;
+}
+
+p {
+  margin-left: 5px;
+}
