@@ -1,6 +1,8 @@
+
 div {
-  display: block;
-  margin: 0 auto;
-  height: 50em;
-  width: 50em;
+  text-align: center;
+}
+
+div.col {
+  margin: 70px 10px 300px 10px;
 }

@@ -26,6 +26,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import {ChartsModule} from 'ng2-charts';
 import { StatisticComponent } from './statistics/statistic.component';
+import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
+import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
+import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
 
 @NgModule({
   imports: [
@@ -53,6 +56,9 @@ import { StatisticComponent } from './statistics/statistic.component';
     TablesComponent,
     ProblemPipe,
     StatisticComponent,
+    OurProblemsResultComponent,
+    ProblemsByDomainsComponent,
+    ProblemsByDistrictComponent,
 
   ],
   providers: [

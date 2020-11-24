@@ -1,10 +1,11 @@
-<div>
-  <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          [options]="pieChartOptions"
-          [plugins]="pieChartPlugins"
-          [legend]="pieChartLegend">
-  </canvas>
+<div class="container" *ngIf="problems">
+  <app-our-problems-result [problems]="problems"></app-our-problems-result>
+  <div class="row">
+    <div class="col">
+      <app-problems-by-domains [problems]="problems"></app-problems-by-domains>
+    </div>
+    <div class="col">
+      <app-problems-by-district [problems]="problems"></app-problems-by-district>
+    </div>
+  </div>
 </div>

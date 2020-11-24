@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ChartOptions, ChartType} from 'chart.js';
-import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+import {ProblemModel} from '@app/repository/problem_repository.model';
+import {Problem} from '@app/models/problem';
+import {ProblemService} from '@app/service/problem.service';
 
 @Component({
   selector: 'app-statistic',
@@ -9,19 +10,10 @@ import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSe
 })
 export class StatisticComponent implements OnInit {
 
-  // Pie
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: SingleDataSet = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  private problems: Problem[];
 
-  constructor() {
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
+  constructor(private problemService: ProblemService,) {
+    problemService.getData().subscribe(data => this.problems = data);
   }
 
   ngOnInit(): void {
