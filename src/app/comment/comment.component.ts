@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Comment} from '@app/models/comment';
 import {CommentModel} from '@app/repository/comment_repository.model';
@@ -9,6 +9,7 @@ import {UserService} from '@app/service/user.service';
 import {CommentVoteService} from '@app/service/commentVote.service';
 import {AccountService} from '@app/service';
 
+
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -16,7 +17,7 @@ import {AccountService} from '@app/service';
 })
 export class CommentComponent implements OnInit {
 
-  comment: Comment = new Comment();
+  @Input() myComment: Comment;
   commentVote: CommentVote;
   user: User;
 
@@ -28,23 +29,25 @@ export class CommentComponent implements OnInit {
     private commentVoteService: CommentVoteService,
     private accountService: AccountService,
   ) {
-    route.params.subscribe(params => {
-      const id = params.id;
-      if (id != null) {
-        Object.assign(this.comment, commentModel.getComment(id));
-      }
-
+      console.log(this.myComment);
       this.user = accountService.userValue;
-
       this.getVote();
-
-    });
   }
 
   ngOnInit(): void {
   }
 
   getVote(): void {
-    this.commentVoteService.getVote(this.comment.comment_id, this.user.user_id).subscribe(data => this.commentVote = data);
+    console.log(this.myComment);
+    this.commentVoteService.getVote(this.myComment.comment_id, this.user.user_id).subscribe(data => this.commentVote = data);
+  }
+
+  voteCommentOnClick(comment: Comment): void{
+    this.myComment = comment;
+    console.log(this.myComment);
+    this.commentVote = new CommentVote(comment, this.user);
+    this.commentVoteService.vote(this.commentVote).subscribe();
+    comment.votes++;
+    this.commentService.updateComment(comment).subscribe();
   }
 }

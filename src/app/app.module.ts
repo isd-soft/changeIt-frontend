@@ -26,6 +26,8 @@ import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import { CommentComponent } from './comment/comment.component';
+import {CommentModel} from '@app/repository/comment_repository.model';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -35,7 +37,8 @@ import { CommentComponent } from './comment/comment.component';
     AppRoutingModule,
     EditorModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    CommonModule,
   ],
   declarations: [
     AppComponent,
@@ -55,7 +58,7 @@ import { CommentComponent } from './comment/comment.component';
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel,
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

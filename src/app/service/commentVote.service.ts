@@ -15,11 +15,11 @@ export class CommentVoteService{
   ) { }
 
   vote(commentVote: CommentVote): Observable<CommentVote> {
-    return this.sendRequest<CommentVote>('POST', `${environment.apiUrl}/commentVote`, commentVote);
+    return this.sendRequest<CommentVote>('POST', `${environment.apiUrl}/comment_vote/`, commentVote);
   }
 
   getVote(commentId: number, userId: number): Observable<CommentVote> {
-    return this.sendRequest<CommentVote>('GET', `${environment.apiUrl}/commentVote/${commentId}/${userId}`);
+    return this.sendRequest<CommentVote>('GET', `${environment.apiUrl}/comment_vote/${commentId}/${userId}`);
   }
 
   private sendRequest<T>(verb: string, url: string, body?: CommentVote): Observable<T> {

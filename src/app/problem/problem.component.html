@@ -36,37 +36,9 @@
       <div class="titleBox d-flex justify-content-center">
         <label>Comments</label>
       </div>
-      <div class="actionBox">
-        <ul class="commentList">
-          <li *ngFor="let comment of comments" class="p-1">
-            <div class="commenterName">
-              <b>
-                {{ comment?.user?.firstName }}
-                {{ comment?.user?.lastName }}
-              </b>
-            </div>
-            <div class="commentText">
-              <p class="">
-                <i>
-                  {{ comment?.content }}
-                </i>
-              </p>
-              <div class="d-flex justify-content-between">
-                <span class="date sub-text">
-                {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
-                </span>
-                <div>
-                  <button class="btn btn-primary" *ngIf="user && !commentVote" (click)="voteCommentOnClick(comment?.comment_id)"  [disabled]="commentVote">
-                    Plus
-                  </button>
-                  <button class="btn btn-secondary" *ngIf="user && commentVote"  [disabled]="commentVote">
-                    Minus
-                  </button>
-                  {{ comment?.votes }}
-                </div>
-              </div>
-            </div>
-          </li>
+      <div class="actionBox" >
+        <ul class="commentList" *ngIF="comments">
+          <app-comment *ngFor="let comment of comments" [myComment]="comment"></app-comment>
         </ul>
         <div class="addcomment">
           <input class="form-control" type="text" placeholder="Your comments" #content/>

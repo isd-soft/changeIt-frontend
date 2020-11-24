@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '@app/models';
 import {AccountService} from '@app/service';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-user-page',
@@ -13,6 +14,20 @@ export class UserPageComponent implements OnInit {
 
   constructor(private accountService: AccountService) {
     this.user = this.accountService.userValue;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try{
+      return jwtDecode(token);
+    }
+    catch (Error){
+      return null;
+    }
+  }
+
+  Decode(): void{
+    const tokenInfo = this.getDecodedAccessToken(this.user.token);
+    console.log(tokenInfo);
   }
 
   ngOnInit(): void {
