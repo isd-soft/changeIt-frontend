@@ -24,6 +24,8 @@ import {EditorModule} from '@tinymce/tinymce-angular';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
+import {ChartsModule} from 'ng2-charts';
+import { StatisticComponent } from './statistics/statistic.component';
 
 @NgModule({
   imports: [
@@ -33,7 +35,8 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     AppRoutingModule,
     EditorModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,
   ],
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     LocationComponent,
     TablesComponent,
     ProblemPipe,
+    StatisticComponent,
 
   ],
   providers: [

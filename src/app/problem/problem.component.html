@@ -3,7 +3,7 @@
     <h1>{{ problem?.title }}</h1>
     <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
     <h4 class="d-flex justify-content-end">{{ problem?.status}}</h4>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="user?.role == 'ADMIN'">
       <select id="changeStatus" class="form-control changeStatus" #problemStatus>
         <option selected>Choose status</option>
         <option>DONE</option>
