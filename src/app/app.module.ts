@@ -24,6 +24,7 @@ import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DomainComponent,
     LocationComponent,
     TablesComponent,
+    CommentComponent,
 
   ],
   providers: [

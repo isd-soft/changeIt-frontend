@@ -14,7 +14,7 @@ export class CommentModel{
 
   saveComment(comment: Comment): void{
     if (comment.comment_id == 0 || comment.comment_id == null){
-      this.commentService.createComment(comment)
+      this.commentService.saveComment(comment)
         .subscribe(c => this.comment.push(c));
     } else {
       this.commentService.updateComment(comment).subscribe(c => {

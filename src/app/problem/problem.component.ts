@@ -10,6 +10,12 @@ import {ProblemService} from '@app/service/problem.service';
 import {VoteService} from '@app/service/vote.service';
 import {Vote} from '@app/models/Vote';
 import {UserService} from '@app/service/user.service';
+import {CommentVote} from '@app/models/commentVote';
+import {CommentComponent} from '@app/comment/comment.component';
+import {District} from '@app/models/district';
+import {CommentVoteService} from '@app/service/commentVote.service';
+import {CommentModel} from '@app/repository/comment_repository.model';
+import {DistrictModel} from '@app/repository/district_repository.model';
 
 @Component({
   selector: 'app-problem',
@@ -20,6 +26,7 @@ export class ProblemComponent implements OnInit {
 
   problem: Problem = new Problem();
   vote: Vote;
+  commentVote: CommentVote;
   user: User;
   comments: Comment[];
 
@@ -31,6 +38,7 @@ export class ProblemComponent implements OnInit {
     private voteService: VoteService,
     private userService: UserService,
     private accountService: AccountService,
+    private commentVoteService: CommentVoteService,
   ) {
     route.params.subscribe(params => {
       const id = params.id;
@@ -62,6 +70,16 @@ export class ProblemComponent implements OnInit {
     this.voteService.vote(this.vote).subscribe();
     this.problem.votesCount++;
     this.problemModel.saveProblem(this.problem);
+  }
+
+  voteCommentOnClick(commentId: number): void{
+    let comment: Comment = new Comment();
+    this.commentService.getCommentById(commentId).subscribe(data => {
+      comment = data; });
+    this.commentVote = new CommentVote(comment, this.user);
+    this.commentVoteService.vote(this.commentVote).subscribe();
+    comment.votes++;
+    this.commentService.updateComment(comment).subscribe();
   }
 
   addComment(content: string): void {
