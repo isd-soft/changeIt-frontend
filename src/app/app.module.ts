@@ -21,8 +21,8 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
-import { TablesComponent } from './tables/tables.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {TablesComponent} from './tables/tables.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 
 @NgModule({
@@ -33,7 +33,8 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     AppRoutingModule,
     EditorModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+
   ],
   declarations: [
     AppComponent,
@@ -48,7 +49,7 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     DomainComponent,
     LocationComponent,
     TablesComponent,
-    ProblemPipe,
+    ProblemPipe
 
   ],
   providers: [

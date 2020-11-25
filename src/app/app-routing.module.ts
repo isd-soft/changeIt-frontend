@@ -16,6 +16,7 @@ import {AfterConfirmEmailComponent} from '@app/account/after-confirm-email/after
 import {ResetPasswordComponent} from '@app/account/reset-password/reset-password.component';
 import {NewPasswordComponent} from '@app/account/new-password/new-password.component';
 
+
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
@@ -32,7 +33,6 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
-
 ];
 
 @NgModule({
