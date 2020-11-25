@@ -22,6 +22,10 @@ export class CommentVoteService{
     return this.sendRequest<CommentVote>('GET', `${environment.apiUrl}/comment_vote/${commentId}/${userId}`);
   }
 
+  unVote(commentId: number, userId: number): Observable<CommentVote> {
+    return this.sendRequest<CommentVote>('DELETE', `${environment.apiUrl}/comment_vote/${commentId}/${userId}`);
+  }
+
   private sendRequest<T>(verb: string, url: string, body?: CommentVote): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, body);
