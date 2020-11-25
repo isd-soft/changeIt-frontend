@@ -5,7 +5,7 @@
     <hr/>
     <br>
 
-    <form [formGroup]="addProblemForm" (ngSubmit)="onSubmit(addProblemForm.value)">
+    <form [formGroup]="addProblemForm" (ngSubmit)="onSubmit(addProblemForm.value, $event)">
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" formControlName="title" required
@@ -116,9 +116,7 @@
           <div *ngIf="addProblemForm.controls['address'].errors.minlength">
             Address must be at least 4 characters long.
           </div>
-
         </div>
-
       </div>
 
       <div class="form-group">
@@ -131,14 +129,6 @@
       </div>
 
       <div class="form-group">
-<!--        <agm-map-->
-<!--          [latitude]="latitude"-->
-<!--          [longitude]="longitude"-->
-<!--          [zoom]="zoom" >-->
-<!--          <agm-marker-->
-<!--            [latitude]="latitude"-->
-<!--            [longitude]="longitude"></agm-marker>-->
-<!--        </agm-map>-->
         <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
           <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
                       (dragEnd)="markerDragEnd($event)"></agm-marker>
@@ -150,7 +140,7 @@
       </div>
 
       <div class="form-group">
-        <input type="file" formControlName="file">
+        <input type="file" formControlName="file"  (change)="handleFileInput($event.target.files)">
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>

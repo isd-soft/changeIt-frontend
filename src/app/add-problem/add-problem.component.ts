@@ -10,6 +10,9 @@ import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {FormsModule} from '@angular/forms';
 import { MapsAPILoader} from '@agm/core';
+import {AccountService} from '@app/service';
+import {config} from 'rxjs';
+
 
 
 @Component({
@@ -18,13 +21,15 @@ import { MapsAPILoader} from '@agm/core';
   styleUrls: ['./add-problem.component.css']
 })
 export class AddProblemComponent implements OnInit {
-// selectedFile: File = null;
+  // selectedFile: File = null;
+  fileToUpload: File = null;
   show: boolean = false;
   addProblemForm: FormGroup;
   problem: Problem = new Problem();
   location: Location = new Location();
   district: District = new District();
   domains: Domain = new Domain();
+  userId: number;
 
   latitude: number = 47.016136126475665;
   longitude: number = 28.837752985037348;
@@ -37,7 +42,9 @@ export class AddProblemComponent implements OnInit {
               private districtModel: DistrictModel,
               private domainModel: DomainModel,
               private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private accountService: AccountService) {
+    this.userId = this.accountService.userValue.user_id;
   }
 
   ngOnInit(): void {
@@ -99,6 +106,9 @@ export class AddProblemComponent implements OnInit {
     });
   }
 
+  handleFileInput(files: FileList): any {
+    this.fileToUpload = files.item(0);
+  }
   // onFileSelected(event: any): any {
   //   this.selectedFile = (event.target.files[0] as File);
   // }
@@ -119,8 +129,10 @@ export class AddProblemComponent implements OnInit {
   //   });
   // }
 
-  onSubmit(data): any {
-
+  onSubmit(data, event: any): any {
+    console.log(data);
+    // document.getElementById('file').
+    // console.log(event.target.files[0] as File);
     const controls = this.addProblemForm.controls;
     if (this.addProblemForm.invalid) {
       Object.keys(controls)
@@ -143,8 +155,12 @@ export class AddProblemComponent implements OnInit {
     }
     domn += ']';
     data.domains = JSON.parse(domn);
+    data.address = JSON.parse('{"address" : "' + data.address + '", "lat": ' + this.latitude + ', "lng": ' + this.longitude + '}');
+    data.user = JSON.parse('{"user_id": ' + this.userId + '}');
+    data.image = this.fileToUpload;
+    // console.log(data);
     this.problemModel.saveProblem(data);
-    document.location.href = '/home';
+    // document.location.href = '/home';
   }
 
   changeLocation(disctrictID): any {
