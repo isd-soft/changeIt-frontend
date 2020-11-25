@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+﻿import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -33,6 +33,8 @@ import { StatisticComponent } from './statistics/statistic.component';
 import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
 import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
 import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   imports: [
@@ -45,6 +47,10 @@ import { ProblemsByDistrictComponent } from './statistics/problems-by-district/p
     NgbModule,
     ChartsModule,
     CommonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBEcxa0sOCZ3CMOYboi-buCqex6HxY2baM',
+      libraries: ['places']
+    })
   ],
   declarations: [
     AppComponent,
@@ -59,7 +65,6 @@ import { ProblemsByDistrictComponent } from './statistics/problems-by-district/p
     DomainComponent,
     LocationComponent,
     TablesComponent,
-    CommentComponent,
     ProblemPipe,
     StatisticComponent,
     OurProblemsResultComponent,
