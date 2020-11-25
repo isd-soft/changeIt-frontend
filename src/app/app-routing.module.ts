@@ -18,6 +18,7 @@ import {NewPasswordComponent} from '@app/account/new-password/new-password.compo
 import {StatisticComponent} from '@app/statistics/statistic.component';
 import {AdminGuard} from '@app/helpers/admin.guard';
 
+
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
@@ -35,7 +36,6 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
-
 ];
 
 @NgModule({

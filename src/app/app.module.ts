@@ -21,8 +21,8 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
-import { TablesComponent } from './tables/tables.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {TablesComponent} from './tables/tables.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import { CommentComponent } from './comment/comment.component';
 import {CommentModel} from '@app/repository/comment_repository.model';
@@ -69,6 +69,7 @@ import { AgmCoreModule } from '@agm/core';
     OurProblemsResultComponent,
     ProblemsByDomainsComponent,
     ProblemsByDistrictComponent,
+
 
   ],
   providers: [
