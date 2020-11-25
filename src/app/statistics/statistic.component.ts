@@ -10,7 +10,7 @@ import {ProblemService} from '@app/service/problem.service';
 })
 export class StatisticComponent implements OnInit {
 
-  private problems: Problem[];
+  public problems: Problem[];
 
   constructor(private problemService: ProblemService,) {
     problemService.getData().subscribe(data => this.problems = data);
