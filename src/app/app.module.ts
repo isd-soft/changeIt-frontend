@@ -68,7 +68,7 @@ import { ProblemsByDistrictComponent } from './statistics/problems-by-district/p
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel,
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
