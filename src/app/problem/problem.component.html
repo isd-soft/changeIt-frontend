@@ -3,7 +3,7 @@
     <h1>{{ problem?.title }}</h1>
     <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
     <h4 class="d-flex justify-content-end">{{ problem?.status}}</h4>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="user?.role == 'ADMIN'">
       <select id="changeStatus" class="form-control changeStatus" #problemStatus>
         <option selected>Choose status</option>
         <option>DONE</option>
@@ -12,7 +12,7 @@
         <option>REJECTED</option>
       </select>
       <button type="submit" class="btn btn-primary"
-              (click)="changeStatus(problem.problem_id, problemStatus.value)">Submit</button>
+              (click)="changeStatus(problem.problem_id, problemStatus.value)">Change</button>
     </div>
   </div>
   <div class="description p-5">
@@ -36,29 +36,9 @@
       <div class="titleBox d-flex justify-content-center">
         <label>Comments</label>
       </div>
-      <div class="actionBox">
-        <ul class="commentList">
-          <li *ngFor="let comment of comments" class="p-1">
-            <div class="commenterName">
-              <b>
-                {{ comment?.user?.firstName }}
-                {{ comment?.user?.lastName }}
-              </b>
-            </div>
-            <div class="commentText">
-              <p class="">
-                <i>
-                  {{ comment?.content }}
-                </i>
-              </p>
-              <div class="d-flex justify-content-between">
-                <span class="date sub-text">
-                {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
-                </span>
-                Votes: {{ comment?.votes }}
-              </div>
-            </div>
-          </li>
+      <div class="actionBox" >
+        <ul class="commentList" *ngIf="canLoadComments">
+          <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
         </ul>
         <div class="addcomment">
           <input class="form-control" type="text" placeholder="Your comments" #content/>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Data} from '@angular/router';
 import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {CommentService} from '@app/service/comment.service';
@@ -10,11 +10,12 @@ import {ProblemService} from '@app/service/problem.service';
 import {VoteService} from '@app/service/vote.service';
 import {Vote} from '@app/models/Vote';
 import {UserService} from '@app/service/user.service';
+import {Timestamp} from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-problem',
   templateUrl: './problem.component.html',
-  styleUrls: ['./problem.component.css']
+  styleUrls: ['./problem.component.css'],
 })
 export class ProblemComponent implements OnInit {
 
@@ -22,6 +23,7 @@ export class ProblemComponent implements OnInit {
   vote: Vote;
   user: User;
   comments: Comment[];
+  canLoadComments = false;
 
   constructor(
     private problemService: ProblemService,
@@ -41,10 +43,11 @@ export class ProblemComponent implements OnInit {
       this.user = accountService.userValue;
 
       this.getVote();
-    });
 
-    commentService.getData(this.problem).subscribe(data => {
-      this.comments = data;
+      commentService.getData(this.problem).subscribe(data => {
+        this.comments = data;
+        this.canLoadComments = true;
+      });
     });
 
   }
@@ -64,11 +67,13 @@ export class ProblemComponent implements OnInit {
     this.problemModel.saveProblem(this.problem);
   }
 
+
   addComment(content: string): void {
     const comment: Comment = new Comment();
     comment.content = content;
     comment.problem = this.problem;
     comment.user = this.user;
+    comment.votes = 0;
     this.commentService.saveComment( comment ).subscribe( );
     this.comments.push(comment);
   }

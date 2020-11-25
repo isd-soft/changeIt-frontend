@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+﻿import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -24,6 +24,15 @@ import {EditorModule} from '@tinymce/tinymce-angular';
 import {TablesComponent} from './tables/tables.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
+import { CommentComponent } from './comment/comment.component';
+import {CommentModel} from '@app/repository/comment_repository.model';
+import {CommonModule} from '@angular/common';
+import {ChartsModule} from 'ng2-charts';
+import { StatisticComponent } from './statistics/statistic.component';
+import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
+import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
+import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -34,7 +43,12 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     EditorModule,
     FormsModule,
     NgbModule,
-
+    ChartsModule,
+    CommonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBEcxa0sOCZ3CMOYboi-buCqex6HxY2baM',
+      libraries: ['places']
+    })
   ],
   declarations: [
     AppComponent,
@@ -49,11 +63,17 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
     DomainComponent,
     LocationComponent,
     TablesComponent,
-    ProblemPipe
+    CommentComponent,
+    ProblemPipe,
+    StatisticComponent,
+    OurProblemsResultComponent,
+    ProblemsByDomainsComponent,
+    ProblemsByDistrictComponent,
+
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel,
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

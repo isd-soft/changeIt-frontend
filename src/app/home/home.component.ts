@@ -2,10 +2,10 @@
 import {District} from '@app/models/district';
 import {DistrictModel} from '@app/repository/district_repository.model';
 import {Problem} from '@app/models/problem';
-import {Location} from "../models/location"
+import {Location} from '../models/location';
 import {ProblemModel} from '@app/repository/problem_repository.model';
-import {LocationModel} from "@app/repository/location_repository.model";
-import {Domain} from "@app/models/domain";
+import {LocationModel} from '@app/repository/location_repository.model';
+import {Domain} from '@app/models/domain';
 import {DomainModel} from '@app/repository/domain_repository.model';
 
 @Component({
@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
   getDistricts(): District[] {
     return this.districtModel.getDistricts();
   }
-
 
   getProblems(): Problem[] {
     if (this.sort === 'vote') {

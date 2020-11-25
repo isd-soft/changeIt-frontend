@@ -17,8 +17,20 @@ export class CommentService {
     return this.sendRequest<Comment[]>('GET', `${environment.apiUrl}/problem/${problem.problem_id}/comments`);
   }
 
+  getCommentById(id: number): Observable<Comment>{
+    return this.sendRequest<Comment>('GET', `${environment.apiUrl}/comment/${id}`);
+  }
+
+  getVote(id: number): Observable<number> {
+    return this.sendRequest<number>('GET', `${environment.apiUrl}/comment/${id}/votes`);
+  }
+
   saveComment(comment: Comment): Observable<Comment> {
     return this.sendRequest<Comment>('POST', environment.apiUrl + '/comment', comment);
+  }
+
+  updateComment(comment: Comment): Observable<Comment>{
+    return this.sendRequest<Comment>('PUT', `${environment.apiUrl}/comment/${comment.comment_id}`, comment);
   }
 
   private sendRequest<T>(verb: string, url: string, body?: Comment): Observable<T> {

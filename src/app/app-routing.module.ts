@@ -15,6 +15,8 @@ import {AfterRegistrationComponent} from '@app/account/after-registration/after-
 import {AfterConfirmEmailComponent} from '@app/account/after-confirm-email/after-confirm-email.component';
 import {ResetPasswordComponent} from '@app/account/reset-password/reset-password.component';
 import {NewPasswordComponent} from '@app/account/new-password/new-password.component';
+import {StatisticComponent} from '@app/statistics/statistic.component';
+import {AdminGuard} from '@app/helpers/admin.guard';
 
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -29,7 +31,8 @@ const routes: Routes = [
   {path: 'api/v1/user/registrationConfirm', component: AfterConfirmEmailComponent},
   {path: 'problem/add', component: AddProblemComponent, canActivate: [AuthGuard]},
   {path: 'problem/:id', component: ProblemComponent, canActivate: [AuthGuard], resolve: {model: ProblemModelResolver}},
-  {path: 'tables', component: TablesComponent, canActivate: [AuthGuard]},
+  {path: 'tables', component: TablesComponent, canActivate: [AdminGuard]},
+  {path: 'statistics', component: StatisticComponent, canActivate: [AuthGuard]},
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
