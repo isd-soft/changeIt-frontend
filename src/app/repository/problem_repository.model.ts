@@ -30,7 +30,7 @@ export class ProblemModel {
   }
 
   getProblems(): Problem[]{
-    return this.problemsByDateDesc;
+    return this.problems;
   }
 
   getProblemsByVote(voteSorting?: boolean): Problem[] {

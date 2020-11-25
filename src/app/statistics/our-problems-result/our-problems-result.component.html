@@ -1,0 +1,11 @@
+<div *ngIf="pieChartData">
+  <h2>Our problems result</h2>
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend">
+  </canvas>
+</div>

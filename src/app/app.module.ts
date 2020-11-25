@@ -1,8 +1,7 @@
-import {NgModule} from '@angular/core';
+﻿import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-
 import {AppRoutingModule} from './app-routing.module';
 import {JwtInterceptor, ErrorInterceptor} from './helpers';
 import {AppComponent} from './app.component';
@@ -25,6 +24,12 @@ import {EditorModule} from '@tinymce/tinymce-angular';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
+import {ChartsModule} from 'ng2-charts';
+import { StatisticComponent } from './statistics/statistic.component';
+import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
+import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
+import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
+import { AgmCoreModule } from '@agm/core';
 import { CommentComponent } from './comment/comment.component';
 import {CommentModel} from '@app/repository/comment_repository.model';
 import {CommonModule} from '@angular/common';
@@ -39,6 +44,11 @@ import {CommonModule} from '@angular/common';
     FormsModule,
     NgbModule,
     CommonModule,
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBEcxa0sOCZ3CMOYboi-buCqex6HxY2baM',
+      libraries: ['places']
+    })
   ],
   declarations: [
     AppComponent,
@@ -55,6 +65,10 @@ import {CommonModule} from '@angular/common';
     TablesComponent,
     CommentComponent,
     ProblemPipe,
+    StatisticComponent,
+    OurProblemsResultComponent,
+    ProblemsByDomainsComponent,
+    ProblemsByDistrictComponent,
 
   ],
   providers: [
