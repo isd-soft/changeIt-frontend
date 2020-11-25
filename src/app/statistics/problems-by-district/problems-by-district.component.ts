@@ -51,6 +51,9 @@ export class ProblemsByDistrictComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    }
+
   setting(): void {
     this.barChartLabels = this.districts.map(district => district.districtName);
     let data = [];
