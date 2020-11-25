@@ -12,7 +12,7 @@ export class StatisticComponent implements OnInit {
 
   public problems: Problem[];
 
-  constructor(private problemService: ProblemService,) {
+  constructor(private problemService: ProblemService) {
     problemService.getData().subscribe(data => this.problems = data);
   }
 
