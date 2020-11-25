@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, Input, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@app/models/location';
 import {LocationModel} from '@app/repository/location_repository.model';
@@ -9,6 +9,8 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import {FormsModule} from '@angular/forms';
+import { MapsAPILoader} from '@agm/core';
+
 
 @Component({
   selector: 'app-add-problem',
@@ -24,15 +26,33 @@ export class AddProblemComponent implements OnInit {
   district: District = new District();
   domains: Domain = new Domain();
 
+  latitude: number = 47.016136126475665;
+  longitude: number = 28.837752985037348;
+  zoom: number = 15;
+  private geoCoder;
+
   constructor(private fb: FormBuilder,
               private problemModel: ProblemModel,
               private locationModel: LocationModel,
               private districtModel: DistrictModel,
-              private domainModel: DomainModel) {
+              private domainModel: DomainModel,
+              private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.mapsAPILoader.load().then(() => {
+      this.geoCoder = new google.maps.Geocoder;
+
+    });
+  }
+  markerDragEnd($event: google.maps.MouseEvent): any {
+    console.log($event);
+    this.latitude = $event.latLng.lat();
+    this.longitude = $event.latLng.lng();
+    console.log(this.latitude);
+    console.log(this.longitude);
   }
 
   getLocations(): Location[] {
@@ -63,6 +83,10 @@ export class AddProblemComponent implements OnInit {
       ]
       ],
       district: ['', [
+        Validators.required
+      ]
+      ],
+      address: ['', [
         Validators.required
       ]
       ],
