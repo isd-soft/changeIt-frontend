@@ -28,6 +28,11 @@ import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import { CommentComponent } from './comment/comment.component';
 import {CommentModel} from '@app/repository/comment_repository.model';
 import {CommonModule} from '@angular/common';
+import {ChartsModule} from 'ng2-charts';
+import { StatisticComponent } from './statistics/statistic.component';
+import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
+import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
+import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
 
 @NgModule({
   imports: [
@@ -38,6 +43,7 @@ import {CommonModule} from '@angular/common';
     EditorModule,
     FormsModule,
     NgbModule,
+    ChartsModule,
     CommonModule,
   ],
   declarations: [
@@ -55,10 +61,14 @@ import {CommonModule} from '@angular/common';
     TablesComponent,
     CommentComponent,
     ProblemPipe,
+    StatisticComponent,
+    OurProblemsResultComponent,
+    ProblemsByDomainsComponent,
+    ProblemsByDistrictComponent,
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

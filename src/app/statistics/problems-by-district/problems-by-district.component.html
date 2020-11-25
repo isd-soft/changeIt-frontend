@@ -1,0 +1,11 @@
+<div style="display: block;" *ngIf="barChartData">
+  <h2>Problems by district</h2>
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
