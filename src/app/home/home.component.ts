@@ -20,10 +20,13 @@ export class HomeComponent implements OnInit {
   selectedDistrict: District;
   selectedLocation: Location;
   selectedDomains: Domain[] = [];
+  availableStatuses: String[];
+  selectedStatuses: String[] = [];
 
 
   constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel) {
+    this.availableStatuses = ['ACTIVE', 'IN_PROGRESS', 'REJECTED', 'DONE'];
   }
 
   ngOnInit(): void {
@@ -78,5 +81,17 @@ export class HomeComponent implements OnInit {
 
   onChange(): void {
     this.selectedLocation = null;
+  }
+
+  onStatusSelect(event: any, status: String) {
+    if (event.target.checked) {
+      this.selectedStatuses.push(status);
+    }
+    if (!event.target.checked) {
+      const index: number = this.selectedStatuses.indexOf(status);
+      if (index !== -1) {
+        this.selectedStatuses.splice(index, 1);
+      }
+    }
   }
 }

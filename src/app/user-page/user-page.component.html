@@ -38,6 +38,9 @@
         <div class="d-flex justify-content-between">
           <div> Status:</div><div>{{user.status}}</div>
         </div>
+        <li class="nav-item" *ngIf="user">
+          <a class="nav-link" (click)="onClick()">Change password</a>
+        </li>
         <div>
         </div>
       </div>

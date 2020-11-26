@@ -21,8 +21,8 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {LocationComponent} from '@app/location/location.component';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {EditorModule} from '@tinymce/tinymce-angular';
-import { TablesComponent } from './tables/tables.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {TablesComponent} from './tables/tables.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
 import { CommentComponent } from './comment/comment.component';
 import {CommentModel} from '@app/repository/comment_repository.model';
@@ -32,7 +32,10 @@ import { StatisticComponent } from './statistics/statistic.component';
 import { OurProblemsResultComponent } from './statistics/our-problems-result/our-problems-result.component';
 import { ProblemsByDomainsComponent } from './statistics/problems-by-domains/problems-by-domains.component';
 import { ProblemsByDistrictComponent } from './statistics/problems-by-district/problems-by-district.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';;
+import { UsersComponent } from './users/users.component'
+import {UserModel} from '@app/repository/user_repository.model';
+import { UserShowComponent } from './user-show/user-show.component';
 
 @NgModule({
   imports: [
@@ -69,10 +72,14 @@ import { AgmCoreModule } from '@agm/core';
     OurProblemsResultComponent,
     ProblemsByDomainsComponent,
     ProblemsByDistrictComponent,
+    UsersComponent,
+    UserShowComponent
+
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
+
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
