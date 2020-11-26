@@ -8,9 +8,10 @@ import {Domain} from '@app/models/domain';
   name: 'problemFilter'
 })
 export class ProblemPipe implements PipeTransform {
-  transform(values: Problem[], district?: District, location?: Location, domains?: Domain[], domainLenght?: number): Problem[] {
+  transform(values: Problem[], district?: District, location?: Location, domains?: Domain[],
+            domainLenght?: number, statuses?: String[], statusesLength?: number): Problem[] {
 
-    if (!district && !location && !domains){
+    if (!district && !location && !domains && !statuses){
       return values;
     }
 
@@ -27,6 +28,10 @@ export class ProblemPipe implements PipeTransform {
 
     if (domains.length != 0) {
       values = values.filter(value => this.checkIfValueContainAllDomains(value, domains));
+    }
+
+    if(statuses.length != 0) {
+      values = values.filter(value => this.checkIfValueContainStatus(value, statuses));
     }
 
     return values;
@@ -52,6 +57,16 @@ export class ProblemPipe implements PipeTransform {
     return check;
   }
 
+  checkIfValueContainStatus(value: Problem, statuses: String[]) {
+   let check = false;
+   for(let status of statuses){
+     if(value.status == status){
+      check = true;
+      return check;
+     }
+   }
+   return check;
+  }
 }
 
 
