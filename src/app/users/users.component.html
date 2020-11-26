@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Users</h1>
+  <hr/>
+  <br>
+
+  <table class="table table-striped with-scroll">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of getUsers()">
+      <td>{{ user?.user_id }}</td>
+      <td>{{ user?.firstName }} {{user?.lastName}}</td>
+      <td>{{ user?.email }}</td>
+      <td>{{ user?.role }}</td>
+      <td>{{ user?.userStatus }}</td>
+      <td> <a [routerLink]="['/user-show/', user?.user_id]">Show more</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -17,6 +17,8 @@ import {ResetPasswordComponent} from '@app/account/reset-password/reset-password
 import {NewPasswordComponent} from '@app/account/new-password/new-password.component';
 import {StatisticComponent} from '@app/statistics/statistic.component';
 import {AdminGuard} from '@app/helpers/admin.guard';
+import {UsersComponent} from '@app/users/users.component';
+import {UserShowComponent} from '@app/user-show/user-show.component';
 
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -36,6 +38,8 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: 'new-password', component: NewPasswordComponent},
+  {path: 'user-show/:id', component: UserShowComponent, canActivate: [AuthGuard]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
 ];
 
