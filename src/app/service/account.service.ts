@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -79,4 +79,23 @@ export class AccountService {
                 return x;
             }));
     }
+
+  saveUserLogo( logo: any) {
+     this.http.post(
+        `${environment.apiUrl}/user/1/user_logo`, logo)
+       .subscribe(res => {
+         console.log(res);
+       });
+  }
+
+  getUserLogo(id: number): Observable<any>{
+      return this.http.get(`${environment.apiUrl}/user/${id}/user_logo`);
+  }
+
+  getImage(id: number) {
+    const httpHeaders = new HttpHeaders() .set('Accept', 'image/webp,*/*');
+    return this.http.get<Blob>(`${environment.apiUrl}/user/${id}/user_logo`, {
+      headers: httpHeaders, responseType: 'blob' as 'json'
+    });
+  }
 }

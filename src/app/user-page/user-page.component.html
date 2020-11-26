@@ -5,8 +5,24 @@
   <div class="card">
     <div class="card-header"><h4 class="d-flex justify-content-center">User Profile</h4></div>
     <div class="card-body">
-      <h3 class="d-flex justify-content-center" style="color:#00b1b1;"> {{ user.firstName }} {{user.lastName}} </h3>
-      <p class="d-flex flex-row-reverse">{{user.role}}</p>
+      <div class="d-flex flex-row-between">
+        <div class="col-sm-6">
+          <div  align="center">
+            <img alt="User Pic"
+                 src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
+                 id="profile-image1" class="img-circle img-responsive">
+            <input id="profile-image-upload" class="hidden" type="file">
+            <div style="color:#999;" >click here to change profile image</div>
+            <!--Upload Image Js And Css-->
+          </div>
+          <br>
+          <!-- /input-group -->
+        </div>
+        <div>
+          <h4 style="color:#00b1b1;"> {{ user.firstName }} {{user.lastName}} </h4>
+          <p class="d-flex flex-row-reverse">{{user.role}}</p>
+        </div>
+      </div>
       <div class="box-body">
         <hr style="margin:15px 0 15px 0;">
 

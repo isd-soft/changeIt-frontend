@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {Vote} from '@app/models/Vote';
 import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {User} from '@app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +31,6 @@ export class UserService {
                       .set('passwordConfirmation', passwordConfirmation);
     return this.sendRequest('POST', `${environment.apiUrl}/user/savePassword`, myParams);
   }
-
 
   private sendRequest<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 
