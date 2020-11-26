@@ -58,3 +58,23 @@
 .changeStatus{
   width: 175px;
 }
+
+.brd {
+  border: 4px double black;
+  background: #fc3;
+  padding: 5px;
+  margin: 3px;
+}
+
+div.domains {
+  margin: auto;
+  width: 500px;
+}
+
+button.editing {
+  width: 140px;
+}
+
+div.description {
+  width: 80%;
+}

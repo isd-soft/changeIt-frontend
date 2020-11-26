@@ -34,6 +34,10 @@ export class UserService {
     return this.sendRequest('POST', `${environment.apiUrl}/user/savePassword`, myParams);
   }
 
+  getProblemAuthor(problemId: number): Observable<User> {
+    return this.sendRequest('GET', `${environment.apiUrl}/problem/${problemId}/user`);
+  }
+
 
   private sendRequest<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 
@@ -50,4 +54,6 @@ export class UserService {
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
+
+
 }

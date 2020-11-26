@@ -63,7 +63,4 @@ export class ProblemsByDistrictComponent implements OnInit {
     this.barChartData[0].data = data;
   }
 
-  ngOnInit(): void {
-  }
-
 }

@@ -10,7 +10,7 @@ import {ProblemService} from '@app/service/problem.service';
 import {VoteService} from '@app/service/vote.service';
 import {Vote} from '@app/models/Vote';
 import {UserService} from '@app/service/user.service';
-import {Timestamp} from 'rxjs/internal-compatibility';
+
 
 @Component({
   selector: 'app-problem',
@@ -22,8 +22,14 @@ export class ProblemComponent implements OnInit {
   problem: Problem = new Problem();
   vote: Vote;
   user: User;
+  authorId: number;
+  author = false;
   comments: Comment[];
   canLoadComments = false;
+
+
+  // editing
+  editDescription = false;
 
   constructor(
     private problemService: ProblemService,
@@ -39,8 +45,14 @@ export class ProblemComponent implements OnInit {
       if (id != null) {
         Object.assign(this.problem, problemModel.getProblem(id));
       }
-
       this.user = accountService.userValue;
+
+      userService.getProblemAuthor(this.problem.problem_id).subscribe(data => {
+        this.authorId = data.user_id;
+        if (this.authorId === this.user.user_id) {
+          this.author = true;
+        }
+      });
 
       this.getVote();
 
@@ -52,13 +64,12 @@ export class ProblemComponent implements OnInit {
 
   }
 
+  ngOnInit(): void {  }
+
   getVote(): void {
     this.voteService.getVote(this.problem.problem_id, this.user.user_id).subscribe(data => this.vote = data);
   }
 
-  ngOnInit(): void {
-
-  }
 
   voteOnClick(): void {
     this.vote = new Vote(this.problem, this.user);
@@ -78,8 +89,6 @@ export class ProblemComponent implements OnInit {
     this.comments.push(comment);
   }
 
-
-
   getProblem(key: number): Problem {
     return this.problemModel.getProblem(key);
   }
@@ -89,4 +98,15 @@ export class ProblemComponent implements OnInit {
     problem.status = status;
     this.problemService.updateProblem(problem).subscribe();
   }
+
+  toggleEditingDescription(): void {
+    this.editDescription = !this.editDescription;
+  }
+
+
+  saveDescription(): void {
+    this.editDescription = !this.editDescription;
+    this.problemModel.saveProblem(this.problem);
+  }
+
 }
