@@ -35,6 +35,7 @@ const routes: Routes = [
   {path: 'statistics', component: StatisticComponent, canActivate: [AuthGuard]},
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
+  {path: 'new-password', component: NewPasswordComponent},
   {path: '**', redirectTo: ''}
 ];
 

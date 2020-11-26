@@ -20,6 +20,11 @@ export class UserService {
     return this.sendRequest('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );
   }
 
+  getVerificationToken(email: string): Observable<any> {
+    const myParams = new HttpParams().set('email', email);
+    return this.sendRequest('GET', `${environment.apiUrl}/user/verificationToken`, myParams );
+  }
+
   resetPassword(email: string): Observable<boolean> {
     const myParams = new HttpParams().set('userEmail', email);
     return this.sendRequest('POST', `${environment.apiUrl}/user/resetPassword`, myParams );
