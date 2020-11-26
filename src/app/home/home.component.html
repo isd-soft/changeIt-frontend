@@ -24,6 +24,12 @@
           <input type="checkbox" class="form-check-input" id="domains" (change)="onSelectDomain($event, domain)">
           <label class="form-check-label" for="domains" >{{domain.domainName}}</label>
         </div>
+
+        <p>Select status</p>
+        <div class="form-group form-check m-2" *ngFor="let status of availableStatuses">
+          <input type="checkbox" class="form-check-input" id="status" (change)="onStatusSelect($event, status)">
+          <label class="form-check-label" for="status" >{{status}}</label>
+        </div>
       </div>
     </div>
 
@@ -44,7 +50,8 @@
 
 
       <div class="card bg-light m-3"
-           *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict: selectedLocation: selectedDomains: selectedDomains.length"
+           *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict: selectedLocation: selectedDomains: selectedDomains.length:
+                                                                  selectedStatuses: selectedStatuses.length"
            [routerLink]="['/problem/', problem?.problem_id]">
 
         <h5 class="card-header">
