@@ -41,7 +41,7 @@ import { UsersComponent } from './users/users.component';
 import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
 import {ImageModule} from 'ngx-image';
-
+import {UserShowResolver} from '@app/user-show/user-show.resolver';
 
 
 @NgModule({
@@ -91,7 +91,7 @@ import {ImageModule} from 'ngx-image';
   ],
   providers: [
 
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel,
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel, UserShowResolver,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

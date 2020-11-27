@@ -5,8 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {UserModel} from '@app/repository/user_repository.model';
 import {Comment} from '@app/models/comment';
 import {CommentService} from '@app/service/comment.service';
-import {Observable} from 'rxjs';
-
+import {ProblemService} from '@app/service/problem.service';
+import {Problem} from '@app/models/problem';
 @Component({
   selector: 'app-user-show',
   templateUrl: './user-show.component.html',
@@ -15,25 +15,30 @@ import {Observable} from 'rxjs';
 export class UserShowComponent implements OnInit {
   user: User = new User();
   comments: Comment[];
+  problems: Problem[];
 
 
-  constructor(private accountService: AccountService, private route: ActivatedRoute, private userModel: UserModel, private commentService: CommentService) {
+  constructor(private accountService: AccountService,
+              private route: ActivatedRoute,
+              private userModel: UserModel,
+              private commentService: CommentService,
+              private problemService: ProblemService) {
     route.params.subscribe(params => {
       const id = params.id;
-      console.log(id);
       if (id != null) {
-        Object.assign(this.user, userModel.getUser(id));
+        this.user = userModel.getUser(id);
       }
-      console.log(this.user);
     });
   }
 
   ngOnInit(): void {
-    console.log(this.commentService.getCommentsByUserId(this.user));
     this.commentService.getCommentsByUserId(this.user).subscribe(data => {
       this.comments = data;
     });
-    console.log(this.comments);
+
+    this.problemService.getProblemsByUserId(this.user).subscribe(data => {
+      this.problems = data;
+    });
   }
 
 

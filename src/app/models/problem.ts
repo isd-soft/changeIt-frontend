@@ -3,9 +3,6 @@ import { District } from './district';
 import { Domain } from './domain';
 import {Location} from '@app/models/location';
 
-
-
-
 export class Problem {
   problem_id: number;
   votesCount: number;

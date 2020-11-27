@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '@environments/environment';
 import {Problem} from '@app/models/problem';
 import {catchError} from 'rxjs/operators';
+import {User} from '@app/models';
+import {Comment} from '@app/models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,10 @@ export class ProblemService {
 
   getVote(id: number): Observable<number> {
     return this.sendRequest<number>('GET', `${environment.apiUrl}/problem/${id}/votes`);
+  }
+
+  getProblemsByUserId(user: User): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', `${environment.apiUrl}/user/${user.user_id}/problems`);
   }
 
   saveProblem(problem: Problem): Observable<Problem> {

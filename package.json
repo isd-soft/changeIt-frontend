@@ -27,6 +27,7 @@
     "@tinymce/tinymce-angular": "^4.2.0",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.4",
+    "jquery": "^3.4.1",
     "ng2-charts": "^2.4.2",
     "ngx-file-drop": "^10.1.1",
     "ngx-image": "^1.0.7",

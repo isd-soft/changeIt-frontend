@@ -27,30 +27,72 @@
     <dd class="col-sm-9">{{user.userStatus}}</dd>
   </dl>
 
+<div id="sidebar">
+  <p>
+    <a class="btn btn-primary" id="problemButton" data-toggle="collapse" href="#problems" role="button" data-parent="#sidebar" aria-expanded="true" aria-controls="problems">
+      Problems
+    </a>
+    <a class="btn btn-primary" id="commentButton" data-toggle="collapse" href="#comments" role="button" data-parent="#sidebar" aria-expanded="false" aria-controls="comments">
+      Comments
+    </a>
 
-  <!--  <hr/>-->
-  <br>
+  </p>
+  <div class="collapse" id="comments">
+    <div class="card card-body">
+      <div class="comment-widgets p-1" *ngFor="let comment of comments" >
+            <div class="d-flex flex-row comment-row">
+              <div class="comment-text w-100">
+                <span class="text-muted float-right">Problem ID: {{ comment?.problem.problem_id}}
+                 Problem title: {{ comment?.problem.title}}</span>
 
-  <h2>Comments</h2>
-  <hr/>
-  <br>
+                <span class="m-b-15 d-block">{{ comment?.content }} </span>
+                <div class="comment-footer">
+                  <span class="text-muted float-left">{{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
+                  <span class="text-muted float-right">Votes: {{ comment?.votes }} </span>
+                </div>
+              </div>
+            </div>
 
-  <div class="comment-widgets p-1" *ngFor="let comment of comments" >
-
-    <div class="d-flex flex-row comment-row">
-      <div class="comment-text w-100">
-        <span class="text-muted float-right">Problem ID: {{ comment?.problem.problem_id}}
-         Problem title: {{ comment?.problem.title}}</span>
-
-        <span class="m-b-15 d-block">{{ comment?.content }} </span>
-        <div class="comment-footer">
-          <span class="text-muted float-left">{{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
-          <span class="text-muted float-right">Votes: {{ comment?.votes }} </span>
-        </div>
+          </div>
       </div>
-    </div>
-<!--    <hr/>-->
-<!--    <br>-->
   </div>
 
+  <div class="collapse" id="problems">
+    <div class="card card-body">
+      <div class="comment-widgets p-1" *ngFor="let problem of problems" >
+        <div class="d-flex flex-row comment-row">
+          <div class="comment-text w-100">
+                <span class="text-muted float-right">Problem ID: {{ problem?.problem_id}}
+                  Problem title: {{ problem.title}}</span>
+
+            <span class="m-b-15 d-block" [innerHTML]="problem?.description"></span>
+            <div class="comment-footer">
+              <span class="text-muted float-left">{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
+              <span class="text-muted float-right">Votes: {{ problem?.votes }} </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
+
+<!--<script>-->
+<!--  $(document).ready(function(){-->
+<!--    console.log('ready');-->
+<!--    // $('#problemButton').change(function () {-->
+<!--    //   console.log('problemclick');-->
+<!--    //   $('#commentButton').attr('aria-expanded', 'false');-->
+<!--    //   $('#problemButton').attr('aria-expanded', 'true');-->
+<!--    // });-->
+<!--    // $('#commentButton').change(function () {-->
+<!--    //   console.log('commentclick');-->
+<!--    //-->
+<!--    //   $('#problemButton').attr('aria-expanded', 'false');-->
+<!--    //   $('#commentButton').attr('aria-expanded', 'true');-->
+<!--    //-->
+<!--    // });-->
+<!--  });-->
+<!--</script>-->
