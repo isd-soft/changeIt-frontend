@@ -28,11 +28,11 @@
     </div>
 
    <div class="col-2 buttons">
-     <button *ngIf="author && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
+     <button *ngIf="(author || user.role == 'ADMIN') && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
        Edit Description
      </button>
 
-     <button *ngIf="author && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
+     <button *ngIf="(author || user.role == 'ADMIN') && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
        Save
      </button>
    </div>

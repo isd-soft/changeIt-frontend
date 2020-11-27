@@ -6,6 +6,14 @@ import 'rxjs';
 @Injectable()
 export class ProblemModel {
 
+  private problems: Problem[] = new Array<Problem>();
+  private problemsByVoteAsc: Problem[] = new Array<Problem>();
+  private problemsByVoteDesc: Problem[] = new Array<Problem>();
+  private problemsByDateAsc: Problem[] = new Array<Problem>();
+  private problemsByDateDesc: Problem[] = new Array<Problem>();
+  addedProblemId: number;
+  private locator = (p: Problem, id: number) => p.problem_id == id;
+
   constructor(private problemService: ProblemService) {
     problemService.getDataByDateAsc().subscribe(data => {
       this.problems = data;
@@ -23,13 +31,6 @@ export class ProblemModel {
       this.problemsByDateDesc = data;
     });
   }
-  private problems: Problem[] = new Array<Problem>();
-  private problemsByVoteAsc: Problem[] = new Array<Problem>();
-  private problemsByVoteDesc: Problem[] = new Array<Problem>();
-  private problemsByDateAsc: Problem[] = new Array<Problem>();
-  private problemsByDateDesc: Problem[] = new Array<Problem>();
-  addedProblemId: number;
-  private locator = (p: Problem, id: number) => p.problem_id == id;
 
   getProblems(): Problem[]{
     return this.problems;
