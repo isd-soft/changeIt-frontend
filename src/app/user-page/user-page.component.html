@@ -9,8 +9,8 @@
         <div class="col-sm-6">
           <div  align="center">
             <img alt="User Pic"
-                 src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
                  id="profile-image1" class="img-circle img-responsive">
+            <!--src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"-->
             <input id="profile-image-upload" class="hidden" type="file">
             <div style="color:#999;" >click here to change profile image</div>
             <!--Upload Image Js And Css-->
@@ -46,6 +46,42 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <div class="container row">
+    <div class="col-md-12">
+      <h1>Upload Image</h1>
+    </div>
+  </div>
+  <div class="container row">
+    <div class="col-md-6">
+      <input type="file" (change)="onFileChanged($event)">
+    </div>
+    <div class="col-md-6">
+      <input type="button" (click)="onUpload()" value="upload">
+    </div>
+  </div>
+  <hr />
+  <div class="container row">
+    <div class="col-md-12">
+      <div *ngIf=message>{{message}}</div>
+    </div>
+  </div>
+  <div class="container row">
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="user.user_id"
+             name="name" />
+    </div>
+    <div class="col-md-6">
+      <input type="button" (click)="getImage()" value="Get Image">
+    </div>
+  </div>
+  <div class="container row">
+    <div class="col-md-12">
+      <div *ngIf=retrievedImage>
+        <img [src]="retrievedImage">
+      </div>
+    </div>
   </div>
 </div>
 

@@ -3,7 +3,9 @@ import {User} from '@app/models';
 import {AccountService} from '@app/service';
 import {Router} from '@angular/router';
 import {UserService} from '@app/service/user.service';
-import {UserLogo} from '@app/models/userLogo';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '@environments/environment';
 
 @Component({
   selector: 'app-user-page',
@@ -14,9 +16,14 @@ export class UserPageComponent implements OnInit {
 
   user: User;
   verificationToken: string;
-  userLogo: UserLogo;
+  selectedFile: File;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResponse: any;
+  message: string;
 
-  constructor(private accountService: AccountService, private router: Router, private userService: UserService) {
+  constructor(
+    private httpClient: HttpClient, private accountService: AccountService, private router: Router, private userService: UserService) {
     this.user = this.accountService.userValue;
   }
 
@@ -31,4 +38,34 @@ export class UserPageComponent implements OnInit {
       }, error => console.log(error));
   }
 
+  public onFileChanged(event): void{
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload(){
+    console.log(this.selectedFile);
+
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+    this.httpClient.post(`${environment.apiUrl}/user/${this.user.user_id}/user_logo`, uploadImageData, {observe: 'response'  })
+      .subscribe((response) => {
+        if (response.status === 200){
+          this.message = 'Image uploaded successfully';
+        } else {
+          this.message = 'Image not uploaded successfully';
+        }
+      });
+  }
+
+  getImage(): void{
+    this.httpClient.get(`${environment.apiUrl}/user/${this.user.user_id}/user_logo`)
+      .subscribe(
+        res => {
+          this.retrieveResponse = res;
+          this.base64Data = this.retrieveResponse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
+  }
 }

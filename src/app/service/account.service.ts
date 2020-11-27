@@ -1,12 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/models';
-import {UserLogo} from '@app/models/userLogo';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -81,15 +80,15 @@ export class AccountService {
             }));
     }
 
-  uploadUserLogo(userLogo: UserLogo, id: number): Observable<UserLogo> {
-    return this.sendRequest('POST', `${environment.apiUrl}/user/${id}/user_logo`, userLogo);
-  }
+    saveUserLogo(id: number): Observable<User>{
+      return this.sendRequest<User>('POST', `${environment.apiUrl}/user/${id}/user_logo`);
+    }
 
-  getUserLogo(id: number): Observable<UserLogo> {
-    return this.sendRequest('GET', `${environment.apiUrl}/user/${id}/user_logo`);
-  }
+    getUserLogo(id: number): Observable<User>{
+      return this.sendRequest<User>('GET', `${environment.apiUrl}/user/${id}/user_logo`);
+    }
 
-  private sendRequest<T>(verb: string, url: string, body?: UserLogo): Observable<T> {
+  private sendRequest<T>(verb: string, url: string, body?: User): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, body);
 
@@ -100,9 +99,8 @@ export class AccountService {
 
     return this.http.request<T>(verb, url, {
       body,
-      headers: myHeaders,
+      headers: myHeaders
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
-
 }
