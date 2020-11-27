@@ -48,8 +48,8 @@ export class ProblemComponent implements OnInit {
       this.user = accountService.userValue;
 
       userService.getProblemAuthor(this.problem.problem_id).subscribe(data => {
-        this.authorId = data.user_id;
-        if (this.authorId === this.user.user_id) {
+        // this.authorId = data.user_id;
+        if (data.user_id == this.user.user_id) {
           this.author = true;
         }
       });
