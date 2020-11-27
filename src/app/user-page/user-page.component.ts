@@ -27,7 +27,11 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
-       this.logo = 'data:image/png;base64,' + data.logo;
+      if(data.logo){
+        this.logo = 'data:image/png;base64,' + data.logo;
+      } else {
+        this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
+      }
     });
   }
 
