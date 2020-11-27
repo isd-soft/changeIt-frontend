@@ -5,6 +5,7 @@ import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
+import {Location} from '@app/models/location';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,18 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
+  getData(): Observable<User[]> {
+    return this.sendRequest<User[]>('GET', environment.apiUrl + '/user/all');
+  }
+
   confirmEmail(token: string): Observable<any> {
     const myParams = new HttpParams().set('token', token);
     return this.sendRequest('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );
+  }
+
+  getVerificationToken(email: string): Observable<any> {
+    const myParams = new HttpParams().set('email', email);
+    return this.sendRequest('GET', `${environment.apiUrl}/user/verificationToken`, myParams );
   }
 
   resetPassword(email: string): Observable<boolean> {

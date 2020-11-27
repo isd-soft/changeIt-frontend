@@ -37,6 +37,10 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
 import {NgxFileDropModule} from 'ngx-file-drop';
 import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 import { GaleryComponent } from './galery/galery.component';
+import { UsersComponent } from './users/users.component';
+import {UserModel} from '@app/repository/user_repository.model';
+import { UserShowComponent } from './user-show/user-show.component';
+
 
 @NgModule({
   imports: [
@@ -77,11 +81,14 @@ import { GaleryComponent } from './galery/galery.component';
     ProblemsByDistrictComponent,
     UploadImageComponent,
     GaleryComponent,
+    UsersComponent,
+    UserShowComponent,
 
 
   ],
   providers: [
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel,
+
+    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

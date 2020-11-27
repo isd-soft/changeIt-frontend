@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>All info about user</h1>
+  <hr/>
+  <br>
+  <dl class="row">
+    <dt class="col-sm-3">First Name</dt>
+    <dd class="col-sm-9">{{user.firstName}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Last Name</dt>
+    <dd class="col-sm-9">{{user.lastName}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">{{user.email}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Role</dt>
+    <dd class="col-sm-9">{{user.role}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">{{user.userStatus}}</dd>
+  </dl>
+
+
+  <!--  <hr/>-->
+  <br>
+
+  <h2>Comments</h2>
+  <hr/>
+  <br>
+
+  <div class="comment-widgets p-1" *ngFor="let comment of comments" >
+
+    <div class="d-flex flex-row comment-row">
+      <div class="comment-text w-100">
+        <span class="text-muted float-right">Problem ID: {{ comment?.problem.problem_id}}
+         Problem title: {{ comment?.problem.title}}</span>
+
+        <span class="m-b-15 d-block">{{ comment?.content }} </span>
+        <div class="comment-footer">
+          <span class="text-muted float-left">{{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
+          <span class="text-muted float-right">Votes: {{ comment?.votes }} </span>
+        </div>
+      </div>
+    </div>
+<!--    <hr/>-->
+<!--    <br>-->
+  </div>
+
+</div>

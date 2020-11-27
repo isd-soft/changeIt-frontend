@@ -56,8 +56,8 @@ export class ProblemsByDistrictComponent implements OnInit {
 
   setting(): void {
     this.barChartLabels = this.districts.map(district => district.districtName);
-    let data = [];
-    for (let district of this.districts) {
+    const data = [];
+    for (const district of this.districts) {
       data.push(this.problems.filter(prob => prob.location.district.district_id == district.district_id ).length);
     }
     this.barChartData[0].data = data;

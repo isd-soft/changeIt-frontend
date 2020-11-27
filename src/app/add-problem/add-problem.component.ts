@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@app/models/location';
 import {LocationModel} from '@app/repository/location_repository.model';
@@ -8,11 +8,8 @@ import {Domain} from '@app/models/domain';
 import {DomainModel} from '@app/repository/domain_repository.model';
 import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
-import {FormsModule} from '@angular/forms';
 import { MapsAPILoader} from '@agm/core';
 import {AccountService} from '@app/service';
-import {config} from 'rxjs';
-
 
 
 @Component({
@@ -23,7 +20,9 @@ import {config} from 'rxjs';
 export class AddProblemComponent implements OnInit {
   // selectedFile: File = null;
   fileToUpload: File = null;
+
   show: boolean = false;
+
   addProblemForm: FormGroup;
   problem: Problem = new Problem();
   location: Location = new Location();
@@ -31,10 +30,16 @@ export class AddProblemComponent implements OnInit {
   domains: Domain = new Domain();
   userId: number;
 
+// Variables for Google Maps
   latitude: number = 47.016136126475665;
   longitude: number = 28.837752985037348;
   zoom: number = 15;
   private geoCoder;
+
+// Variables for Upload file
+  myFiles:string [] = [];
+
+
 
   constructor(private fb: FormBuilder,
               private problemModel: ProblemModel,
@@ -106,28 +111,33 @@ export class AddProblemComponent implements OnInit {
     });
   }
 
+  get f(): any{
+    return this.addProblemForm.controls;
+  }
+
+  onFileChange(event): any {
+    console.log(event);
+
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.myFiles.push(event.target.files[i]);
+
+      var node = document.createElement('li');
+      var textnode = document.createTextNode(event.target.files[0].name);
+      node.appendChild(textnode);
+      node.value = this.myFiles.length - 1;
+      // node..before('<div class="btn"><button>Delete</button></div>');
+
+      document.getElementById('listOfFiles').appendChild(node);
+
+    }
+
+    console.log(this.myFiles);
+  }
+
   handleFileInput(files: FileList): any {
     this.fileToUpload = files.item(0);
   }
-  // onFileSelected(event: any): any {
-  //   this.selectedFile = (event.target.files[0] as File);
-  // }
-  //
-  // onUpload(): any {
-  //   const fd = new FormData();
-  //   fd.append('image', this.selectedFile, this.selectedFile.name);
-  //   this.http.post('', fd, {
-  //     reportProgress: true,
-  //     observe: 'events'
-  //
-  //   }).subscribe(event => {
-  //     if (event.type === HttpEventType.UploadProgress) {
-  //       console.log('Upload progress:' + Math.round(event.loaded / event.total * 100) + '%');
-  //     } else if (event.type === HttpEventType.Response) {
-  //       console.log(event);
-  //     }
-  //   });
-  // }
+
 
   onSubmit(data, event: any): any {
     console.log(data);
