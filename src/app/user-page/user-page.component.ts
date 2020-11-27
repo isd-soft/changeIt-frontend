@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '@app/models';
 import {AccountService} from '@app/service';
-import {Router} from "@angular/router";
-import {UserService} from "@app/service/user.service";
+import {Router} from '@angular/router';
+import {UserService} from '@app/service/user.service';
+import {UserLogo} from '@app/models/userLogo';
 
 @Component({
   selector: 'app-user-page',
@@ -13,7 +14,7 @@ export class UserPageComponent implements OnInit {
 
   user: User;
   verificationToken: string;
-  selectedFile: File;
+  userLogo: UserLogo;
 
   constructor(private accountService: AccountService, private router: Router, private userService: UserService) {
     this.user = this.accountService.userValue;
@@ -22,21 +23,12 @@ export class UserPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onFileSelected(event): void {
-    this.selectedFile = (event.target.file as File);
-  }
-
-  onUpload(): void {
-/*    const fd = new FormData();
-    fd.append('userLogo', this.selectedFile, 'fileName');*/
-    this.accountService.saveUserLogo(this.selectedFile);
-  }
-
-  onClick() {
+  onClick(): void {
     this.userService.getVerificationToken(this.user.email).subscribe(
       data => {
         this.verificationToken = data.token;
         this.router.navigate(['new-password'], {queryParams: {id: this.user.user_id, token: this.verificationToken}} );
-      }, error => console.log(error))
+      }, error => console.log(error));
   }
+
 }

@@ -1,11 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/models';
+import {UserLogo} from '@app/models/userLogo';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -80,22 +81,28 @@ export class AccountService {
             }));
     }
 
-  saveUserLogo( logo: any) {
-     this.http.post(
-        `${environment.apiUrl}/user/1/user_logo`, logo)
-       .subscribe(res => {
-         console.log(res);
-       });
+  uploadUserLogo(userLogo: UserLogo, id: number): Observable<UserLogo> {
+    return this.sendRequest('POST', `${environment.apiUrl}/user/${id}/user_logo`, userLogo);
   }
 
-  getUserLogo(id: number): Observable<any>{
-      return this.http.get(`${environment.apiUrl}/user/${id}/user_logo`);
+  getUserLogo(id: number): Observable<UserLogo> {
+    return this.sendRequest('GET', `${environment.apiUrl}/user/${id}/user_logo`);
   }
 
-  getImage(id: number) {
-    const httpHeaders = new HttpHeaders() .set('Accept', 'image/webp,*/*');
-    return this.http.get<Blob>(`${environment.apiUrl}/user/${id}/user_logo`, {
-      headers: httpHeaders, responseType: 'blob' as 'json'
+  private sendRequest<T>(verb: string, url: string, body?: UserLogo): Observable<T> {
+
+    console.log('\n\n---Request ', verb, url, body);
+
+    const myHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     });
+
+    return this.http.request<T>(verb, url, {
+      body,
+      headers: myHeaders,
+    }).pipe(catchError((error: Response) =>
+      throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
+
 }

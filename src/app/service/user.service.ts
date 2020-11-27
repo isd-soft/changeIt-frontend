@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {Vote} from '@app/models/Vote';
 import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
-import {Location} from '@app/models/location';
 
 @Injectable({
   providedIn: 'root'
