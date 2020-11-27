@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
 import {Location} from '@app/models/location';
+import {ResetPasswordDetailsDto} from '@app/models/resetPasswordDetailsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,39 +18,35 @@ export class UserService {
   ) { }
 
   getData(): Observable<User[]> {
-    return this.sendRequest<User[]>('GET', environment.apiUrl + '/user/all');
+    return this.sendRequestWithParams<User[]>('GET', environment.apiUrl + '/user/all');
   }
 
   confirmEmail(token: string): Observable<any> {
     const myParams = new HttpParams().set('token', token);
-    return this.sendRequest('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );
+    return this.sendRequestWithParams('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );
   }
 
   getVerificationToken(email: string): Observable<any> {
     const myParams = new HttpParams().set('email', email);
-    return this.sendRequest('GET', `${environment.apiUrl}/user/verificationToken`, myParams );
+    return this.sendRequestWithParams('GET', `${environment.apiUrl}/user/verificationToken`, myParams );
   }
 
   resetPassword(email: string): Observable<boolean> {
     const myParams = new HttpParams().set('userEmail', email);
-    return this.sendRequest('POST', `${environment.apiUrl}/user/resetPassword`, myParams );
+    return this.sendRequestWithParams('POST', `${environment.apiUrl}/user/resetPassword`, myParams );
   }
 
   savePassword(id: string, token: string, password: string, passwordConfirmation: string): Observable<any> {
-    const myParams = new HttpParams()
-                      .set('id', id)
-                      .set('token', token)
-                      .set('password', password)
-                      .set('passwordConfirmation', passwordConfirmation);
-    return this.sendRequest('POST', `${environment.apiUrl}/user/savePassword`, myParams);
+    const resetDetails: ResetPasswordDetailsDto = new ResetPasswordDetailsDto(id, token, password, passwordConfirmation);
+    return this.sendRequestWithBody('POST', `${environment.apiUrl}/user/savePassword`, resetDetails);
   }
 
   getProblemAuthor(problemId: number): Observable<User> {
-    return this.sendRequest('GET', `${environment.apiUrl}/problem/${problemId}/user`);
+    return this.sendRequestWithParams('GET', `${environment.apiUrl}/problem/${problemId}/user`);
   }
 
 
-  private sendRequest<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
+  private sendRequestWithParams<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, myParams);
 
@@ -61,6 +58,22 @@ export class UserService {
     return this.http.request<T>(verb, url, {
       headers: myHeaders,
       params: myParams
+    }).pipe(catchError((error: Response) =>
+      throwError(`Network Error: ${error.statusText} (${error.status})`)));
+  }
+
+  private sendRequestWithBody<T>(verb: string, url: string, myBody?: ResetPasswordDetailsDto): Observable<T> {
+
+    console.log('\n\n---Request ', verb, url);
+
+    const myHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.request<T>(verb, url, {
+      headers: myHeaders,
+      body: myBody,
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
