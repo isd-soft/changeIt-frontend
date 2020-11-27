@@ -1,8 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/models';
@@ -79,4 +79,28 @@ export class AccountService {
                 return x;
             }));
     }
+
+  getUserLogo(userId: number): Observable<any> {
+    return this.sendRequest<any>('GET', `${environment.apiUrl}/user/${userId}/user_logo`);
+  }
+
+  deleteUserLogo(userId: number): Observable<any> {
+    return this.sendRequest<any>('DELETE', `${environment.apiUrl}/user/${userId}/user_logo`);
+  }
+
+  private sendRequest<T>(verb: string, url: string, body?: User): Observable<T> {
+
+    console.log('\n\n---Request ', verb, url, body);
+
+    const myHeaders = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.request<T>(verb, url, {
+      body,
+      headers: myHeaders
+    }).pipe(catchError((error: Response) =>
+      throwError(`Network Error: ${error.statusText} (${error.status})`)));
+  }
 }
