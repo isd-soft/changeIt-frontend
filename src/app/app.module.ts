@@ -40,6 +40,7 @@ import { GaleryComponent } from './galery/galery.component';
 import { UsersComponent } from './users/users.component';
 import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
+import {ImageModule} from 'ngx-image';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { UserShowComponent } from './user-show/user-show.component';
     }),
     NgxFileDropModule,
     NgxGalleryModule,
+    ImageModule,
   ],
   declarations: [
     AppComponent,

@@ -80,13 +80,13 @@ export class AccountService {
             }));
     }
 
-    saveUserLogo(id: number): Observable<User>{
-      return this.sendRequest<User>('POST', `${environment.apiUrl}/user/${id}/user_logo`);
-    }
+  getUserLogo(userId: number): Observable<any> {
+    return this.sendRequest<any>('GET', `${environment.apiUrl}/user/${userId}/user_logo`);
+  }
 
-    getUserLogo(id: number): Observable<User>{
-      return this.sendRequest<User>('GET', `${environment.apiUrl}/user/${id}/user_logo`);
-    }
+  deleteUserLogo(userId: number): Observable<any> {
+    return this.sendRequest<any>('DELETE', `${environment.apiUrl}/user/${userId}/user_logo`);
+  }
 
   private sendRequest<T>(verb: string, url: string, body?: User): Observable<T> {
 

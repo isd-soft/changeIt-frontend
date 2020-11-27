@@ -7,16 +7,8 @@
     <div class="card-body">
       <div class="d-flex flex-row-between">
         <div class="col-sm-6">
-          <div  align="center">
-            <img alt="User Pic"
-                 id="profile-image1" class="img-circle img-responsive">
-            <!--src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"-->
-            <input id="profile-image-upload" class="hidden" type="file">
-            <div style="color:#999;" >click here to change profile image</div>
-            <!--Upload Image Js And Css-->
-          </div>
+          <img [src]="logo" alt="" width="150px" height="150px">
           <br>
-          <!-- /input-group -->
         </div>
         <div>
           <h4 style="color:#00b1b1;"> {{ user.firstName }} {{user.lastName}} </h4>
@@ -41,6 +33,7 @@
         <li class="nav-item" *ngIf="user">
           <a class="nav-link" (click)="onClick()">Change password</a>
         </li>
+        <div style="color:#999999;" >click here to change profile image</div>
         <div>
         </div>
       </div>
@@ -48,40 +41,19 @@
   </div>
   </div>
 
-  <div class="container row">
-    <div class="col-md-12">
-      <h1>Upload Image</h1>
+  <div *ngIf="logo">
+    <div class="remove m-auto d-flex" *ngIf="user.role === 'ADMIN'">
+      <button type="button" (click)="removeUserLogo(user.user_id)" class="btn btn-outline-primary m-1 float-left">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+        </svg>
+      </button>
     </div>
   </div>
-  <div class="container row">
-    <div class="col-md-6">
-      <input type="file" (change)="onFileChanged($event)">
-    </div>
-    <div class="col-md-6">
-      <input type="button" (click)="onUpload()" value="upload">
-    </div>
-  </div>
-  <hr />
-  <div class="container row">
-    <div class="col-md-12">
-      <div *ngIf=message>{{message}}</div>
-    </div>
-  </div>
-  <div class="container row">
-    <div class="col-md-6">
-      <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="user.user_id"
-             name="name" />
-    </div>
-    <div class="col-md-6">
-      <input type="button" (click)="getImage()" value="Get Image">
-    </div>
-  </div>
-  <div class="container row">
-    <div class="col-md-12">
-      <div *ngIf=retrievedImage>
-        <img [src]="retrievedImage">
-      </div>
-    </div>
+
+  <div class="center m-4">
+
   </div>
 </div>
 

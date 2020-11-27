@@ -3,9 +3,9 @@ import {User} from '@app/models';
 import {AccountService} from '@app/service';
 import {Router} from '@angular/router';
 import {UserService} from '@app/service/user.service';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '@environments/environment';
+import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
+import {UserLogoUploadService} from '@app/service/userLogoUpload.service';
+import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from '@kolkov/ngx-gallery';
 
 @Component({
   selector: 'app-user-page',
@@ -16,18 +16,19 @@ export class UserPageComponent implements OnInit {
 
   user: User;
   verificationToken: string;
-  selectedFile: File;
-  retrievedImage: any;
-  base64Data: any;
-  retrieveResponse: any;
-  message: string;
+  files: string;
+  logo: string;
 
   constructor(
-    private httpClient: HttpClient, private accountService: AccountService, private router: Router, private userService: UserService) {
+    private userLogoUploadService: UserLogoUploadService, private accountService: AccountService,
+    private router: Router, private userService: UserService) {
     this.user = this.accountService.userValue;
   }
 
   ngOnInit(): void {
+    this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
+       this.logo = 'data:image/png;base64,' + data.logo;
+    });
   }
 
   onClick(): void {
@@ -38,34 +39,21 @@ export class UserPageComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  public onFileChanged(event): void{
-    this.selectedFile = event.target.files[0];
-  }
-
-  onUpload(){
-    console.log(this.selectedFile);
-
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-
-    this.httpClient.post(`${environment.apiUrl}/user/${this.user.user_id}/user_logo`, uploadImageData, {observe: 'response'  })
-      .subscribe((response) => {
-        if (response.status === 200){
-          this.message = 'Image uploaded successfully';
-        } else {
-          this.message = 'Image not uploaded successfully';
-        }
+  public saveLogo(file: string) {
+    const formData = new FormData();
+    formData.append('imageFile', file);
+    this.userLogoUploadService.postUserLogo(formData, this.user.user_id, { responseType: 'blob' })
+      .subscribe(data => {
+        this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(`/user-page`);
+        });
       });
   }
 
-  getImage(): void{
-    this.httpClient.get(`${environment.apiUrl}/user/${this.user.user_id}/user_logo`)
-      .subscribe(
-        res => {
-          this.retrieveResponse = res;
-          this.base64Data = this.retrieveResponse.picByte;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        }
-      );
+  removeUserLogo(id: number): void {
+    this.accountService.deleteUserLogo(this.user.user_id).subscribe();
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl(`/user-page`);
+    });
   }
 }
