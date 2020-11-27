@@ -20,6 +20,7 @@ export class CommentComponent implements OnInit {
   @Input() comment: Comment;
   commentVote: CommentVote;
   user: User;
+  logo: string;
 
   constructor(
     private commentService: CommentService,
@@ -34,6 +35,9 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVote();
+    this.accountService.getUserLogo(this.comment.user.user_id).subscribe(data => {
+      this.logo = 'data:image/png;base64,' + data.logo;
+    });
   }
 
   getVote(): void {

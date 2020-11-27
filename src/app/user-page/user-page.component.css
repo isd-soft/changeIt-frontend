@@ -3,13 +3,6 @@ input.hidden {
   left: -9999px;
 }
 
-#profile-image1 {
-  cursor: pointer;
-  width: 100px;
-  height: 100px;
-  border:2px solid #00b1b1;
-}
-
 .bot-border{
   border-bottom:1px #f8f8f8 solid;
   margin:5px 0  5px 0;
@@ -30,7 +23,6 @@ input.hidden {
   width: 800px;
 }
 
-button {
-  width: 19%;
+.fileUpload{
+  width: 20%;
 }
-
