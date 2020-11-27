@@ -138,28 +138,6 @@
         <div>Latitude: {{latitude}}</div>
         <div>Longitude: {{longitude}}</div>
       </div>
-
-      <div class="form-group">
-<!--        <input type="file" formControlName="file"  (change)="handleFileInput($event.target.files)">-->
-
-          <label for="file">File</label>
-          <input
-            formControlName="file"
-            id="file"
-            type="file"
-            multiple
-            class="form-control"
-            (change)="onFileChange($event)">
-          <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
-            <div *ngIf="f.file.errors.required">File is required.</div>
-          </div>
-
-        <ul id="listOfFiles">
-        </ul>
-      </div>
-
-
-
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

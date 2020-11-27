@@ -139,10 +139,9 @@ export class AddProblemComponent implements OnInit {
   }
 
 
-  onSubmit(data, event: any): any {
-    console.log(data);
-    // document.getElementById('file').
-    // console.log(event.target.files[0] as File);
+   onSubmit(data, event: any): any{
+    // console.log(data);
+
     const controls = this.addProblemForm.controls;
     if (this.addProblemForm.invalid) {
       Object.keys(controls)
@@ -170,7 +169,8 @@ export class AddProblemComponent implements OnInit {
     data.image = this.fileToUpload;
     // console.log(data);
     this.problemModel.saveProblem(data);
-    // document.location.href = '/home';
+    console.log('add problem ts ' + this.problemModel.addedProblemId);
+
   }
 
   changeLocation(disctrictID): any {
