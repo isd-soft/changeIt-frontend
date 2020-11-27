@@ -17,10 +17,10 @@
                 </span>
       <div>
         <button class="btn btn-primary" *ngIf="user && !commentVote" (click)="voteCommentOnClick()" [disabled]="commentVote">
-          Plus
+          Vote
         </button>
         <button class="btn btn-danger" *ngIf="user && commentVote" (click)="unVoteCommentOnClick()" [disabled]="!commentVote">
-          Minus
+          Unvote
         </button>
         {{ comment?.votes }}
       </div>

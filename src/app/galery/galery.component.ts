@@ -37,7 +37,8 @@ export class GaleryComponent implements OnInit {
         width: '800px',
         height: '500px',
         thumbnailsColumns: 5,
-        imageAnimation: NgxGalleryAnimation.Slide
+        imageAnimation: NgxGalleryAnimation.Slide,
+
       },
       // max-width 800
       {
@@ -47,12 +48,14 @@ export class GaleryComponent implements OnInit {
         imagePercent: 80,
         thumbnailsPercent: 20,
         thumbnailsMargin: 20,
-        thumbnailMargin: 20
+        thumbnailMargin: 20,
+
       },
       // max-width 400
       {
         breakpoint: 400,
-        preview: false
+        preview: false,
+
       }
     ];
 

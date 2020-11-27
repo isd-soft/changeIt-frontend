@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Problem} from '../models/problem';
 import {ProblemService} from '../service/problem.service';
-
+import {HttpResponse} from '@angular/common/http';
+import 'rxjs';
 @Injectable()
 export class ProblemModel {
+
   private problems: Problem[] = new Array<Problem>();
   private problemsByVoteAsc: Problem[] = new Array<Problem>();
   private problemsByVoteDesc: Problem[] = new Array<Problem>();
   private problemsByDateAsc: Problem[] = new Array<Problem>();
   private problemsByDateDesc: Problem[] = new Array<Problem>();
+  addedProblemId: number;
   private locator = (p: Problem, id: number) => p.problem_id == id;
 
   constructor(private problemService: ProblemService) {
@@ -55,8 +58,11 @@ export class ProblemModel {
 
   saveProblem(problem: Problem): void {
     if (problem.problem_id == 0 || problem.problem_id == null) {
-      this.problemService.saveProblem(problem)
-        .subscribe(p => this.problems.push(p));
+    this.problemService.saveProblem(problem)
+        .subscribe(p => {
+          this.problems.push(p);
+          document.location.href = '/problem/' + p.problem_id;
+        });
     } else {
       this.problemService.updateProblem(problem).subscribe(p => {
         const index = this.problems

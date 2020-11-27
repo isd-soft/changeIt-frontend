@@ -22,17 +22,17 @@
     </div>
   </div>
   <div class ="p-5 row">
-    <div class="description col">
-      <p [innerHTML]="problem?.description" *ngIf="!editDescription"></p>
-      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="110" rows="5"></textarea>
+    <div class="description col-10">
+      <p [innerHTML]="problem?.description" *ngIf="!editDescription"  align="justify"></p>
+      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="110" [rows]="problem.description.length / 120"></textarea>
     </div>
 
-   <div class="col">
-     <button *ngIf="author && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
+   <div class="col-2 buttons">
+     <button *ngIf="(author || user.role == 'ADMIN') && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
        Edit Description
      </button>
 
-     <button *ngIf="author && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
+     <button *ngIf="(author || user.role == 'ADMIN') && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
        Save
      </button>
    </div>

@@ -22,6 +22,7 @@ export class UploadImageComponent implements OnInit {
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
+    const formData = new FormData();
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -33,15 +34,8 @@ export class UploadImageComponent implements OnInit {
           console.log(droppedFile.relativePath, file);
 
            // You could upload it like this:
-          const formData = new FormData();
-          formData.append('imageFile', file, droppedFile.relativePath);
 
-          this.imageUploadService.postImages(formData, this.problem.problem_id, { responseType: 'blob' })
-           .subscribe(data => {
-             this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-               this.router.navigateByUrl(`/problem/${this.problem.problem_id}`);
-             });
-           });
+          formData.append('imageFile', file, droppedFile.relativePath);
 
         });
       } else {
@@ -49,7 +43,17 @@ export class UploadImageComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
         console.log(droppedFile.relativePath, fileEntry);
       }
+
     }
+    this.imageUploadService.postImages(formData, this.problem.problem_id, { responseType: 'blob' })
+      .subscribe(data => {
+        this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(`/problem/${this.problem.problem_id}`);
+        });
+      },
+        error => {
+        console.log(error);
+        });
   }
 
   public fileOver(event){
