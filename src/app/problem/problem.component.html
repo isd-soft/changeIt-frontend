@@ -38,6 +38,19 @@
    </div>
   </div>
 
+<div class="images">
+
+  <app-galery [problemId]="problem.problem_id"></app-galery>
+
+</div>
+
+
+<div *ngIf="author">
+
+  <app-upload-image [problem]="problem"></app-upload-image>
+
+</div>
+
 
   <div class="votes d-flex justify-content-center">
     <h3>Votes: {{ problem?.votesCount }}</h3>

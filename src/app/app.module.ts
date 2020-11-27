@@ -34,6 +34,9 @@ import {ProblemsByDomainsComponent} from '@app/statistics/problems-by-domains/pr
 import {OurProblemsResultComponent} from '@app/statistics/our-problems-result/our-problems-result.component';
 import {DistrictComponent} from '@app/district/district.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import {NgxFileDropModule} from 'ngx-file-drop';
+import {NgxGalleryModule} from '@kolkov/ngx-gallery';
+import { GaleryComponent } from './galery/galery.component';
 
 @NgModule({
   imports: [
@@ -50,6 +53,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
       apiKey: 'AIzaSyBEcxa0sOCZ3CMOYboi-buCqex6HxY2baM',
       libraries: ['places']
     }),
+    NgxFileDropModule,
+    NgxGalleryModule,
   ],
   declarations: [
     AppComponent,
@@ -71,6 +76,7 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     ProblemsByDomainsComponent,
     ProblemsByDistrictComponent,
     UploadImageComponent,
+    GaleryComponent,
 
 
   ],

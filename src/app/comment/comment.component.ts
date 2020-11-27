@@ -51,5 +51,6 @@ export class CommentComponent implements OnInit {
     this.commentVoteService.unVote(this.comment.comment_id, this.user.user_id).subscribe();
     this.comment.votes--;
     this.commentService.updateComment(this.comment).subscribe();
+    this.commentVote = null;
   }
 }
