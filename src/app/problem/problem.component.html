@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="title text-center m-4">
+  <div class="text-center m-4">
     <h1>{{ problem?.title }}</h1>
+    <h5 *ngIf="problem.location.locationName">{{ problem?.location.district.districtName }}, {{ problem?.location.locationName }}</h5>
+
+        <div class="domains row">
+          <h5 class="brd col" *ngFor="let domain of problem.domains"> {{ domain.domainName }} </h5>
+        </div>
+
     <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
     <h4 class="d-flex justify-content-end">{{ problem?.status}}</h4>
     <div class="d-flex justify-content-end" *ngIf="user?.role == 'ADMIN'">
@@ -15,9 +21,37 @@
               (click)="changeStatus(problem.problem_id, problemStatus.value)">Change</button>
     </div>
   </div>
-  <div class="description p-5">
-    <p [innerHTML]="problem?.description"></p>
+  <div class ="p-5 row">
+    <div class="description col">
+      <p [innerHTML]="problem?.description" *ngIf="!editDescription"></p>
+      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="110" rows="5"></textarea>
+    </div>
+
+   <div class="col">
+     <button *ngIf="author && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
+       Edit Description
+     </button>
+
+     <button *ngIf="author && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
+       Save
+     </button>
+   </div>
   </div>
+
+<div class="images">
+
+  <app-galery [problemId]="problem.problem_id"></app-galery>
+
+</div>
+
+
+<div *ngIf="author">
+
+  <app-upload-image [problem]="problem"></app-upload-image>
+
+</div>
+
+
   <div class="votes d-flex justify-content-center">
     <h3>Votes: {{ problem?.votesCount }}</h3>
   </div>

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
+import {Vote} from '@app/models/Vote';
 import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
+import {Location} from '@app/models/location';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +44,11 @@ export class UserService {
     return this.sendRequest('POST', `${environment.apiUrl}/user/savePassword`, myParams);
   }
 
+  getProblemAuthor(problemId: number): Observable<User> {
+    return this.sendRequest('GET', `${environment.apiUrl}/problem/${problemId}/user`);
+  }
+
+
   private sendRequest<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, myParams);
@@ -57,4 +64,6 @@ export class UserService {
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }
+
+
 }

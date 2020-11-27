@@ -20,7 +20,7 @@ export class ProblemModelResolver {
     resolve(route: ActivatedRouteSnapshot,
             state: RouterStateSnapshot): Observable<Problem[]> {
 
-        if (this.model.getProblems().length === 0) {
+        if (this.model.getProblems().length == 0) {
             // this.messages.reportMessage(new Message('Loading data...'));
             return this.dataSource.getData();
         }
