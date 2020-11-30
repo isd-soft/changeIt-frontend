@@ -25,6 +25,7 @@ export class CommentService {
   getVote(id: number): Observable<number> {
     return this.sendRequest<number>('GET', `${environment.apiUrl}/comment/${id}/votes`);
   }
+
   getCommentsByUserId(user: User): Observable<Comment[]> {
     return this.sendRequest<Comment[]>('GET', `${environment.apiUrl}/user/${user.user_id}/comments`);
   }

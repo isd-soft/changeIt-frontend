@@ -1,74 +1,101 @@
 
 <div class="container">
 
-  <h2 class="mt-3">Districts:</h2>
-  <table class="table table-striped table-light with-scroll">
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">District Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let district of getDistricts()">
-        <td>{{ district?.district_id }}</td>
-        <td>{{ district?.districtName }}</td>
-        <td width="10%">
-          <div ngbDropdown container="body">
-            <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Update</button>
-            <div ngbDropdownMenu>
-              <input class="form-control" type="text" placeholder="District Name" #districtUpdateName/>
-              <button class="btn btn-primary m-1" (click)="editDistrict(district?.district_id,districtUpdateName.value)">Confirm</button>
+  <h4 class="mt-2 text-center">
+    Here you can change data into tables
+  </h4>
+  <h6>
+    Choose table:
+  </h6>
+  <p class="mt-2">
+    <button class="btn btn-primary m-1" type="button" data-toggle="collapse" data-target="#districts" aria-expanded="false" aria-controls="districts">
+      Districts
+    </button>
+    <button class="btn btn-primary m-1" type="button" data-toggle="collapse" data-target="#locations" aria-expanded="false" aria-controls="locations">
+      Locations
+    </button>
+    <button class="btn btn-primary m-1" type="button" data-toggle="collapse" data-target="#domains" aria-expanded="false" aria-controls="domains">
+      Domains
+    </button>
+  </p>
+
+  <div class="collapse" id="districts">
+    <div class="card card-body">
+
+      <h2>Districts:</h2>
+      <table class="table table-striped table-light with-scroll">
+        <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">District Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let district of getDistricts()">
+          <td>{{ district?.district_id }}</td>
+          <td>{{ district?.districtName }}</td>
+          <td width="10%">
+            <div ngbDropdown container="body">
+              <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Update</button>
+              <div ngbDropdownMenu>
+                <input class="form-control" type="text" placeholder="District Name" #districtUpdateName/>
+                <button class="btn btn-primary m-1" (click)="editDistrict(district?.district_id,districtUpdateName.value)">Confirm</button>
+              </div>
             </div>
-          </div>
-        </td>
-        <td width="10%">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDistrict" (click)="getId(district?.district_id)">
-            Delete
-          </button>
-          <div class="modal fade" id="deleteDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="deleteDistrictTitle">Delete district</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Do you want to delete selected district?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  <button type="button" class="btn btn-primary" (click)="deleteDistrict(selectedId)">Yes</button>
+          </td>
+          <td width="10%">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDistrict" (click)="getId(district?.district_id)">
+              Delete
+            </button>
+            <div class="modal fade" id="deleteDistrict" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDistrictTitle">Delete district</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete selected district?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" (click)="deleteLocation(selectedId)">Yes</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-  <div class="d-flex justify-content-end">
-    <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="text" placeholder="District Name" #districtName/>
-    </div>
-    <div class="btn-group" data-toggle="buttons">
-      <button class="btn btn-primary m-1" (click)="createDistrict(districtName.value)">Insert</button>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group" data-toggle="buttons">
+          <input class="form-control" type="text" placeholder="District Name" #districtName/>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
+          <button class="btn btn-primary m-1" (click)="createDistrict(districtName.value)">Insert</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <h2 class="mt-3">Locations:</h2>
-    <table class="table table-striped table-light with-scroll">
-      <thead>
+  <div class="collapse" id="locations">
+    <div class="card card-body">
+
+      <h2>Locations:</h2>
+      <table class="table table-striped table-light with-scroll">
+        <thead>
         <tr>
           <th scope="col">id</th>
           <th scope="col">Location Name</th>
-          <th scope="col">District id</th>
+          <th scope="col">District</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr class="text" *ngFor="let location of getLocations()">
           <td>{{ location?.location_id }}</td>
           <td>{{ location?.locationName }}</td>
@@ -112,77 +139,88 @@
             </div>
           </td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
 
-  <div class="d-flex justify-content-end">
-    <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="text" placeholder="Location Name" #locationName/>
-      <select class="form-control" #locationDistrictName>
-        <option *ngFor="let district of getDistricts()">{{district.districtName}}</option>
-      </select>
-    </div>
-    <div class="btn-group" data-toggle="buttons">
-      <button class="btn btn-primary m-1" (click)="createLocation(locationName.value, locationDistrictName.value)">Insert</button>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group" data-toggle="buttons">
+          <input class="form-control" type="text" placeholder="Location Name" #locationName/>
+          <select class="form-control" #locationDistrictName>
+            <option *ngFor="let district of getDistricts()">{{district.districtName}}</option>
+          </select>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
+          <button class="btn btn-primary m-1" (click)="createLocation(locationName.value, locationDistrictName.value)">Insert</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <h2 class="mt-3">Domains:</h2>
-  <table class="table table-striped table-light">
-    <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Domain Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="text" *ngFor="let domain of getDomains()">
-      <td>{{ domain?.domain_id }}</td>
-      <td>{{ domain?.domainName }}</td>
-      <td width="10%">
-        <div ngbDropdown container="body">
-          <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Update</button>
-          <div ngbDropdownMenu>
-            <input class="form-control" type="text" placeholder="Domain Name" #domainUpdateName/>
-            <button class="btn btn-primary m-1" (click)="editDomain(domain?.domain_id,domainUpdateName.value)">Confirm</button>
-          </div>
-        </div>
-      </td>
-      <td width="10%">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDomain" (click)="getId(domain?.domain_id)">
-          Delete
-        </button>
-        <div class="modal fade" id="deleteDomain" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="deleteDomainTitle">Delete domain</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Do you want to delete selected domain?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" (click)="deleteDomain(selectedId)">Yes</button>
+  <div class="collapse" id="domains">
+    <div class="card card-body">
+
+      <h2>Domains:</h2>
+      <table class="table table-striped table-light">
+        <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Domain Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text" *ngFor="let domain of getDomains()">
+          <td>{{ domain?.domain_id }}</td>
+          <td>{{ domain?.domainName }}</td>
+          <td width="10%">
+            <div ngbDropdown container="body">
+              <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Update</button>
+              <div ngbDropdownMenu>
+                <input class="form-control" type="text" placeholder="Domain Name" #domainUpdateName/>
+                <button class="btn btn-primary m-1" (click)="editDomain(domain?.domain_id,domainUpdateName.value)">Confirm</button>
               </div>
             </div>
-          </div>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+          </td>
+          <td width="10%">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDomain" (click)="getId(domain?.domain_id)">
+              Delete
+            </button>
+            <div class="modal fade" id="deleteDomain" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDomainTitle">Delete domain</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete selected domain?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" (click)="deleteDomain(selectedId)">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-  <div class="d-flex justify-content-end">
-    <div class="btn-group" data-toggle="buttons">
-      <input class="form-control" type="text" placeholder="Domain Name" #domainName/>
-    </div>
-    <div class="btn-group" data-toggle="buttons">
-      <button class="btn btn-primary m-1" (click)="createDomain(domainName.value)">Insert</button>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group" data-toggle="buttons">
+          <input class="form-control" type="text" placeholder="Domain Name" #domainName/>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
+          <button class="btn btn-primary m-1" (click)="createDomain(domainName.value)">Insert</button>
+        </div>
+      </div>
+
     </div>
   </div>
+
+
 
 </div>
