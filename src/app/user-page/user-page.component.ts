@@ -42,7 +42,7 @@ export class UserPageComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  public dropped(files: NgxFileDropEntry[]) {
+  public dropped(files: NgxFileDropEntry[]): void {
     this.files = files;
     for (const droppedFile of files) {
 
@@ -74,11 +74,11 @@ export class UserPageComponent implements OnInit {
     }
   }
 
-  public fileOver(event){
+  public fileOver(event): void{
     console.log(event);
   }
 
-  public fileLeave(event){
+  public fileLeave(event): void{
     console.log(event);
   }
 
