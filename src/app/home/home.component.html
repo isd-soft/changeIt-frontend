@@ -62,8 +62,8 @@
           <p></p>
         </h5>
         <div class="card-body">
-          <p class="card-text" [innerHTML]="problem?.description">
-          </p>
+            <app-problem-image [problemId] = "problem.problem_id"></app-problem-image>
+            <p class="card-text" [innerHTML]="problem?.description"> </p>
         </div>
         <div class="card-footer d-flex justify-content-between">
           Votes: {{ problem?.votesCount }}

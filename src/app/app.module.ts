@@ -42,6 +42,7 @@ import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
 import {ImageModule} from 'ngx-image';
 import {UserShowResolver} from '@app/user-show/user-show.resolver';
+import { ProblemImageComponent } from './home/problem-image/problem-image.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import {UserShowResolver} from '@app/user-show/user-show.resolver';
     GaleryComponent,
     UsersComponent,
     UserShowComponent,
+    ProblemImageComponent,
 
 
   ],
