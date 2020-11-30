@@ -13,6 +13,8 @@ import {Location} from '@app/models/location';
 })
 export class TablesComponent implements OnInit {
 
+  selectedId: number;
+
   constructor(private districtModel: DistrictModel,
               private domainModel: DomainModel,
               private locationModel: LocationModel,
@@ -20,6 +22,10 @@ export class TablesComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  getId(key: number): void {
+   this.selectedId = key;
+  }
 
   getDistrict(key: number): District {
     return this.districtModel.getDistrict(key);
