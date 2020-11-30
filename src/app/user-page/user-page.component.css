@@ -8,15 +8,8 @@ input.hidden {
   margin:5px 0  5px 0;
 }
 
-.gallery-wrapper {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.ngx-gallery {
-  display: inline-block;
-  margin-bottom: 20px;
-
+li {
+  list-style-type: none; /* Убираем маркеры */
 }
 
 .remove {

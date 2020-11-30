@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {UserService} from '@app/service/user.service';
 import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
 import {UserLogoUploadService} from '@app/service/userLogoUpload.service';
-import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from '@kolkov/ngx-gallery';
 
 @Component({
   selector: 'app-user-page',
@@ -27,7 +26,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
-      if(data.logo){
+      if (data.logo){
         this.logo = 'data:image/png;base64,' + data.logo;
       } else {
         this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
