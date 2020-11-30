@@ -41,7 +41,8 @@ import { UsersComponent } from './users/users.component';
 import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
 import {ImageModule} from 'ngx-image';
-import {UserShowResolver} from '@app/user-show/user-show.resolver';
+import {UserShowResolver} from '@app/user-show/user-show.resolver';;
+import { SearchBoxComponent } from './search-box/search-box.component'
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import {UserShowResolver} from '@app/user-show/user-show.resolver';
     UploadImageComponent,
     GaleryComponent,
     UsersComponent,
-    UserShowComponent,
+    UserShowComponent,,
+    SearchBoxComponent
 
 
   ],
