@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Comment} from '@app/models/comment';
 import {CommentModel} from '@app/repository/comment_repository.model';
 import {User} from '@app/models';
@@ -29,6 +29,7 @@ export class CommentComponent implements OnInit {
     private userService: UserService,
     private commentVoteService: CommentVoteService,
     private accountService: AccountService,
+    private router: Router,
   ) {
       this.user = accountService.userValue;
   }
@@ -60,5 +61,9 @@ export class CommentComponent implements OnInit {
     this.comment.votes--;
     this.commentService.updateComment(this.comment).subscribe();
     this.commentVote = null;
+  }
+
+  onClick(comment: Comment) {
+        this.router.navigate(['/user-show/' + comment.user.user_id] );
   }
 }
