@@ -2,8 +2,10 @@
   <div class="commenterName">
   <b>
     <img *ngIf="logo" [src]="logo" width="50px" height="50px">
+
+  <a class="nav-link" (click)="onClick(comment)">
     {{ comment?.user?.firstName }}
-    {{ comment?.user?.lastName }}
+    {{ comment?.user?.lastName }}</a>
   </b>
   </div>
   <div class="commentText">

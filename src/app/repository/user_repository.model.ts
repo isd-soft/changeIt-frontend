@@ -9,7 +9,10 @@ export class UserModel {
   private locator = (l: User, id: number) => l.user_id == id;
 
   constructor(private userService: UserService) {
-    this.userService.getData().subscribe(data => this.user = data);
+    this.userService.getData().subscribe(data => {
+      console.log(data);
+      this.user = data
+    });
   }
   getUsers(): User[] {
     return this.user;
