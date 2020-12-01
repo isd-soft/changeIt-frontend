@@ -15,3 +15,30 @@ p {
   margin-left: 5px;
 }
 
+.activestatus {
+  color: #0037ff;
+}
+
+.donestatus {
+  color: #11ff00;
+}
+
+.inprogress {
+  color: #fff200;
+}
+
+.rejected {
+  color: #ff0000;
+}
+
+
+.pasivepage {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.activepage {
+  background-color: #4CAF50;
+  color: white;
+}
+

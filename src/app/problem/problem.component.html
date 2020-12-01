@@ -3,44 +3,54 @@
     <h1>{{ problem?.title }}</h1>
     <h5 *ngIf="problem.location.locationName">{{ problem?.location.district.districtName }}, {{ problem?.location.locationName }}</h5>
 
-        <div class="domains row">
-          <h5 class="brd col" *ngFor="let domain of problem.domains"> {{ domain.domainName }} </h5>
+        <div class="domains">
+          <h5 class="text-warning" *ngFor="let domain of problem.domains"> {{ domain.domainName }} </h5>
         </div>
 
-    <p><i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i></p>
-    <h4 class="d-flex justify-content-end">{{ problem?.status}}</h4>
-    <div class="d-flex justify-content-end" *ngIf="user?.role == 'ADMIN'">
-      <select id="changeStatus" class="form-control changeStatus" #problemStatus>
-        <option selected>Choose status</option>
-        <option>DONE</option>
-        <option>IN_PROGRESS</option>
-        <option>ACTIVE</option>
-        <option>REJECTED</option>
-      </select>
-      <button type="submit" class="btn btn-primary"
-              (click)="changeStatus(problem.problem_id, problemStatus.value)">Change</button>
-    </div>
+    <p><i>{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</i></p>
+
   </div>
-  <div class ="p-5 row">
-    <div class="description col-10">
+
+  <div class ="p-3 row">
+    <div class="description col-11">
       <p [innerHTML]="problem?.description" *ngIf="!editDescription"  align="justify"></p>
-      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="110" [rows]="problem.description.length / 120"></textarea>
+      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="135" [rows]="problem.description.length / 120"></textarea>
     </div>
 
-   <div class="col-2 buttons">
-     <button *ngIf="(author || user.role == 'ADMIN') && !editDescription" class="btn editing btn-warning float-right"  (click)="toggleEditingDescription()">
+   <div class="col-1 buttons">
+     <button *ngIf="(author || user.role == 'ADMIN') && !editDescription" class="btn editing btn-warning"  (click)="toggleEditingDescription()">
        Edit Description
      </button>
 
-     <button *ngIf="(author || user.role == 'ADMIN') && editDescription" class="btn editing btn-warning float-right" (click)="saveDescription()">
+     <button *ngIf="(author || user.role == 'ADMIN') && editDescription" class="btn editing btn-warning" (click)="saveDescription()">
        Save
      </button>
+
+     <div class="row">
+       <h4 class="m-4"
+           [ngClass]="{'activestatus': problem.status === 'ACTIVE',
+        'donestatus': problem.status === 'DONE',
+        'inprogress': problem.status === 'IN_PROGRESS',
+        'rejected': problem.status === 'REJECTED'}">
+         {{ problem?.status}}</h4>
+       <div class="d-flex justify-content-end " *ngIf="user?.role == 'ADMIN'">
+         <select id="changeStatus" class="form-control changeStatus ml-2 mr-2" #problemStatus>
+           <option selected>Choose status</option>
+           <option>DONE</option>
+           <option>IN_PROGRESS</option>
+           <option>ACTIVE</option>
+           <option>REJECTED</option>
+         </select>
+         <button type="submit" class="btn btn-primary"
+                 (click)="changeStatus(problem.id, problemStatus.value)">Change</button>
+       </div>
+     </div>
    </div>
   </div>
 
 <div class="images">
 
-  <app-galery [problemId]="problem.problem_id"></app-galery>
+  <app-galery [problemId]="problem.id"></app-galery>
 
 </div>
 

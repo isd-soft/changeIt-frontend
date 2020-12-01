@@ -16,8 +16,11 @@ export class ProblemImageComponent implements OnInit {
   ngOnInit(): void {
 
     this.imageService.getImages(this.problemId).subscribe(data => {
-      const objectURL = 'data:image/png;base64,' + data[0].imageFile;
-      this.image = objectURL;
+      if (data[0]?.imageFile){
+        const objectURL = 'data:image/png;base64,' + data[0].imageFile;
+        this.image = objectURL;
+      }
+
     });
   }
 

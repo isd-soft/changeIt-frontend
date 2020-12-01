@@ -59,16 +59,10 @@
   width: 175px;
 }
 
-.brd {
-  border: 4px double black;
-  background: #fc3;
-  padding: 5px;
-  margin: 3px;
-}
 
 div.domains {
   margin: auto;
-  width: 500px;
+  width: 400px;
 }
 
 button.editing {
@@ -78,4 +72,20 @@ button.editing {
 div.description {
   width: 80%;
 
+}
+
+.activestatus {
+  color: #0037ff;
+}
+
+.donestatus {
+  color: #11ff00;
+}
+
+.inprogress {
+  color: #fff200;
+}
+
+.rejected {
+  color: #ff0000;
 }

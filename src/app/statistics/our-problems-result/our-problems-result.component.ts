@@ -28,7 +28,6 @@ export class OurProblemsResultComponent implements OnInit {
   public pieChartPlugins = [];
 
   constructor(private problemModel: ProblemModel) {
-    this.problems = problemModel.getProblems();
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }

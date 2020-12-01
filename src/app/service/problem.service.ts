@@ -5,7 +5,7 @@ import {environment} from '@environments/environment';
 import {Problem} from '@app/models/problem';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
-import {Comment} from '@app/models/comment';
+import {PaginationDetails} from '@app/models/paginationDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +15,8 @@ export class ProblemService {
   constructor(private http: HttpClient, ) {
   }
 
-  getData(): Observable<Problem[]> {
-    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem');
-  }
-
-  getDataByVoteAsc(): Observable<Problem[]> {
-    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByVoteAsc');
-  }
-
-  getDataByVoteDesc(): Observable<Problem[]> {
-    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByVoteDesc');
-  }
-
-  getDataByDateAsc(): Observable<Problem[]> {
-    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByDateAsc');
-  }
-
-  getDataByDateDesc(): Observable<Problem[]> {
-    return this.sendRequest<Problem[]>('GET', environment.apiUrl + '/problem/sortedByDateDesc');
+  getData(paginationDetails: PaginationDetails): Observable<any> {
+    return this.sendRequest<any>('POST', environment.apiUrl + '/problem', paginationDetails);
   }
 
   getVote(id: number): Observable<number> {
@@ -44,12 +28,12 @@ export class ProblemService {
   }
 
   saveProblem(problem: Problem): Observable<Problem> {
-    return this.sendRequest<Problem>('POST', environment.apiUrl + '/problem', problem);
+    return this.sendRequest<Problem>('POST', environment.apiUrl + '/problem/new', problem);
   }
 
   updateProblem(problem: Problem): Observable<Problem> {
     return this.sendRequest<Problem>('PUT',
-      `${environment.apiUrl}/problem/${problem.problem_id}`, problem);
+      `${environment.apiUrl}/problem/${problem.id}`, problem);
   }
 
   deleteProblem(id: number): Observable<Problem> {
@@ -57,7 +41,7 @@ export class ProblemService {
   }
 
 
-  private sendRequest<T>(verb: string, url: string, body?: Problem): Observable<T> {
+  private sendRequest<T>(verb: string, url: string, body?: any): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, body);
 
@@ -68,7 +52,7 @@ export class ProblemService {
 
     return this.http.request<T>(verb, url, {
       body,
-      headers: myHeaders
+      headers: myHeaders,
     }).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));
   }

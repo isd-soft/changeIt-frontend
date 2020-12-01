@@ -3,53 +3,28 @@ import {Problem} from '../models/problem';
 import {ProblemService} from '../service/problem.service';
 import {HttpResponse} from '@angular/common/http';
 import 'rxjs';
+import {PaginationDetails} from '@app/models/paginationDetails';
+
+
 @Injectable()
 export class ProblemModel {
 
   private problems: Problem[] = new Array<Problem>();
-  private problemsByVoteAsc: Problem[] = new Array<Problem>();
-  private problemsByVoteDesc: Problem[] = new Array<Problem>();
-  private problemsByDateAsc: Problem[] = new Array<Problem>();
-  private problemsByDateDesc: Problem[] = new Array<Problem>();
-  addedProblemId: number;
-  private locator = (p: Problem, id: number) => p.problem_id == id;
+  public hasNext: string;
+  public hasPrevious: string;
+  public totalPages: number;
+  public totalElements: number;
+  private locator = (p: Problem, id: number) => p.id == id;
 
   constructor(private problemService: ProblemService) {
-    problemService.getDataByDateAsc().subscribe(data => {
-      this.problems = data;
-    });
-    problemService.getDataByVoteAsc().subscribe(data => {
-      this.problemsByVoteAsc = data;
-    });
-    problemService.getDataByVoteDesc().subscribe(data => {
-      this.problemsByVoteDesc = data;
-    });
-    problemService.getDataByDateAsc().subscribe(data => {
-      this.problemsByDateAsc = data;
-    });
-    problemService.getDataByDateDesc().subscribe(data => {
-      this.problemsByDateDesc = data;
-    });
   }
 
   getProblems(): Problem[]{
     return this.problems;
   }
 
-  getProblemsByVote(voteSorting?: boolean): Problem[] {
-    if (voteSorting) {
-      return this.problemsByVoteDesc;
-    } else if (!voteSorting) {
-      return this.problemsByVoteAsc;
-    }
-  }
-
-  getProblemsByDate(dateSorting?: boolean): Problem[] {
-    if (dateSorting) {
-      return this.problemsByDateAsc;
-    } else if (!dateSorting) {
-      return this.problemsByDateDesc;
-    }
+  loadProblems(problems: Problem[]): void {
+    this.problems = problems;
   }
 
   getProblem(id: number): Problem {
@@ -57,16 +32,16 @@ export class ProblemModel {
   }
 
   saveProblem(problem: Problem): void {
-    if (problem.problem_id == 0 || problem.problem_id == null) {
+    if (problem.id == 0 || problem.id == null) {
     this.problemService.saveProblem(problem)
         .subscribe(p => {
           this.problems.push(p);
-          document.location.href = '/problem/' + p.problem_id;
+          document.location.href = '/problem/' + p.id;
         });
     } else {
       this.problemService.updateProblem(problem).subscribe(p => {
         const index = this.problems
-          .findIndex(item => this.locator(item, p.problem_id));
+          .findIndex(item => this.locator(item, p.id));
         this.problems.splice(index, 1, p);
       });
     }

@@ -47,7 +47,7 @@ export class ProblemComponent implements OnInit {
       }
       this.user = accountService.userValue;
 
-      userService.getProblemAuthor(this.problem.problem_id).subscribe(data => {
+      userService.getProblemAuthor(this.problem.id).subscribe(data => {
         // this.authorId = data.user_id;
         if (data.user_id == this.user.user_id) {
           this.author = true;
@@ -67,7 +67,7 @@ export class ProblemComponent implements OnInit {
   ngOnInit(): void {  }
 
   getVote(): void {
-    this.voteService.getVote(this.problem.problem_id, this.user.user_id).subscribe(data => this.vote = data);
+    this.voteService.getVote(this.problem.id, this.user.user_id).subscribe(data => this.vote = data);
   }
 
 

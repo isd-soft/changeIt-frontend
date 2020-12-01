@@ -169,7 +169,6 @@ export class AddProblemComponent implements OnInit {
     data.image = this.fileToUpload;
     // console.log(data);
     this.problemModel.saveProblem(data);
-    console.log('add problem ts ' + this.problemModel.addedProblemId);
 
   }
 

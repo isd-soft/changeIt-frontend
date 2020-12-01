@@ -44,8 +44,7 @@ export class ProblemsByDistrictComponent implements OnInit {
     private problemModel: ProblemModel,
     private districtService: DistrictService,
   ) {
-    this.problems = problemModel.getProblems();
-    districtService.getData().subscribe(data => {
+      districtService.getData().subscribe(data => {
       this.districts = data;
       this.setting();
     });
