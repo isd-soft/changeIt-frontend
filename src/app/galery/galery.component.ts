@@ -34,7 +34,7 @@ export class GaleryComponent implements OnInit {
   ngOnInit(): void {
     this.galleryOptions = [
       {
-        width: '900px',
+        width: '800px',
         height: '500px',
         thumbnailsColumns: 5,
         imageAnimation: NgxGalleryAnimation.Slide,

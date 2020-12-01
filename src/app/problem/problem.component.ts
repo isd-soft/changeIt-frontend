@@ -19,7 +19,7 @@ import {UserService} from '@app/service/user.service';
 })
 export class ProblemComponent implements OnInit {
 
-  problem: Problem = new Problem();
+  problem: Problem;
   vote: Vote;
   user: User;
   authorId: number;
@@ -43,23 +43,28 @@ export class ProblemComponent implements OnInit {
     route.params.subscribe(params => {
       const id = params.id;
       if (id != null) {
-        Object.assign(this.problem, problemModel.getProblem(id));
+        problemService.getProblem(id).subscribe(data => {
+          this.problem = data;
+
+          commentService.getData(this.problem).subscribe(comments => {
+            this.comments = comments;
+            this.canLoadComments = true;
+          });
+
+
+          userService.getProblemAuthor(this.problem.id).subscribe(data => {
+            // this.authorId = data.user_id;
+            if (data.user_id == this.user.user_id) {
+              this.author = true;
+            }
+          });
+
+          this.user = accountService.userValue;
+          this.getVote();
+        });
       }
-      this.user = accountService.userValue;
 
-      userService.getProblemAuthor(this.problem.id).subscribe(data => {
-        // this.authorId = data.user_id;
-        if (data.user_id == this.user.user_id) {
-          this.author = true;
-        }
-      });
 
-      this.getVote();
-
-      commentService.getData(this.problem).subscribe(data => {
-        this.comments = data;
-        this.canLoadComments = true;
-      });
     });
 
   }
@@ -94,9 +99,8 @@ export class ProblemComponent implements OnInit {
   }
 
   changeStatus(problemId: number, status: string): void{
-    const problem: Problem = this.getProblem(problemId);
-    problem.status = status;
-    this.problemService.updateProblem(problem).subscribe();
+    this.problem.status = status;
+    this.problemService.updateProblem(this.problem).subscribe();
   }
 
   toggleEditingDescription(): void {
