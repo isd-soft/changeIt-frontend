@@ -28,8 +28,7 @@ export class HomeComponent implements OnInit {
   selectedStatuses: string[] = [];
   problemPipe = new ProblemPipe();
   problems: Problem[] = [];
-
-
+  searchValue: string;
 
   constructor(public problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel,
@@ -58,7 +57,7 @@ export class HomeComponent implements OnInit {
       this.problems = this.problemPipe.transform(this.problems,
         this.selectedDistrict, this.selectedLocation,
         this.selectedDomains, this.selectedDomains.length, this.selectedStatuses,
-        this.selectedStatuses.length);
+        this.selectedStatuses.length, this.searchValue, this.searchValue.length);
       if (this.problems.length < this.size && this.problemModel.hasNext) {
         this.getProblems(page, size + (this.size - this.problems.length));
       }
@@ -132,6 +131,11 @@ export class HomeComponent implements OnInit {
 
   nextPage(): void {
     this.page++;
+    this.getProblems(this.page, this.size);
+  }
+
+  searchThis(data) {
+    this.searchValue = data;
     this.getProblems(this.page, this.size);
   }
 }

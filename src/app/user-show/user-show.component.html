@@ -53,9 +53,9 @@
       <div class="comment-widgets p-1" *ngFor="let comment of comments" >
             <div class="d-flex flex-row comment-row">
               <div class="comment-text w-100">
-                <span class="text-muted float-right">Problem ID: {{ comment?.problem.problem_id}}
-                 Problem title: {{ comment?.problem.title}}</span>
-
+                <span class="text-muted float-left">
+                 <strong><u>Problem title: {{ comment?.problem.title}}</u></strong></span>
+                <br>
                 <span class="m-b-15 d-block">{{ comment?.content }} </span>
                 <div class="comment-footer">
                   <span class="text-muted float-left">{{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
@@ -73,13 +73,13 @@
       <div class="comment-widgets p-1" *ngFor="let problem of problems" >
         <div class="d-flex flex-row comment-row">
           <div class="comment-text w-100">
-                <span class="text-muted float-right">Problem ID: {{ problem?.problem_id}}
-                  Problem title: {{ problem.title}}</span>
+                <span class="text-muted float-left"><strong><u>Problem title: {{ problem.title}}</u></strong></span>
 
+            <br>
             <span class="m-b-15 d-block" [innerHTML]="problem?.description"></span>
             <div class="comment-footer">
-              <span class="text-muted float-left">{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
-              <span class="text-muted float-right">Votes: {{ problem?.votes }} </span>
+              <span class="text-muted float-left">{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</span>
+              <span class="text-muted float-right">Votes: {{ problem?.votesCount}} </span>
             </div>
           </div>
         </div>
@@ -89,21 +89,3 @@
     </div>
   </div>
 </div>
-
-<!--<script>-->
-<!--  $(document).ready(function(){-->
-<!--    console.log('ready');-->
-<!--    // $('#problemButton').change(function () {-->
-<!--    //   console.log('problemclick');-->
-<!--    //   $('#commentButton').attr('aria-expanded', 'false');-->
-<!--    //   $('#problemButton').attr('aria-expanded', 'true');-->
-<!--    // });-->
-<!--    // $('#commentButton').change(function () {-->
-<!--    //   console.log('commentclick');-->
-<!--    //-->
-<!--    //   $('#problemButton').attr('aria-expanded', 'false');-->
-<!--    //   $('#commentButton').attr('aria-expanded', 'true');-->
-<!--    //-->
-<!--    // });-->
-<!--  });-->
-<!--</script>-->
