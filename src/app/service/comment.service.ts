@@ -15,7 +15,7 @@ export class CommentService {
   constructor(private http: HttpClient) { }
 
   getData(problem: Problem): Observable<Comment[]> {
-    return this.sendRequest<Comment[]>('GET', `${environment.apiUrl}/problem/${problem.problem_id}/comments`);
+    return this.sendRequest<Comment[]>('GET', `${environment.apiUrl}/problem/${problem.id}/comments`);
   }
 
   getCommentById(id: number): Observable<Comment>{

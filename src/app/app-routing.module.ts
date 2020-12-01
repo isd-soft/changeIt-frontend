@@ -7,7 +7,6 @@ import {WelcomeComponent} from '@app/welcome/welcome.component';
 import {LoginComponent} from '@app/account/login/login.component';
 import {RegisterComponent} from '@app/account/register/register.component';
 import {ProblemComponent} from '@app/problem/problem.component';
-import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
 import {UserPageComponent} from '@app/user-page/user-page.component';
 import {AddProblemComponent} from '@app/add-problem/add-problem.component';
 import {TablesComponent} from '@app/tables/tables.component';
@@ -32,7 +31,7 @@ const routes: Routes = [
   {path: 'user/savePassword', component: NewPasswordComponent},
   {path: 'api/v1/user/registrationConfirm', component: AfterConfirmEmailComponent},
   {path: 'problem/add', component: AddProblemComponent, canActivate: [AuthGuard]},
-  {path: 'problem/:id', component: ProblemComponent, canActivate: [AuthGuard], resolve: {model: ProblemModelResolver}},
+  {path: 'problem/:id', component: ProblemComponent, canActivate: [AuthGuard]},
   {path: 'tables', component: TablesComponent, canActivate: [AdminGuard]},
   {path: 'statistics', component: StatisticComponent, canActivate: [AuthGuard]},
   {path: '', component: WelcomeComponent},

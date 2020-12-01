@@ -10,7 +10,6 @@ import {MenuComponent} from './menu/menu.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {ProblemComponent} from './problem/problem.component';
 import {ProblemModel} from '@app/repository/problem_repository.model';
-import {ProblemModelResolver} from '@app/problem/problem_model.resolver';
 import {UserPageComponent} from '@app/user-page/user-page.component';
 import {AddProblemComponent} from './add-problem/add-problem.component';
 import {DistrictModel} from '@app/repository/district_repository.model';
@@ -42,6 +41,7 @@ import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
 import {ImageModule} from 'ngx-image';
 import {UserShowResolver} from '@app/user-show/user-show.resolver';
+import { ProblemImageComponent } from './home/problem-image/problem-image.component';
 
 
 @NgModule({
@@ -86,12 +86,13 @@ import {UserShowResolver} from '@app/user-show/user-show.resolver';
     GaleryComponent,
     UsersComponent,
     UserShowComponent,
+    ProblemImageComponent,
 
 
   ],
   providers: [
 
-    ProblemModel, ProblemModelResolver, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel, UserShowResolver,
+    ProblemModel, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel, UserShowResolver,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

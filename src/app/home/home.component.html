@@ -5,7 +5,7 @@
       <div class="border">
         <p>Select a district</p>
         <div>
-          <select class="form-control m-2" [(ngModel)]='selectedDistrict' (change)="onChange()">
+          <select class="form-control m-2" [(ngModel)]='selectedDistrict' (change)="onChangeDistrict()">
             <option [ngValue]=null >----</option>
             <option  *ngFor="let district of getDistricts()"  [ngValue]="district" > {{district.districtName}} </option>
           </select>
@@ -13,7 +13,7 @@
 
         <p>Select location</p>
         <div>
-          <select class="form-control m-2" [(ngModel)]='selectedLocation'>
+          <select class="form-control m-2" [(ngModel)]='selectedLocation' (change)="onChange()">
             <option [ngValue]=null>----</option>
             <option *ngFor="let location of getAllLocations()" [ngValue]="location">{{location.locationName}}</option>
           </select>
@@ -39,38 +39,58 @@
       </h3>
 
       <div>
-        <button class="btn btn-primary m-1" (click)="toggleVoteSorting()">
+        <button class="btn btn-outline-primary m-1" (click)="toggleVoteSorting()">
           Sort by votes
         </button>
-        <button class="btn btn-primary m-1" (click)="toggleDateSorting()" >
+        <button class="btn btn-outline-primary m-1" (click)="toggleDateSorting()" >
           Sort by date
         </button>
       </div>
 
 
 
-      <div class="card bg-light m-3"
-           *ngFor="let problem of getProblems() | problemFilter:  selectedDistrict: selectedLocation: selectedDomains: selectedDomains.length:
-                                                                  selectedStatuses: selectedStatuses.length"
-           [routerLink]="['/problem/', problem?.problem_id]">
+      <div>
+        <div class="card bg-light m-3"
+             *ngFor="let problem of problems  "
+             [routerLink]="['/problem/', problem?.id]">
 
-        <h5 class="card-header">
-          <div class="d-flex justify-content-between">
-            <h5>{{ problem?.title }}</h5>
-            <h5>{{ problem?.status}}</h5>
+          <h5 class="card-header">
+            <div class="d-flex justify-content-between">
+              <h5>{{ problem?.title }}</h5>
+              <h5 [ngClass]="{'activestatus': problem.status === 'ACTIVE',
+                            'donestatus': problem.status === 'DONE',
+                            'inprogress': problem.status === 'IN_PROGRESS',
+                            'rejected': problem.status === 'REJECTED'}">
+                {{ problem?.status}}
+              </h5>
+            </div>
+            <p></p>
+          </h5>
+          <div class="card-body">
+            <app-problem-image [problemId] = "problem.id"></app-problem-image>
+            <p class="card-text" [innerHTML]="problem?.description"> </p>
           </div>
-          <p></p>
-        </h5>
-        <div class="card-body">
-          <p class="card-text" [innerHTML]="problem?.description">
-          </p>
-        </div>
-        <div class="card-footer d-flex justify-content-between">
-          Votes: {{ problem?.votesCount }}
-          <i>{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</i>
+          <div class="card-footer d-flex justify-content-between">
+            Votes: {{ problem?.votesCount }}
+            <i>{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</i>
+          </div>
         </div>
       </div>
 
     </div>
+  </div>
+  <div class="paggination d-flex justify-content-center m-3 mb-5">
+    <button [ngClass]="{'activepage' : problemModel.hasPrevious, 'pasivepage' : !problemModel.hasPrevious}"
+            class="btn btn-success m-1"
+       [disabled]="!problemModel.hasPrevious"
+       (click)="previousPage()">
+      &laquo; Previous
+    </button>
+    <button [ngClass]="{'activepage' : problemModel.hasNext, 'pasivepage' : !problemModel.hasNext}"
+            class="btn btn-success m-1"
+       [disabled]="!problemModel.hasNext"
+       (click)="nextPage()">
+      Next &raquo;
+    </button>
   </div>
 </div>

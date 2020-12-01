@@ -45,10 +45,10 @@ export class UploadImageComponent implements OnInit {
       }
 
     }
-    this.imageUploadService.postImages(formData, this.problem.problem_id, { responseType: 'blob' })
+    this.imageUploadService.postImages(formData, this.problem.id, { responseType: 'blob' })
       .subscribe(data => {
         this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-          this.router.navigateByUrl(`/problem/${this.problem.problem_id}`);
+          this.router.navigateByUrl(`/problem/${this.problem.id}`);
         });
       },
         error => {

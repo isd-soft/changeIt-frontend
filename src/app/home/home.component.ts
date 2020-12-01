@@ -7,6 +7,9 @@ import {ProblemModel} from '@app/repository/problem_repository.model';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {Domain} from '@app/models/domain';
 import {DomainModel} from '@app/repository/domain_repository.model';
+import {ProblemPipe} from '@app/pipe/problem-pipe.pipe';
+import {PaginationDetails} from '@app/models/paginationDetails';
+import {ProblemService} from '@app/service/problem.service';
 
 @Component({
   selector: 'app-home',
@@ -14,19 +17,25 @@ import {DomainModel} from '@app/repository/domain_repository.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  voteSorting = true;
-  dateSorting = true;
-  sort = 'vote';
+  sortDir = 'ASC';
+  sort = 'votesCount';
+  page = 0;
+  size = 5;
   selectedDistrict: District;
   selectedLocation: Location;
   selectedDomains: Domain[] = [];
-  availableStatuses: String[];
-  selectedStatuses: String[] = [];
+  availableStatuses: string[];
+  selectedStatuses: string[] = [];
+  problemPipe = new ProblemPipe();
+  problems: Problem[] = [];
 
 
-  constructor(private problemModel: ProblemModel, private districtModel: DistrictModel,
-              private locationModel: LocationModel, private domainModel: DomainModel) {
+
+  constructor(public problemModel: ProblemModel, private districtModel: DistrictModel,
+              private locationModel: LocationModel, private domainModel: DomainModel,
+              private problemService: ProblemService) {
     this.availableStatuses = ['ACTIVE', 'IN_PROGRESS', 'REJECTED', 'DONE'];
+    this.getProblems(0, 5);
   }
 
   ngOnInit(): void {
@@ -36,12 +45,24 @@ export class HomeComponent implements OnInit {
     return this.districtModel.getDistricts();
   }
 
-  getProblems(): Problem[] {
-    if (this.sort === 'vote') {
-      return this.problemModel.getProblemsByVote(this.voteSorting);
-    } else {
-      return this.problemModel.getProblemsByDate(this.dateSorting);
-    }
+  getProblems(page: number, size: number): void {
+    const paginationDetails: PaginationDetails = new PaginationDetails(page, size, this.sortDir, this.sort);
+    this.problemService.getData(paginationDetails).subscribe(data => {
+      this.problems = data.Problems;
+      this.problemModel.hasNext = data.hasNext;
+      this.problemModel.hasPrevious = data.hasPrevious;
+      this.problemModel.totalElements = data.totalElements;
+      this.problemModel.totalPages = data.totalPages;
+      this.problemModel.loadProblems(this.problems);
+
+      this.problems = this.problemPipe.transform(this.problems,
+        this.selectedDistrict, this.selectedLocation,
+        this.selectedDomains, this.selectedDomains.length, this.selectedStatuses,
+        this.selectedStatuses.length);
+      if (this.problems.length < this.size && this.problemModel.hasNext) {
+        this.getProblems(page, size + (this.size - this.problems.length));
+      }
+    });
   }
 
   getAllDomains(): Domain[] {
@@ -66,24 +87,32 @@ export class HomeComponent implements OnInit {
         this.selectedDomains.splice(index, 1);
       }
     }
+    this.getProblems(this.page, this.size);
   }
 
   toggleVoteSorting(): void {
-    this.sort = 'vote';
-    this.voteSorting = !this.voteSorting;
+    this.sort = 'votesCount';
+    this.sortDir = (this.sortDir === 'ASC' ) ? 'DESC' : 'ASC';
+    this.getProblems(this.page, this.size);
   }
 
   toggleDateSorting(): void {
-    this.sort = 'date';
-    this.dateSorting = !this.dateSorting;
+    this.sort = 'createdAt';
+    this.sortDir = (this.sortDir === 'ASC' ) ? 'DESC' : 'ASC';
+    this.getProblems(this.page, this.size);
   }
 
 
   onChange(): void {
-    this.selectedLocation = null;
+    this.getProblems(this.page, this.size);
   }
 
-  onStatusSelect(event: any, status: String) {
+  onChangeDistrict(): void {
+    this.selectedLocation = null;
+    this.getProblems(this.page, this.size);
+  }
+
+  onStatusSelect(event: any, status: string): any {
     if (event.target.checked) {
       this.selectedStatuses.push(status);
     }
@@ -93,5 +122,16 @@ export class HomeComponent implements OnInit {
         this.selectedStatuses.splice(index, 1);
       }
     }
+    this.getProblems(this.page, this.size);
+  }
+
+  previousPage(): void {
+    this.page--;
+    this.getProblems(this.page, this.size);
+  }
+
+  nextPage(): void {
+    this.page++;
+    this.getProblems(this.page, this.size);
   }
 }
