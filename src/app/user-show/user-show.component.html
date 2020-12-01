@@ -2,6 +2,17 @@
   <h1>All info about user</h1>
   <hr/>
   <br>
+
+  <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
+  <div *ngIf="logo">
+    <div *ngIf="user?.role === 'ADMIN'">
+      <button class="btn btn-danger btn-sm" (click)="removeUserLogo(user.user_id)">
+        Delete profile image
+      </button>
+    </div>
+  </div>
+
+
   <dl class="row">
     <dt class="col-sm-3">First Name</dt>
     <dd class="col-sm-9">{{user.firstName}}</dd>
