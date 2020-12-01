@@ -89,3 +89,6 @@ div.description {
 .rejected {
   color: #ff0000;
 }
+agm-map {
+  height: 500px;
+}

@@ -61,6 +61,10 @@
 
 </div>
 
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="problem.address.lat" [longitude]="problem.address.lng">
+    </agm-marker>
+  </agm-map>
 
   <div class="votes d-flex justify-content-center">
     <h3>Votes: {{ problem?.votesCount }}</h3>

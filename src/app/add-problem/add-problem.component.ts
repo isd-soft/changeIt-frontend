@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@app/models/location';
 import {LocationModel} from '@app/repository/location_repository.model';
@@ -10,6 +10,7 @@ import {Problem} from '@app/models/problem';
 import {ProblemModel} from '@app/repository/problem_repository.model';
 import { MapsAPILoader} from '@agm/core';
 import {AccountService} from '@app/service';
+import LatLngLiteral = google.maps.LatLngLiteral;
 
 
 @Component({
@@ -18,8 +19,8 @@ import {AccountService} from '@app/service';
   styleUrls: ['./add-problem.component.css']
 })
 export class AddProblemComponent implements OnInit {
-  // selectedFile: File = null;
-  fileToUpload: File = null;
+  // // selectedFile: File = null;
+  // fileToUpload: File = null;
 
   show: boolean = false;
 
@@ -31,15 +32,17 @@ export class AddProblemComponent implements OnInit {
   userId: number;
 
 // Variables for Google Maps
-  latitude: number = 47.016136126475665;
-  longitude: number = 28.837752985037348;
-  zoom: number = 15;
+  latitude: number = 47.059;
+  longitude: number = 28.88;
+  centerLatitude = this.latitude;
+  centerLongitude = this.longitude;
+  zoom: number = 10;
   private geoCoder;
 
-// Variables for Upload file
-  myFiles:string [] = [];
 
-
+address: string;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
   constructor(private fb: FormBuilder,
               private problemModel: ProblemModel,
@@ -59,6 +62,17 @@ export class AddProblemComponent implements OnInit {
 
     });
   }
+  putMarkerOnMap(event): any {
+    // console.log(event.target.value);
+
+    this.problemModel.getLatLang(event.target.value).subscribe(address => {
+      // console.log(address.results[0].geometry.location.lat);
+      this.latitude = address.results[0].geometry.location.lat;
+      this.longitude = address.results[0].geometry.location.lng;
+
+    });
+  }
+
   markerDragEnd($event: google.maps.MouseEvent): any {
     console.log($event);
     this.latitude = $event.latLng.lat();
@@ -115,30 +129,6 @@ export class AddProblemComponent implements OnInit {
     return this.addProblemForm.controls;
   }
 
-  onFileChange(event): any {
-    console.log(event);
-
-    for (var i = 0; i < event.target.files.length; i++) {
-      this.myFiles.push(event.target.files[i]);
-
-      var node = document.createElement('li');
-      var textnode = document.createTextNode(event.target.files[0].name);
-      node.appendChild(textnode);
-      node.value = this.myFiles.length - 1;
-      // node..before('<div class="btn"><button>Delete</button></div>');
-
-      document.getElementById('listOfFiles').appendChild(node);
-
-    }
-
-    console.log(this.myFiles);
-  }
-
-  handleFileInput(files: FileList): any {
-    this.fileToUpload = files.item(0);
-  }
-
-
    onSubmit(data, event: any): any{
     // console.log(data);
 
@@ -166,7 +156,7 @@ export class AddProblemComponent implements OnInit {
     data.domains = JSON.parse(domn);
     data.address = JSON.parse('{"address" : "' + data.address + '", "lat": ' + this.latitude + ', "lng": ' + this.longitude + '}');
     data.user = JSON.parse('{"user_id": ' + this.userId + '}');
-    data.image = this.fileToUpload;
+    // data.image = this.fileToUpload;
     // console.log(data);
     this.problemModel.saveProblem(data);
 
@@ -185,5 +175,18 @@ export class AddProblemComponent implements OnInit {
 
   }
 
+
+  public centerChanged(coords: LatLngLiteral): any {
+    this.centerLatitude = coords.lat;
+    this.centerLongitude = coords.lng;
+  }
+
+  public mapReady(map): any {
+    map.addListener('dragend', () => {
+      console.log(this.latitude);
+      console.log(this.longitude);
+      // do something with centerLatitude/centerLongitude
+    });
+  }
 }
 

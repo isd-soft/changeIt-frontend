@@ -35,6 +35,10 @@ export class ProblemService {
     return this.sendRequest<Problem>('POST', environment.apiUrl + '/problem/new', problem);
   }
 
+  getLatLng(address): any {
+    return this.sendRequest('GET', `${environment.apiUrl}/geocode/?address="${address}"`);
+  }
+
   updateProblem(problem: Problem): Observable<Problem> {
     return this.sendRequest<Problem>('PUT',
       `${environment.apiUrl}/problem/${problem.id}`, problem);

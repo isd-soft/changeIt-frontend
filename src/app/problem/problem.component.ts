@@ -27,6 +27,10 @@ export class ProblemComponent implements OnInit {
   comments: Comment[];
   canLoadComments = false;
 
+  latitude = 48;
+  longitude = 23;
+  zoom = 15;
+
 
   // editing
   editDescription = false;
@@ -64,12 +68,24 @@ export class ProblemComponent implements OnInit {
         });
       }
 
+      this.latitude = parseFloat(String(this.problem.address.lat));
+      this.longitude = parseFloat(String(this.problem.address.lng));
 
+      commentService.getData(this.problem).subscribe(data => {
+        this.comments = data;
+        this.canLoadComments = true;
+      });
     });
 
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+  }
+
+  // location(): any {
+  //   this.latitude = this.problem.address.lat;
+  //   this.longitude = this.problem.address.lng;
+  // }
 
   getVote(): void {
     this.voteService.getVote(this.problem.id, this.user.user_id).subscribe(data => this.vote = data);

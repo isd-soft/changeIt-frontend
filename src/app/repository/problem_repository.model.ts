@@ -31,6 +31,10 @@ export class ProblemModel {
     return this.problems.find(p => this.locator(p, id));
   }
 
+  getLatLang(address: number): any {
+    return this.problemService.getLatLng(address);
+  }
+
   saveProblem(problem: Problem): void {
     if (problem.id == 0 || problem.id == null) {
     this.problemService.saveProblem(problem)
