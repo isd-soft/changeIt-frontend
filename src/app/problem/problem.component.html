@@ -60,7 +60,7 @@
   <app-upload-image [problem]="problem"></app-upload-image>
 
 </div>
-
+{{location()}}
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker [latitude]="problem.address.lat" [longitude]="problem.address.lng">
     </agm-marker>

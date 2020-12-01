@@ -129,25 +129,25 @@
       </div>
 
       <div class="form-group">
-<!--        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">-->
-<!--          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"-->
-<!--                      (dragEnd)="markerDragEnd($event)"></agm-marker>-->
-<!--        </agm-map>-->
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+          <agm-marker [latitude]="centerLatitude" [longitude]="centerLongitude" [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map>
 
 <!--          <label>Enter address</label>-->
 <!--          <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>-->
 
 
-        <agm-map  [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" (centerChange)="centerChanged($event)" (mapReady)="mapReady($event)">
-          <agm-marker [iconUrl]="{url: '/assets/marker.png', anchor: {x:19, y:19}, scaledSize: { width: '30px' , height: '30px'}}"
-                      [opacity]="1"
-                      [visible]="true"
-                      [markerClickable]="true"
-                      [latitude]="centerLatitude"
-                      [longitude]="centerLongitude"
+<!--        <agm-map  [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" (centerChange)="centerChanged($event)" (mapReady)="mapReady($event)">-->
+<!--          <agm-marker [iconUrl]="{url: '/assets/marker.png', anchor: {x:19, y:19}, scaledSize: { width: '30px' , height: '30px'}}"-->
+<!--                      [opacity]="1"-->
+<!--                      [visible]="true"-->
+<!--                      [markerClickable]="true"-->
+<!--                      [latitude]="centerLatitude"-->
+<!--                      [longitude]="centerLongitude"-->
 
-          ></agm-marker>
-        </agm-map>
+<!--          ></agm-marker>-->
+<!--        </agm-map>-->
 
         <h5>Address: </h5>
         <div>Latitude: {{centerLatitude}}</div>

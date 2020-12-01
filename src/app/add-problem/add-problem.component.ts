@@ -36,7 +36,7 @@ export class AddProblemComponent implements OnInit {
   longitude: number = 28.88;
   centerLatitude = this.latitude;
   centerLongitude = this.longitude;
-  zoom: number = 10;
+  zoom: number = 15;
   private geoCoder;
 
 
@@ -66,9 +66,12 @@ address: string;
     // console.log(event.target.value);
 
     this.problemModel.getLatLang(event.target.value).subscribe(address => {
-      // console.log(address.results[0].geometry.location.lat);
-      this.latitude = address.results[0].geometry.location.lat;
-      this.longitude = address.results[0].geometry.location.lng;
+      console.log(address.results[0].geometry.location);
+      this.centerLatitude = address.results[0].geometry.location.lat;
+      this.centerLongitude = address.results[0].geometry.location.lng;
+      this.longitude = this.centerLongitude;
+      this.latitude = this.centerLatitude;
+      this.zoom = 10;
 
     });
   }
