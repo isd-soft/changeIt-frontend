@@ -42,7 +42,7 @@
       <div class="comment-widgets p-1" *ngFor="let comment of comments" >
             <div class="d-flex flex-row comment-row">
               <div class="comment-text w-100">
-                <span class="text-muted float-right">Problem ID: {{ comment?.problem.problem_id}}
+                <span class="text-muted float-right">Problem ID: {{ comment?.problem.id}}
                  Problem title: {{ comment?.problem.title}}</span>
 
                 <span class="m-b-15 d-block">{{ comment?.content }} </span>
@@ -62,12 +62,12 @@
       <div class="comment-widgets p-1" *ngFor="let problem of problems" >
         <div class="d-flex flex-row comment-row">
           <div class="comment-text w-100">
-                <span class="text-muted float-right">Problem ID: {{ problem?.problem_id}}
+                <span class="text-muted float-right">Problem ID: {{ problem?.id}}
                   Problem title: {{ problem.title}}</span>
 
             <span class="m-b-15 d-block" [innerHTML]="problem?.description"></span>
             <div class="comment-footer">
-              <span class="text-muted float-left">{{ problem?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
+              <span class="text-muted float-left">{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</span>
               <span class="text-muted float-right">Votes: {{ problem?.votes }} </span>
             </div>
           </div>
