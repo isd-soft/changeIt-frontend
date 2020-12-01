@@ -57,25 +57,6 @@
   </div>
   </div>
 
-  <div class="fileUpload">
-    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
-                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-        <button type="button" (click)="openFileSelector()">Choose Logo</button>
-      </ng-template>
-    </ngx-file-drop>
-  </div>
-  <div *ngIf="logo">
-    <div class="remove m-auto d-flex justify-content-end" *ngIf="user.role === 'ADMIN'">
-      <button type="button" (click)="removeUserLogo(user.user_id)">
-        Delete logo
-      </button>
-    </div>
-  </div>
-
-  <div class="center m-4">
-
-  </div>
 </div>
 
 
