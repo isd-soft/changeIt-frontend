@@ -20,6 +20,7 @@ import {AdminGuard} from '@app/helpers/admin.guard';
 import {UsersComponent} from '@app/users/users.component';
 import {UserShowComponent} from '@app/user-show/user-show.component';
 import {UserShowResolver} from '@app/user-show/user-show.resolver';
+import {SearchBoxComponent} from "@app/search-box/search-box.component";
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'new-password', component: NewPasswordComponent},
   {path: 'user-show/:id', component: UserShowComponent, canActivate: [AuthGuard], resolve: {model: UserShowResolver}},
   {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  {path: 'search-box', component: SearchBoxComponent},
   {path: '**', redirectTo: ''}
 ];
 

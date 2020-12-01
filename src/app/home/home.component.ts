@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     return this.districtModel.getDistricts();
   }
 
-  getProblems(): Problem[] {
+  public getProblems(): Problem[] {
     if (this.sort === 'vote') {
       return this.problemModel.getProblemsByVote(this.voteSorting);
     } else {

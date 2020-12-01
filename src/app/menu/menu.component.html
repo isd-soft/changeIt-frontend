@@ -16,7 +16,9 @@
     </ul>
     <ul class="navbar-nav">
       <li>
-        <input type="text" class="form-control" placeholder="Search" autofocus>
+        <app-search-box></app-search-box>
+        <!--<input type="text" class="form-control" placeholder="Search" autofocus>
+        <a class="nav-link" routerLink="/search-box"></a>-->
       </li>
       <li class="nav-item" *ngIf="!user">
         <a class="nav-link" routerLink="/login">Login</a>

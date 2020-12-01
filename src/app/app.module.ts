@@ -86,10 +86,8 @@ import { SearchBoxComponent } from './search-box/search-box.component'
     UploadImageComponent,
     GaleryComponent,
     UsersComponent,
-    UserShowComponent,,
+    UserShowComponent,
     SearchBoxComponent
-
-
   ],
   providers: [
 
