@@ -14,6 +14,20 @@
 
 
   <dl class="row">
+    <dt class="col-sm-3"></dt>
+    <dd class="col-sm-9">
+      <div class="d-flex justify-content-end ">
+        <select id="changeStatus" class="form-control changeStatus ml-2 mr-2" (change)="changeStatus()" style="width: 150px" #userStatus>
+          <option selected>Choose status</option>
+          <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>
+          <option [selected]="user.userStatus == 'INACTIVE'" value="INACTIVE">INACTIVE</option>
+          <option [selected]="user.userStatus == 'BANNED'" value="BANNED" >BANNED</option>
+        </select>
+      </div>
+    </dd>
+  </dl>
+
+  <dl class="row">
     <dt class="col-sm-3">First Name</dt>
     <dd class="col-sm-9">{{user.firstName}}</dd>
   </dl>

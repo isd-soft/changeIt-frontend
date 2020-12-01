@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UserModel} from '@app/repository/user_repository.model';
 import {User} from '@app/models';
+import {CommentService} from '@app/service/comment.service';
+import {Observable} from 'rxjs';
+import {UserService} from '@app/service/user.service';
 
 @Component({
   selector: 'app-users',
@@ -8,14 +11,33 @@ import {User} from '@app/models';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
-  constructor(private userModel: UserModel) { }
+  users: User[];
+  rate: number = 0;
+  constructor(private userModel: UserModel, private commentService: CommentService, private userService: UserService){
+  }
 
   ngOnInit(): void {
-  }
-  getUsers(): User[] {
-    return this.userModel.getUsers();
+    this.getUsers();
 
+  }
+  getUsers(): any {
+    this.users = this.userModel.getUsers();
+    console.log(this.users);
+
+    this.users.forEach((user, key) => {
+      console.log(user);
+      this.users[key].rate = 0;
+      this.commentService.getCommentsByUserId(user.user_id).subscribe(data => {
+        data.forEach(item => {
+          this.users[key].rate += item.votes;
+        });
+      });
+    });
+  }
+
+  changeStatus(user_id: number): void {
+    this.userService.updateUser(user_id, 'BANNED').subscribe();
+    window.location.reload();
   }
 
 }

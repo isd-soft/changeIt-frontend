@@ -10,8 +10,7 @@ export class UserModel {
 
   constructor(private userService: UserService) {
     this.userService.getData().subscribe(data => {
-      console.log(data);
-      this.user = data
+      this.user = data;
     });
   }
   getUsers(): User[] {

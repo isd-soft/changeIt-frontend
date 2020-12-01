@@ -41,6 +41,7 @@ import {UserModel} from '@app/repository/user_repository.model';
 import { UserShowComponent } from './user-show/user-show.component';
 import {ImageModule} from 'ngx-image';
 import {UserShowResolver} from '@app/user-show/user-show.resolver';
+import {UsersResolver} from '@app/users/users.resolver';
 import { ProblemImageComponent } from './home/problem-image/problem-image.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import {HighlightDirective} from "@app/home/highlight.directive";
@@ -95,7 +96,7 @@ import {HighlightDirective} from "@app/home/highlight.directive";
   ],
   providers: [
 
-    ProblemModel, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel, UserShowResolver,
+    ProblemModel, LocationModel, DistrictModel, DomainModel, CommentModel, UserModel, UserShowResolver, UsersResolver,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

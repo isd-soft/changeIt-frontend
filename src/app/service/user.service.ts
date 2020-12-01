@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {User} from '@app/models';
 import {ResetPasswordDetailsDto} from '@app/models/resetPasswordDetailsDto';
+import {Problem} from '@app/models/problem';
 
 
 @Injectable({
@@ -44,6 +45,9 @@ export class UserService {
     return this.sendRequestWithParams('GET', `${environment.apiUrl}/problem/${problemId}/user`);
   }
 
+  updateUser(id: number, status: string): Observable<User> {
+    return this.sendRequestWithBody('PUT', `${environment.apiUrl}/admin/user/${id}?userStatus=${status}`);
+  }
 
   private sendRequestWithParams<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 

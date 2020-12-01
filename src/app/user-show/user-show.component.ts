@@ -7,6 +7,8 @@ import {Comment} from '@app/models/comment';
 import {CommentService} from '@app/service/comment.service';
 import {ProblemService} from '@app/service/problem.service';
 import {Problem} from '@app/models/problem';
+import {UserService} from '@app/service/user.service';
+import {parseStatementForUmdModule} from '@angular/compiler-cli/ngcc/src/host/umd_host';
 @Component({
   selector: 'app-user-show',
   templateUrl: './user-show.component.html',
@@ -24,7 +26,9 @@ export class UserShowComponent implements OnInit {
               private userModel: UserModel,
               private commentService: CommentService,
               private problemService: ProblemService,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
+
     route.params.subscribe(params => {
       const id = params.id;
       if (id != null) {
@@ -34,7 +38,7 @@ export class UserShowComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commentService.getCommentsByUserId(this.user).subscribe(data => {
+    this.commentService.getCommentsByUserId(this.user.user_id).subscribe(data => {
       this.comments = data;
     });
 
@@ -49,6 +53,11 @@ export class UserShowComponent implements OnInit {
         this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
       }
     });
+  }
+  changeStatus(): void {
+    var status  = (document.getElementById('changeStatus') as HTMLInputElement).value;
+    this.userService.updateUser(this.user.user_id, status).subscribe();
+    window.location.reload();
   }
 
   removeUserLogo(id: number): void {

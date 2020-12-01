@@ -7,4 +7,5 @@
   role: string;
   userStatus: string;
   status: string;
+  rate: number;
 }
