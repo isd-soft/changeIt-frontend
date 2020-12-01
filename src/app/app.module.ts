@@ -43,6 +43,7 @@ import {ImageModule} from 'ngx-image';
 import {UserShowResolver} from '@app/user-show/user-show.resolver';
 import { ProblemImageComponent } from './home/problem-image/problem-image.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
+import {HighlightDirective} from "@app/home/highlight.directive";
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     UsersComponent,
     UserShowComponent,
     ProblemImageComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    HighlightDirective
 
   ],
   providers: [

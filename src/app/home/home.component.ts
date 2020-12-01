@@ -30,8 +30,6 @@ export class HomeComponent implements OnInit {
   problems: Problem[] = [];
   searchValue: string;
 
-
-
   constructor(public problemModel: ProblemModel, private districtModel: DistrictModel,
               private locationModel: LocationModel, private domainModel: DomainModel,
               private problemService: ProblemService) {
