@@ -33,11 +33,14 @@
       </div>
     </div>
 
+
     <div class="col-md-10">
       <h3>
         Problems
+          <label class="pull-right">
+            <app-search-box (searchCriteria)="searchThis($event)"></app-search-box>
+          </label>
       </h3>
-
       <div>
         <button class="btn btn-outline-primary m-1" (click)="toggleVoteSorting()">
           Sort by votes
@@ -48,15 +51,19 @@
       </div>
 
 
-
       <div>
         <div class="card bg-light m-3"
-             *ngFor="let problem of problems  "
-             [routerLink]="['/problem/', problem?.id]">
+             *ngFor="let problem of problems "
+
+          [routerLink]="['/problem/', problem?.id]">
 
           <h5 class="card-header">
             <div class="d-flex justify-content-between">
-              <h5>{{ problem?.title }}</h5>
+              <h5 appHighlight
+                 [content]="problem.title"
+                 [searchTerm]="searchValue"
+                 [caseSensitive]="false">
+              </h5>
               <h5 [ngClass]="{'activestatus': problem.status === 'ACTIVE',
                             'donestatus': problem.status === 'DONE',
                             'inprogress': problem.status === 'IN_PROGRESS',
@@ -68,10 +75,14 @@
           </h5>
           <div class="card-body">
             <app-problem-image [problemId] = "problem.id"></app-problem-image>
-            <p class="card-text" [innerHTML]="problem?.description"> </p>
+            <p appHighlight
+               [content]="problem.description"
+               [searchTerm]="searchValue"
+               [caseSensitive]="false">
+            </p>
           </div>
           <div class="card-footer d-flex justify-content-between">
-            Votes: {{ problem?.votesCount }}
+            <h5>Votes: {{ problem?.votesCount }}</h5>
             <i>{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</i>
           </div>
         </div>

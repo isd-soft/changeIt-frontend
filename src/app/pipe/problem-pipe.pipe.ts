@@ -8,8 +8,9 @@ import {Domain} from '@app/models/domain';
   name: 'problemFilter'
 })
 export class ProblemPipe implements PipeTransform {
+
   transform(values: Problem[], district?: District, location?: Location, domains?: Domain[],
-            domainLenght?: number, statuses?: String[], statusesLength?: number): Problem[] {
+            statuses?: string[], searchValue?: string): Problem[] {
 
     if (!district && !location && !domains && !statuses){
       return values;
@@ -32,6 +33,10 @@ export class ProblemPipe implements PipeTransform {
 
     if(statuses.length != 0) {
       values = values.filter(value => this.checkIfValueContainStatus(value, statuses));
+    }
+
+    if ( searchValue && searchValue.length != 0) {
+      values = values.filter(value => this.checkExistingValue(value, searchValue));
     }
 
     return values;
@@ -66,6 +71,10 @@ export class ProblemPipe implements PipeTransform {
      }
    }
    return check;
+  }
+
+  private checkExistingValue(value: Problem, searchValue: string) {
+    return value.title.toLowerCase().includes(searchValue.toLowerCase()) || value.description.toLowerCase().includes(searchValue.toLowerCase());
   }
 }
 

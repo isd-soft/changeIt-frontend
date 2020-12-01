@@ -24,7 +24,7 @@ p {
 }
 
 .inprogress {
-  color: #fff200;
+  color: #ff9900;
 }
 
 .rejected {
@@ -40,5 +40,12 @@ p {
 .activepage {
   background-color: #4CAF50;
   color: white;
+}
+
+p {
+  font-family: Lato;
+}
+::ng-deep .text-highlight {
+  background: yellow;
 }
 

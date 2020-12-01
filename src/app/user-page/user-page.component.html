@@ -18,6 +18,7 @@
             </ngx-file-drop>
           </div>
           <div class="mt-4" style="color:#999999;" >click here to change profile image</div>
+
           <div *ngIf="logo">
             <div *ngIf="user.role === 'ADMIN'">
               <button type="button" class="btn-danger" (click)="removeUserLogo(user.user_id)">
@@ -25,6 +26,7 @@
               </button>
             </div>
           </div>
+
         </div>
         <div>
           <h4 style="color:#00b1b1;"> {{ user.firstName }} {{user.lastName}} </h4>
@@ -47,9 +49,8 @@
           <div> Status:</div><div>{{user.status}}</div>
         </div>
         <li class="nav-item" *ngIf="user">
-          <a class="nav-link" (click)="onClick()">Change password</a>
+          <a class="nav-link d-flex justify-content-end" (click)="onClick()">Change password</a>
         </li>
-        <div style="color:#999999;" >click here to change profile image</div>
         <div>
         </div>
       </div>
@@ -57,25 +58,6 @@
   </div>
   </div>
 
-  <div class="fileUpload">
-    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
-                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-        <button type="button" (click)="openFileSelector()">Choose Logo</button>
-      </ng-template>
-    </ngx-file-drop>
-  </div>
-  <div *ngIf="logo">
-    <div class="remove m-auto d-flex justify-content-end" *ngIf="user.role === 'ADMIN'">
-      <button type="button" (click)="removeUserLogo(user.user_id)">
-        Delete logo
-      </button>
-    </div>
-  </div>
-
-  <div class="center m-4">
-
-  </div>
 </div>
 
 

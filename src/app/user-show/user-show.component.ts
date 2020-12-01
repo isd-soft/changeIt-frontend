@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from '@app/service';
 import {User} from '@app/models';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserModel} from '@app/repository/user_repository.model';
 import {Comment} from '@app/models/comment';
 import {CommentService} from '@app/service/comment.service';
@@ -16,13 +16,15 @@ export class UserShowComponent implements OnInit {
   user: User = new User();
   comments: Comment[];
   problems: Problem[];
+  logo: string;
 
 
   constructor(private accountService: AccountService,
               private route: ActivatedRoute,
               private userModel: UserModel,
               private commentService: CommentService,
-              private problemService: ProblemService) {
+              private problemService: ProblemService,
+              private router: Router) {
     route.params.subscribe(params => {
       const id = params.id;
       if (id != null) {
@@ -39,7 +41,21 @@ export class UserShowComponent implements OnInit {
     this.problemService.getProblemsByUserId(this.user).subscribe(data => {
       this.problems = data;
     });
+
+    this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
+      if (data.logo){
+        this.logo = 'data:image/png;base64,' + data.logo;
+      } else {
+        this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
+      }
+    });
   }
 
+  removeUserLogo(id: number): void {
+    this.accountService.deleteUserLogo(this.user.user_id).subscribe();
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl(`/user-show/${this.user.user_id}`);
+    });
+  }
 
 }
