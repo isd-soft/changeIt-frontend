@@ -3,30 +3,30 @@ import {Observable, throwError} from 'rxjs';
 import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {CommentVote} from '@app/models/CommentVote';
+import {Likes} from '@app/models/Likes';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommentVoteService{
+export class LikesService{
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  vote(commentVote: CommentVote): Observable<CommentVote> {
-    return this.sendRequest<CommentVote>('POST', `${environment.apiUrl}/comment_vote/`, commentVote);
+  like(likes: Likes): Observable<Likes> {
+    return this.sendRequest<Likes>('POST', `${environment.apiUrl}/likes/`, likes);
   }
 
-  getVote(commentId: number, userId: number): Observable<CommentVote> {
-    return this.sendRequest<CommentVote>('GET', `${environment.apiUrl}/comment_vote/${commentId}/${userId}`);
+  getLike(commentId: number, userId: number): Observable<Likes> {
+    return this.sendRequest<Likes>('GET', `${environment.apiUrl}/likes/${commentId}/${userId}`);
   }
 
-  unVote(commentId: number, userId: number): Observable<CommentVote> {
-    return this.sendRequest<CommentVote>('DELETE', `${environment.apiUrl}/comment_vote/${commentId}/${userId}`);
+  deleteLike(commentId: number, userId: number): Observable<Likes> {
+    return this.sendRequest<Likes>('DELETE', `${environment.apiUrl}/likes/${commentId}/${userId}`);
   }
 
-  private sendRequest<T>(verb: string, url: string, body?: CommentVote): Observable<T> {
+  private sendRequest<T>(verb: string, url: string, body?: Likes): Observable<T> {
 
     console.log('\n\n---Request ', verb, url, body);
 

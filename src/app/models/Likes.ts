@@ -1,7 +1,7 @@
 import {User} from './user';
 import {Comment} from './comment';
 
-export class CommentVote{
+export class Likes{
   comment: Comment;
   user: User;
 

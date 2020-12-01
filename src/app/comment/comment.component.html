@@ -17,11 +17,17 @@
                 {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
                 </span>
       <div>
-        <button class="btn btn-primary" *ngIf="user && !commentVote" (click)="voteCommentOnClick()" [disabled]="commentVote">
-          Vote
+        <button class="btn btn-primary" *ngIf="user && !likes && !dislikes" (click)="likeCommentOnClick()" [disabled]="likes">
+          Like
         </button>
-        <button class="btn btn-danger" *ngIf="user && commentVote" (click)="unVoteCommentOnClick()" [disabled]="!commentVote">
-          Unvote
+        <button class="btn btn-secondary" *ngIf="user && likes" (click)="deleteLikeCommentOnClick()" [disabled]="!likes">
+          Cancel
+        </button>
+        <button class="btn btn-danger" *ngIf="user && !likes && !dislikes" (click)="dislikeCommentOnClick()" [disabled]="dislikes">
+          Dislike
+        </button>
+        <button class="btn btn-dark" *ngIf="user && dislikes" (click)="deleteDislikeCommentOnClick()" [disabled]="!dislikes">
+          Cancel
         </button>
         {{ comment?.votes }}
       </div>
