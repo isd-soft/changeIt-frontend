@@ -3,7 +3,7 @@ import {Observable, throwError} from 'rxjs';
 import {environment} from '@environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {Likes} from '@app/models/Likes';
+import {Likes} from '@app/models/likes';
 
 @Injectable({
   providedIn: 'root'
