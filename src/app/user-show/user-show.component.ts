@@ -19,7 +19,7 @@ export class UserShowComponent implements OnInit {
   comments: Comment[];
   problems: Problem[];
   logo: string;
-  userStatus: User;
+  userRole: User;
 
 
   constructor(private accountService: AccountService,
@@ -36,7 +36,7 @@ export class UserShowComponent implements OnInit {
         this.user = userModel.getUser(id);
       }
     });
-    this.accountService.user.subscribe(x => this.userStatus = x);
+    this.accountService.user.subscribe(x => this.userRole = x);
   }
 
   ngOnInit(): void {
