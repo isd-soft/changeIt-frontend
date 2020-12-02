@@ -75,11 +75,11 @@
           </h5>
           <div class="card-body">
             <app-problem-image [problemId] = "problem.id"></app-problem-image>
-            <p appHighlight
-               [content]="problem.description"
+            <div appHighlight
+               [outerHTML]="problem?.description"
                [searchTerm]="searchValue"
                [caseSensitive]="false">
-            </p>
+            </div>
           </div>
           <div class="card-footer d-flex justify-content-between">
             <h5>Votes: {{ problem?.votesCount }}</h5>
