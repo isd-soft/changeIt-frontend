@@ -19,6 +19,10 @@ export class ProblemService {
     return this.sendRequest<any>('POST', environment.apiUrl + '/problem', paginationDetails);
   }
 
+  getAll(): Observable<Problem[]> {
+    return this.sendRequest<Problem[]>('GET', `${environment.apiUrl}/problem`);
+  }
+
   getProblem(id: number): Observable<Problem> {
     return this.sendRequest<Problem>('GET', `${environment.apiUrl}/problem/${id}`);
   }

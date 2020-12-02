@@ -35,8 +35,13 @@ export class DistrictModel {
     }
   }
 
-  deleteDistrict(key: number) {
-    return this.districtService.deleteDistrict(key);
+  deleteDistrict(key: number): void{
+    this.districtService.deleteDistrict(key).subscribe(() => {
+      const index = this.district.findIndex(d => this.locator(d, key));
+      if (index > -1) {
+        this.district.splice(index, 1);
+      }
+    });
   }
 
 }

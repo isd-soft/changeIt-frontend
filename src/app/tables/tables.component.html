@@ -17,6 +17,9 @@
     <button class="btn btn-primary m-1" type="button" data-toggle="collapse" data-target="#domains" aria-expanded="false" aria-controls="domains">
       Domains
     </button>
+    <button class="btn btn-primary m-1" type="button" data-toggle="collapse" data-target="#problems" aria-expanded="false" aria-controls="problems">
+      Problems
+    </button>
   </p>
 
   <div class="collapse" id="districts">
@@ -61,7 +64,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary" (click)="deleteLocation(selectedId)">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="deleteDistrict(selectedId)">Yes</button>
                   </div>
                 </div>
               </div>
@@ -132,7 +135,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary" (click)="deleteLocation(selectedId)">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="deleteLocation(selectedId)">Yes</button>
                   </div>
                 </div>
               </div>
@@ -199,7 +202,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary" (click)="deleteDomain(selectedId)">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="deleteDomain(selectedId)">Yes</button>
                   </div>
                 </div>
               </div>
@@ -217,10 +220,57 @@
           <button class="btn btn-primary m-1" (click)="createDomain(domainName.value)">Insert</button>
         </div>
       </div>
-
     </div>
   </div>
 
+  <div class="collapse" id="problems">
+    <div class="card card-body">
+
+      <h2>Problems:</h2>
+      <table class="table table-sm table-striped table-light">
+        <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Problem Name</th>
+          <th scope="col">Votes</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text" *ngFor="let problem of getProblems()">
+          <td>{{ problem?.id }}</td>
+          <td class="nav-link btn-link" (click)="linkToProblem(problem?.id)">{{ problem?.title }}</td>
+          <td>{{ problem?.votesCount }}</td>
+          <td>{{ problem?.status }}</td>
+          <td width="10%">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteProblem" (click)="getId(problem?.id)">
+              Delete
+            </button>
+            <div class="modal fade" id="deleteProblem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProblemTitle">Delete problem</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete selected problem?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="deleteProblem(selectedId)">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
 </div>

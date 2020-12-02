@@ -5,6 +5,10 @@ import {DomainModel} from '@app/repository/domain_repository.model';
 import {Domain} from '@app/models/domain';
 import {LocationModel} from '@app/repository/location_repository.model';
 import {Location} from '@app/models/location';
+import {ProblemModel} from '@app/repository/problem_repository.model';
+import {Problem} from '@app/models/problem';
+import {ProblemService} from '@app/service/problem.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tables',
@@ -14,11 +18,16 @@ import {Location} from '@app/models/location';
 export class TablesComponent implements OnInit {
 
   selectedId: number;
+  private problems: Problem[] = new Array<Problem>();
 
   constructor(private districtModel: DistrictModel,
               private domainModel: DomainModel,
               private locationModel: LocationModel,
+              private problemModel: ProblemModel,
+              private problemService: ProblemService,
+              private router: Router
   ) {
+    this.problemService.getAll().subscribe(data => this.problems = data);
   }
 
   ngOnInit(): void { }
@@ -105,5 +114,17 @@ export class TablesComponent implements OnInit {
     location.locationName = locationName;
     location.district = district;
     this.locationModel.saveLocation(location);
+  }
+
+  getProblems(): Problem[]{
+    return this.problems;
+  }
+
+  deleteProblem(key: number): void{
+    return this.problemModel.deleteProblem(key);
+  }
+
+  linkToProblem(id: number): void{
+    this.router.navigate(['/problem/' + id]);
   }
 }
