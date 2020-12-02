@@ -5,27 +5,12 @@
 
   <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
   <div *ngIf="logo">
-    <div *ngIf="user?.role === 'ADMIN'">
-      <button class="btn btn-danger btn-sm" (click)="removeUserLogo(user.user_id)">
+    <div *ngIf="userRole?.role === 'ADMIN'">
+      <button class="btn btn-danger btn-sm m-1" (click)="removeUserLogo(user.user_id)">
         Delete profile image
       </button>
     </div>
   </div>
-
-
-  <dl class="row">
-    <dt class="col-sm-3"></dt>
-    <dd class="col-sm-9">
-      <div class="d-flex justify-content-end " *ngIf="user?.role == 'ADMIN'">
-        <select id="changeStatus" class="form-control changeStatus ml-2 mr-2" (change)="changeStatus()" style="width: 150px" #userStatus>
-          <option selected>Choose status</option>
-          <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>
-          <option [selected]="user.userStatus == 'INACTIVE'" value="INACTIVE">INACTIVE</option>
-          <option [selected]="user.userStatus == 'BANNED'" value="BANNED" >BANNED</option>
-        </select>
-      </div>
-    </dd>
-  </dl>
 
   <dl class="row">
     <dt class="col-sm-3">First Name</dt>
@@ -49,7 +34,17 @@
 
   <dl class="row">
     <dt class="col-sm-3">Status</dt>
-    <dd class="col-sm-9">{{user.userStatus}}</dd>
+    <dd class="col-sm-9">
+      <div *ngIf="userRole?.role != 'ADMIN'">{{user.userStatus}}</div>
+      <div *ngIf="userRole?.role == 'ADMIN'">
+        <select id="changeStatus" class="form-control changeStatus" (change)="changeStatus()" style="width: 150px" #userStatus>
+          <option selected>Choose status</option>
+          <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>
+          <option [selected]="user.userStatus == 'INACTIVE'" value="INACTIVE">INACTIVE</option>
+          <option [selected]="user.userStatus == 'BANNED'" value="BANNED" >BANNED</option>
+        </select>
+      </div>
+    </dd>
   </dl>
 
 <div id="sidebar">
