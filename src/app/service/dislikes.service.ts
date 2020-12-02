@@ -19,11 +19,11 @@ export class DislikesService{
   }
 
   getDislike(commentId: number, userId: number): Observable<Dislikes> {
-    return this.sendRequest<Dislikes>('GET', `${environment.apiUrl}/dislikes/${commentId}/${userId}`);
+    return this.sendRequest<Dislikes>('GET', `${environment.apiUrl}/dislikes/comment/${commentId}/user/${userId}`);
   }
 
   deleteDislike(commentId: number, userId: number): Observable<Dislikes> {
-    return this.sendRequest<Dislikes>('DELETE', `${environment.apiUrl}/dislikes/${commentId}/${userId}`);
+    return this.sendRequest<Dislikes>('DELETE', `${environment.apiUrl}/dislikes/comment/${commentId}/user/${userId}`);
   }
 
   private sendRequest<T>(verb: string, url: string, body?: Dislikes): Observable<T> {
