@@ -63,12 +63,15 @@ address: string;
     });
   }
   putMarkerOnMap(event): any {
-    // console.log(event.target.value);
-
-    this.problemModel.getLatLang(event.target.value).subscribe(address => {
-      console.log(address.results[0].geometry.location);
-      this.centerLatitude = address.results[0].geometry.location.lat;
-      this.centerLongitude = address.results[0].geometry.location.lng;
+    var e = document.getElementById('district');
+    // var value = e.options[e.selectedIndex].value;
+    var text = e.options[e.selectedIndex].text;
+    var address = text + ' ' + event.target.value;
+// console.log(address);
+    this.problemModel.getLatLang(address).subscribe(addr => {
+      console.log(addr.results[0].geometry.location);
+      this.centerLatitude = addr.results[0].geometry.location.lat;
+      this.centerLongitude = addr.results[0].geometry.location.lng;
       this.longitude = this.centerLongitude;
       this.latitude = this.centerLatitude;
       this.zoom = 10;

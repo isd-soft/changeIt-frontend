@@ -62,6 +62,10 @@
 </div>
 
   <div *ngIf="problem.address">
+    <h6> Address:</h6>
+
+
+    <p>{{problem?.location.district.districtName}}, {{problem.address.address}}</p>
     {{location()}}
     <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
       <agm-marker [latitude]="problem.address.lat" [longitude]="problem.address.lng">
