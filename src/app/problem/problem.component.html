@@ -55,9 +55,9 @@
 </div>
 
 
-<div *ngIf="author">
+<div *ngIf="author && problem">
 
-  <app-upload-image [problem]="problem"></app-upload-image>
+  <app-upload-image [imageNumber]="imageNumber" [problemId]="problemId"></app-upload-image>
 
 </div>
 
