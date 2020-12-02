@@ -1,12 +1,12 @@
 <li>
   <div class="commenterName">
-  <b>
-    <img *ngIf="logo" [src]="logo" width="50px" height="50px">
-
-  <a class="nav-link" (click)="onClick(comment)">
-    {{ comment?.user?.firstName }}
-    {{ comment?.user?.lastName }}</a>
-  </b>
+    <b>
+      <a class="nav-link" (click)="onClick(comment)">
+        <img *ngIf="logo" [src]="logo" width="50px" height="50px">
+        {{ comment?.user?.firstName }}
+        {{ comment?.user?.lastName }}
+      </a>
+    </b>
   </div>
   <div class="commentText">
     <p class="">
@@ -19,19 +19,19 @@
                 {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
                 </span>
       <div>
+        {{ comment?.votes }}
         <button class="btn btn-primary" *ngIf="user && !likes && !dislikes" (click)="likeCommentOnClick()" [disabled]="likes">
           Like
         </button>
-        <button class="btn btn-secondary" *ngIf="user && likes" (click)="deleteLikeCommentOnClick()" [disabled]="!likes">
-          Cancel
+        <button class="btn btn-dark" *ngIf="user && likes" (click)="deleteLikeCommentOnClick()" [disabled]="!likes">
+          Cancel Like
         </button>
         <button class="btn btn-danger" *ngIf="user && !likes && !dislikes" (click)="dislikeCommentOnClick()" [disabled]="dislikes">
           Dislike
         </button>
         <button class="btn btn-dark" *ngIf="user && dislikes" (click)="deleteDislikeCommentOnClick()" [disabled]="!dislikes">
-          Cancel
+          Cancel Dislike
         </button>
-        {{ comment?.votes }}
       </div>
     </div>
   </div>
