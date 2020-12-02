@@ -16,7 +16,7 @@
   <dl class="row">
     <dt class="col-sm-3"></dt>
     <dd class="col-sm-9">
-      <div class="d-flex justify-content-end ">
+      <div class="d-flex justify-content-end " *ngIf="user?.role == 'ADMIN'">
         <select id="changeStatus" class="form-control changeStatus ml-2 mr-2" (change)="changeStatus()" style="width: 150px" #userStatus>
           <option selected>Choose status</option>
           <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>
