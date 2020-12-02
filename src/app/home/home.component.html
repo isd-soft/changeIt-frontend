@@ -76,7 +76,7 @@
           <div class="card-body">
             <app-problem-image [problemId] = "problem.id"></app-problem-image>
             <div appHighlight
-               [outerHTML]="problem?.description"
+               [content]="problem?.description"
                [searchTerm]="searchValue"
                [caseSensitive]="false">
             </div>
