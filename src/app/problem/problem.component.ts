@@ -10,6 +10,7 @@ import {ProblemService} from '@app/service/problem.service';
 import {VoteService} from '@app/service/vote.service';
 import {Vote} from '@app/models/Vote';
 import {UserService} from '@app/service/user.service';
+import {ImageService} from "@app/service/image.service";
 
 
 @Component({
@@ -26,6 +27,8 @@ export class ProblemComponent implements OnInit {
   author = false;
   comments: Comment[];
   canLoadComments = false;
+  problemId: number;
+  imageNumber: number;
 
   latitude = 47.059;
   longitude = 28.88;
@@ -43,11 +46,12 @@ export class ProblemComponent implements OnInit {
     private voteService: VoteService,
     private userService: UserService,
     private accountService: AccountService,
+    private imageService: ImageService,
   ) {
     route.params.subscribe(params => {
-      const id = params.id;
-      if (id != null) {
-        problemService.getProblem(id).subscribe(data => {
+      this.problemId = params.id;
+      if (this.problemId != null) {
+        problemService.getProblem(this.problemId).subscribe(data => {
           this.problem = data;
 
           commentService.getData(this.problem).subscribe(comments => {
@@ -66,6 +70,10 @@ export class ProblemComponent implements OnInit {
           this.user = accountService.userValue;
           this.getVote();
         });
+
+        this.imageService.getImages(this.problemId).subscribe(data => {
+          this.imageNumber = data.length;
+        });
       }
 
       // this.latitude = parseFloat(String(this.problem.address.lat));
@@ -81,8 +89,9 @@ export class ProblemComponent implements OnInit {
         this.canLoadComments = true;
       });
     });
-
   }
+
+
 
   ngOnInit(): void {
 

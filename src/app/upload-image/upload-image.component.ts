@@ -12,7 +12,8 @@ import {Router} from '@angular/router';
 })
 export class UploadImageComponent implements OnInit {
   public files: NgxFileDropEntry[] = [];
-  @Input() private problem: Problem;
+  @Input() private problemId: number;
+  @Input() private imageNumber: number;
 
   constructor(
     private imageUploadService: ImageUploadService,
@@ -22,6 +23,10 @@ export class UploadImageComponent implements OnInit {
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
+    if(files.length + this.imageNumber > 5) {
+      alert("Image number is exceeded. Please upload no more than 5 images");
+      return false;
+    }
     const formData = new FormData();
     for (const droppedFile of files) {
 
@@ -45,10 +50,10 @@ export class UploadImageComponent implements OnInit {
       }
 
     }
-    this.imageUploadService.postImages(formData, this.problem.id, { responseType: 'blob' })
+    this.imageUploadService.postImages(formData, this.problemId, { responseType: 'blob' })
       .subscribe(data => {
         this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-          this.router.navigateByUrl(`/problem/${this.problem.id}`);
+          this.router.navigateByUrl(`/problem/${this.problemId}`);
         });
       },
         error => {

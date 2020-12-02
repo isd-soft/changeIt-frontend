@@ -1,4 +1,4 @@
-<div class="gallery-wrapper" *ngIf="galleryImages?.length > 0">
+<div class="gallery-wrapper" *ngIf="galleryImages?.length > 0" [(ngModel)]="images.length">
   <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
 
   <div class="remove m-auto d-flex" *ngIf="author ||  user.role === 'ADMIN'">

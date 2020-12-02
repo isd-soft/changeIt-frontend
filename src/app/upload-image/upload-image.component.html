@@ -4,22 +4,18 @@
     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
       Choose files or drag they here, maximum is 5 files..
       <button type="button" (click)="openFileSelector()">Browse Files</button>
-
     </ng-template>
   </ngx-file-drop>
-  <div class="upload-table">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Name</th>
-      </tr>
-      </thead>
-      <tbody class="upload-name-style">
-      <tr *ngFor="let item of files; let i=index">
-        <td><strong>{{ item.relativePath }}</strong></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
+
+
+  <!--<div [(ngModel)]="files" *ngIf="files.length > 5">Maximum upload files is 5</div>-->
+
+   <!-- <div [(ngModel)]="files" *ngIf="files.length > 5" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>File number is exceeded!</strong> Please upload no more than 5 images!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>-->
 </div>
 
