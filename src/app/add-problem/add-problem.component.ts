@@ -63,11 +63,8 @@ address: string;
     });
   }
   putMarkerOnMap(event): any {
-    var e = document.getElementById('district');
-    // var value = e.options[e.selectedIndex].value;
-    var text = e.options[e.selectedIndex].text;
-    var address = text + ' ' + event.target.value;
-// console.log(address);
+    var e = (document.getElementById('district')) as HTMLSelectElement;
+    var address = e.options[e.selectedIndex].text + ' ' + event.target.value;
     this.problemModel.getLatLang(address).subscribe(addr => {
       console.log(addr.results[0].geometry.location);
       this.centerLatitude = addr.results[0].geometry.location.lat;
