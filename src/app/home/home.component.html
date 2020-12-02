@@ -60,7 +60,7 @@
           <h5 class="card-header">
             <div class="d-flex justify-content-between">
               <h5 appHighlight
-                 [content]="problem.title"
+                 [content]="problem?.title"
                  [searchTerm]="searchValue"
                  [caseSensitive]="false">
               </h5>
@@ -75,6 +75,7 @@
           </h5>
           <div class="card-body">
             <app-problem-image [problemId] = "problem.id"></app-problem-image>
+            <!-- [outerHTML]="problem?.description"-->
             <div appHighlight
                [content]="problem?.description"
                [searchTerm]="searchValue"
