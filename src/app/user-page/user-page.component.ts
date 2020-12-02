@@ -81,11 +81,4 @@ export class UserPageComponent implements OnInit {
   public fileLeave(event): void{
     console.log(event);
   }
-
-  removeUserLogo(id: number): void {
-    this.accountService.deleteUserLogo(this.user.user_id).subscribe();
-    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-      this.router.navigateByUrl(`/user-page`);
-    });
-  }
 }
