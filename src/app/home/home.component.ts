@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   sort = 'votesCount';
   page = 0;
   size = 5;
+  totalPages = [];
   selectedDistrict: District;
   selectedLocation: Location;
   selectedDomains: Domain[] = [];
@@ -52,6 +53,10 @@ export class HomeComponent implements OnInit {
       this.problemModel.hasPrevious = data.hasPrevious;
       this.problemModel.totalElements = data.totalElements;
       this.problemModel.totalPages = data.totalPages;
+      this.totalPages = [];
+      for (let i = 0; i < data.totalPages; i++) {
+        this.totalPages.push(i);
+      }
       this.problemModel.loadProblems(this.problems);
 
       this.problems = this.problemPipe.transform(this.problems,
@@ -130,6 +135,11 @@ export class HomeComponent implements OnInit {
 
   nextPage(): void {
     this.page++;
+    this.getProblems(this.page, this.size);
+  }
+
+  changePage(pag: number): void {
+    this.page = pag;
     this.getProblems(this.page, this.size);
   }
 

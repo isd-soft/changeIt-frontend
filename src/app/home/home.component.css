@@ -49,3 +49,7 @@ p {
   background: yellow;
 }
 
+.activeLink {
+  border: 2px solid #6610f2;
+}
+

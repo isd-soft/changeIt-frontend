@@ -21,14 +21,14 @@
 
         <p>Select domain</p>
         <div class="form-group form-check m-2" *ngFor="let domain of getAllDomains()">
-          <input type="checkbox" class="form-check-input" id="domains" (change)="onSelectDomain($event, domain)">
-          <label class="form-check-label" for="domains" >{{domain.domainName}}</label>
+          <input type="checkbox" class="form-check-input" [id]="domain.domain_id" (change)="onSelectDomain($event, domain)">
+          <label class="form-check-label" [for]="domain.domain_id" >{{domain.domainName}}</label>
         </div>
 
         <p>Select status</p>
         <div class="form-group form-check m-2" *ngFor="let status of availableStatuses">
-          <input type="checkbox" class="form-check-input" id="status" (change)="onStatusSelect($event, status)">
-          <label class="form-check-label" for="status" >{{status}}</label>
+          <input type="checkbox" class="form-check-input" [id]="status" (change)="onStatusSelect($event, status)">
+          <label class="form-check-label" [for]="status" >{{status}}</label>
         </div>
       </div>
     </div>
@@ -91,7 +91,15 @@
 
     </div>
   </div>
-  <div class="paggination d-flex justify-content-center m-3 mb-5">
+
+  <div class="d-flex justify-content-center m-1">
+    <a *ngFor="let p of totalPages" class="m-1 p-1" [ngClass]="{'activeLink': p == page}" (click)="changePage(p)">
+      {{p+1}}
+    </a>
+  </div>
+
+  <div class="paggination d-flex justify-content-center m-3 mb-5 mt-0">
+
     <button [ngClass]="{'activepage' : problemModel.hasPrevious, 'pasivepage' : !problemModel.hasPrevious}"
             class="btn btn-success m-1"
        [disabled]="!problemModel.hasPrevious"
