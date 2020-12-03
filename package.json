@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod && npm install http-server-spa",
+    "heroku-postbuild": "ng build --aot --prod",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
