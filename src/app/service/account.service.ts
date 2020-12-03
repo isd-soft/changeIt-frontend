@@ -90,7 +90,6 @@ export class AccountService {
 
   private sendRequest<T>(verb: string, url: string, body?: User): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

@@ -18,8 +18,6 @@ export class UserLogoUploadService{
 
   private sendRequest<T>(verb: string, url: string, formData?: FormData): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url);
-
 
     return this.http.post<T>(url, formData).pipe(catchError((error: Response) =>
       throwError(`Network Error: ${error.statusText} (${error.status})`)));

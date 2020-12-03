@@ -31,7 +31,6 @@ export class DistrictService {
 
   private sendRequest<T>(verb: string, url: string, body?: District): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

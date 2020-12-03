@@ -35,7 +35,6 @@ export class UserShowComponent implements OnInit {
       if (id != null) {
         this.userService.getUser(id).subscribe(user => {
           this.user = user;
-          console.log(user);
           this.commentService.getCommentsByUserId(this.user.user_id).subscribe(data => {
             this.comments = data;
           });

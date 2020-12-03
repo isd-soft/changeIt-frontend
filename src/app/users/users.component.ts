@@ -22,10 +22,8 @@ export class UsersComponent implements OnInit {
   }
   getUsers(): any {
     this.users = this.userModel.getUsers();
-    console.log(this.users);
 
     this.users.forEach((user, key) => {
-      console.log(user);
       this.users[key].rate = 0;
       this.commentService.getCommentsByUserId(user.user_id).subscribe(data => {
         data.forEach(item => {

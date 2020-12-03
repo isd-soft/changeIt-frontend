@@ -24,8 +24,6 @@ export class VoteService {
 
   private sendRequest<T>(verb: string, url: string, body?: Vote): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
-
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',

@@ -32,7 +32,6 @@ export class DomainService {
 
   private sendRequest<T>(verb: string, url: string, body?: Domain): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

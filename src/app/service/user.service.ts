@@ -55,7 +55,6 @@ export class UserService {
 
   private sendRequestWithParams<T>(verb: string, url: string, myParams?: HttpParams): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, myParams);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',
@@ -70,8 +69,6 @@ export class UserService {
   }
 
   private sendRequestWithBody<T>(verb: string, url: string, myBody?: ResetPasswordDetailsDto): Observable<T> {
-
-    console.log('\n\n---Request ', verb, url);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

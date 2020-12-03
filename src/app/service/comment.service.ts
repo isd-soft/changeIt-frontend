@@ -40,7 +40,6 @@ export class CommentService {
 
   private sendRequest<T>(verb: string, url: string, body?: Comment): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

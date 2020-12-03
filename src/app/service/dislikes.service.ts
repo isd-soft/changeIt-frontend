@@ -28,7 +28,6 @@ export class DislikesService{
 
   private sendRequest<T>(verb: string, url: string, body?: Dislikes): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',

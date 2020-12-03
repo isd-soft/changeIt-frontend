@@ -35,7 +35,6 @@ export class LocationService {
 
   private sendRequest<T>(verb: string, url: string, body?: Location): Observable<T> {
 
-    console.log('\n\n---Request ', verb, url, body);
 
     const myHeaders = new HttpHeaders({
       Accept: 'application/json',
