@@ -1,5 +1,5 @@
 {
-  "name": "angular-registration-login-example",
+  "name": "changeit-frontend",
   "version": "0.0.0",
   "engines": {
     "node": "14.x",
@@ -7,8 +7,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
-    "start": "http-server-spa dist/changeIt-frontend index.html $PORT",
+    "heroku-postbuild": "ng build --prod",
+    "start": "node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
