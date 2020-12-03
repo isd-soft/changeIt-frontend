@@ -1,16 +1,20 @@
 {
-    "name": "angular-registration-login-example",
-    "version": "0.0.0",
-    "scripts": {
-        "ng": "ng",
-        "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
-        "start": "http-server-spa dist/changeIt-frontend index.html $PORT",
-        "build": "ng build",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
-    },
-    "private": true,
+  "name": "angular-registration-login-example",
+  "version": "0.0.0",
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
+  "scripts": {
+    "ng": "ng",
+    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
+    "start": "http-server-spa dist/changeIt-frontend index.html $PORT",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
     "dependencies": {
         "@angular/animations": "^10.0.3",
         "@angular/common": "^10.0.3",
