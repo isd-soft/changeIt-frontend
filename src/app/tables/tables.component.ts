@@ -18,7 +18,8 @@ import {Router} from '@angular/router';
 export class TablesComponent implements OnInit {
 
   selectedId: number;
-  private problems: Problem[] = new Array<Problem>();
+  private problems: Problem[] = [];
+  private locator = (p: Problem, id: number) => p.id == id;
 
   constructor(private districtModel: DistrictModel,
               private domainModel: DomainModel,
@@ -116,12 +117,12 @@ export class TablesComponent implements OnInit {
     this.locationModel.saveLocation(location);
   }
 
-  getProblems(): Problem[]{
-    return this.problems;
-  }
-
   deleteProblem(key: number): void{
-    return this.problemModel.deleteProblem(key);
+    this.problemModel.deleteProblem(key);
+    const index = this.problems.findIndex(p => this.locator(p, key));
+    if (index > -1) {
+      this.problems.splice(index, 1);
+    }
   }
 
   linkToProblem(id: number): void{

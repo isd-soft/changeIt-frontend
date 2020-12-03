@@ -230,7 +230,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="text" *ngFor="let problem of getProblems()">
+        <tr class="text" *ngFor="let problem of problems">
           <td class="nav-link btn-link" (click)="linkToProblem(problem?.id)">{{ problem?.title }}</td>
           <td>{{ problem?.votesCount }}</td>
           <td>{{ problem?.status }}</td>

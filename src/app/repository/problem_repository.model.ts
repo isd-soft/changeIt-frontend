@@ -52,12 +52,7 @@ export class ProblemModel {
   }
 
   deleteProblem(id: number): void {
-    this.problemService.deleteProblem(id).subscribe(() => {
-      const index = this.problems.findIndex(p => this.locator(p, id));
-      if (index > -1) {
-        this.problems.splice(index, 1);
-      }
-    });
+    this.problemService.deleteProblem(id).subscribe();
   }
 
 }
