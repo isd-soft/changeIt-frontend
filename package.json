@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start:prod": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -31,6 +31,7 @@
     "@tinymce/tinymce-angular": "^4.2.0",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.4",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "ng2-charts": "^2.4.2",
     "ngx-file-drop": "^10.1.1",
