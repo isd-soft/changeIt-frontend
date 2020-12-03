@@ -1,52 +1,41 @@
 {
-  "name": "angular-registration-login-example",
+  "name": "changeit-frontend",
   "version": "0.0.0",
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "heroku-postbuild": "ng build --configuration=production",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^3.0.0-beta.0",
+    "@angular/cli": "^10.0.1",
+    "@angular/compiler-cli": "^10.0.3",
     "@angular/animations": "^10.0.3",
     "@angular/common": "^10.0.3",
     "@angular/compiler": "^10.0.3",
     "@angular/core": "^10.0.3",
     "@angular/forms": "^10.0.3",
-    "@angular/localize": "^10.0.3",
     "@angular/platform-browser": "^10.0.3",
     "@angular/platform-browser-dynamic": "^10.0.3",
     "@angular/router": "^10.0.3",
-    "@kolkov/ngx-gallery": "^1.2.3",
-    "@livechat/angular-widget": "^0.3.1",
-    "@ng-bootstrap/ng-bootstrap": "^8.0.0",
-    "@tinymce/tinymce-angular": "^4.2.0",
-    "bootstrap": "^4.5.0",
-    "chart.js": "^2.9.4",
-    "jquery": "^3.4.1",
-    "ng2-charts": "^2.4.2",
-    "ngx-file-drop": "^10.1.1",
-    "ngx-image": "^1.0.7",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1100.1",
-    "@angular/cli": "^10.0.1",
-    "@angular/compiler-cli": "^10.0.3",
-    "@types/googlemaps": "^3.39.13",
+    "@angular-devkit/build-angular": "^0.1100.3",
     "@types/jasmine": "^3.5.0",
     "@types/jasminewd2": "^2.0.3",
-    "@types/node": "^12.19.8",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0-next.1",
-    "exports-loader": "^1.1.1",
-    "imports-loader": "^1.2.0",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "^5.0.0",
     "karma": "^5.0.0",
@@ -57,10 +46,6 @@
     "protractor": "^7.0.0",
     "ts-node": "^8.3.0",
     "tslint": "^6.1.0",
-    "typescript": "^3.9.7"
-  },
-  "engines": {
-    "node": "12.19.0",
-    "npm": "6.14.8"
+    "typescript": "^3.9.5"
   }
 }
