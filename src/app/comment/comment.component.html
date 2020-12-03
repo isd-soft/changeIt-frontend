@@ -1,0 +1,38 @@
+<li>
+  <div class="commenterName">
+    <b>
+      <a class="nav-link" (click)="onClick(comment)">
+        <img *ngIf="logo" [src]="logo" width="50px" height="50px">
+        {{ comment?.user?.firstName }}
+        {{ comment?.user?.lastName }}
+      </a>
+    </b>
+  </div>
+  <div class="commentText">
+    <p class="">
+      <i>
+        {{ comment?.content }}
+      </i>
+    </p>
+    <div class="d-flex justify-content-between">
+                <span class="date sub-text">
+                {{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}
+                </span>
+      <div>
+        {{ comment?.votes }}
+        <button class="btn btn-primary" *ngIf="user && !likes && !dislikes" (click)="likeCommentOnClick()" [disabled]="likes">
+          Like
+        </button>
+        <button class="btn btn-dark" *ngIf="user && likes" (click)="deleteLikeCommentOnClick()" [disabled]="!likes">
+          Cancel Like
+        </button>
+        <button class="btn btn-danger" *ngIf="user && !likes && !dislikes" (click)="dislikeCommentOnClick()" [disabled]="dislikes">
+          Dislike
+        </button>
+        <button class="btn btn-dark" *ngIf="user && dislikes" (click)="deleteDislikeCommentOnClick()" [disabled]="!dislikes">
+          Cancel Dislike
+        </button>
+      </div>
+    </div>
+  </div>
+</li>

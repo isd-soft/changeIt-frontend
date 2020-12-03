@@ -1,0 +1,109 @@
+<div class="container" *ngIf="problem">
+  <div class="text-center m-4">
+    <h1>{{ problem?.title }}</h1>
+    <h5 *ngIf="problem.location.locationName">{{ problem?.location.district.districtName }}, {{ problem?.location.locationName }}</h5>
+
+        <div class="domains">
+          <h5 class="text-warning" *ngFor="let domain of problem.domains"> {{ domain.domainName }} </h5>
+        </div>
+
+    <p><i>{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</i></p>
+
+  </div>
+
+  <div class ="p-3 row">
+    <div class="description col-11">
+      <p [innerHTML]="problem?.description" *ngIf="!editDescription"  align="justify"></p>
+      <textarea [(ngModel)]="problem.description" *ngIf="editDescription" name="description" required cols="135" [rows]="problem.description.length / 120"></textarea>
+    </div>
+
+   <div class="col-1 buttons">
+     <button *ngIf="(author || user.role == 'ADMIN') && !editDescription" class="btn editing btn-warning"  (click)="toggleEditingDescription()">
+       Edit Description
+     </button>
+
+     <button *ngIf="(author || user.role == 'ADMIN') && editDescription" class="btn editing btn-warning" (click)="saveDescription()">
+       Save
+     </button>
+
+     <div class="row">
+       <h4 class="m-4"
+           [ngClass]="{'activestatus': problem.status === 'ACTIVE',
+        'donestatus': problem.status === 'DONE',
+        'inprogress': problem.status === 'IN_PROGRESS',
+        'rejected': problem.status === 'REJECTED'}">
+         {{ problem?.status}}</h4>
+       <div class="d-flex justify-content-end " *ngIf="user?.role == 'ADMIN'">
+         <select id="changeStatus" class="form-control changeStatus ml-2 mr-2" #problemStatus>
+           <option selected>Choose status</option>
+           <option>DONE</option>
+           <option>IN_PROGRESS</option>
+           <option>ACTIVE</option>
+           <option>REJECTED</option>
+         </select>
+         <button type="submit" class="btn btn-primary"
+                 (click)="changeStatus(problem.id, problemStatus.value)">Change</button>
+       </div>
+     </div>
+   </div>
+  </div>
+
+<div class="images">
+
+  <app-galery [problemId]="problem.id"></app-galery>
+
+</div>
+
+
+<div *ngIf="author && problem">
+
+  <app-upload-image [imageNumber]="imageNumber" [problemId]="problemId"></app-upload-image>
+
+</div>
+
+  <div *ngIf="problem.address">
+    <h6> Address:</h6>
+
+
+    <p>{{problem?.location.district.districtName}}, {{problem.address.address}}</p>
+    {{location()}}
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+      <agm-marker [latitude]="problem.address.lat" [longitude]="problem.address.lng">
+      </agm-marker>
+    </agm-map>
+  </div>
+
+  <div class="votes d-flex justify-content-center">
+    <h3>Votes: {{ problem?.votesCount }}</h3>
+  </div>
+  <div class="vote d-flex justify-content-center">
+    <button class="btn btn-primary" *ngIf="user && !vote && problem.status === 'ACTIVE'" (click)="voteOnClick()"  [disabled]="vote">
+      Vote for this problem
+    </button>
+    <button class="btn btn-secondary" *ngIf="user && vote"  [disabled]="vote">
+      You have already voted
+    </button>
+    <button class="btn btn-secondary" *ngIf="problem.status !== 'ACTIVE'"  disabled>
+      Voting disabled
+    </button>
+  </div>
+
+
+  <div class="comments d-flex justify-content-center">
+    <div class="detailBox">
+      <div class="titleBox d-flex justify-content-center">
+        <label>Comments</label>
+      </div>
+      <div class="actionBox" >
+        <ul class="commentList" *ngIf="canLoadComments">
+          <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+        </ul>
+        <div class="addcomment d-flex justify-content-center">
+          <input class="form-control" type="text" placeholder="Your comments" #content/>
+          <button class="btn btn-primary ml-1" (click)="addComment(content.value)">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

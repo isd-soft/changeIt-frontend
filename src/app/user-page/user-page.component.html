@@ -1,0 +1,56 @@
+
+<div class="container" align="center">
+  <br>
+  <div class="col-sm-10">
+  <div class="card">
+    <div class="card-header"><h4 class="d-flex justify-content-center">User Profile</h4></div>
+    <div class="card-body">
+      <div class="d-flex flex-row-between">
+        <div class="col-sm-6 mt-3">
+          <div class="fileUpload">
+            <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                           (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+              <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                <a role="button" (click)="openFileSelector()">
+                  <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
+                </a>
+              </ng-template>
+            </ngx-file-drop>
+          </div>
+          <div class="mt-4" style="color:#999999;" >click here to change profile image</div>
+        </div>
+        <div>
+          <h4 style="color:#00b1b1;"> {{ user.firstName }} {{user.lastName}} </h4>
+          <p class="d-flex flex-row-reverse">{{user.role}}</p>
+        </div>
+      </div>
+      <div class="box-body">
+        <hr style="margin:15px 0 15px 0;">
+
+        <div class="d-flex justify-content-between">
+          <div>First Name:</div><div>{{user.firstName}}</div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>Last Name: </div><div>{{user.lastName}}</div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>Email:</div><div> {{user.email}}</div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div> Status:</div><div>{{user.status}}</div>
+        </div>
+        <li class="nav-item" *ngIf="user">
+          <a class="nav-link d-flex justify-content-end" (click)="onClick()">Change password</a>
+        </li>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+
+
+

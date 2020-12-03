@@ -1,53 +1,32 @@
-﻿<!--<div class="wrapper fadeInDown">-->
-<!--  <div>-->
-<!--    &lt;!&ndash; Tabs Titles &ndash;&gt;-->
-
-<!--    &lt;!&ndash; Icon &ndash;&gt;-->
-<!--    <div class="fadeIn first">-->
-<!--      <label>Log in</label>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Login Form &ndash;&gt;-->
-<!--    <form [formGroup]="form" (ngSubmit)="onSubmit()">-->
-<!--      <input type="email" id="login" class="fadeIn second" required="required" name="login" placeholder="email">-->
-<!--      <input type="password" id="password" class="fadeIn third" required="required" name="login" placeholder="password">-->
-<!--      <input type="submit" class="fadeIn fourth" value="Log In">-->
-<!--    </form>-->
-
-<!--    &lt;!&ndash; Remind Passowrd &ndash;&gt;-->
-<!--    <div id="formFooter">-->
-<!--      <a class="underlineHover" href="#">Forgot Password?</a>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
-
-
-
-
-<div class="wrapper fadeInDown">
+﻿<div class="wrapper fadeInDown">
     <h4 class="fadeIn first">Login</h4>
     <div class="card-body" id="formContent">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <input type="email" name="email" placeholder="email" formControlName="email" class="form-control fadeIn second" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="email" class="form-control fadeIn second" placeholder="email"
+                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="password" formControlName="password" class="form-control fadeIn third" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                </div>
+          </div>
+
+          <div class="form-group">
+            <input type="password" placeholder="password" formControlName="password" class="fadeIn third form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
             </div>
-            <div class="form-group formFooter fadeIn fourth">
-                <button [disabled]="loading" class="btn btn-primary ">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
-                </button>
-            </div>
+          </div>
+
+          <div class="form-group formFooter fadeIn fourth">
+              <button [disabled]="loading" class="btn btn-primary ">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Login
+              </button>
+            <a routerLink="/reset-password" class="btn btn-link">Reset Password</a>
+          </div>
         </form>
     </div>
 </div>

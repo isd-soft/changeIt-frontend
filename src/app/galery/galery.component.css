@@ -1,0 +1,18 @@
+.gallery-wrapper {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
+
+}
+
+.remove {
+  width: 800px;
+}
+
+button {
+  width: 19%;
+}

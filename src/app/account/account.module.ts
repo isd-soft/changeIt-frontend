@@ -2,21 +2,27 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AccountRoutingModule } from './account-routing.module';
-import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AfterRegistrationComponent } from './after-registration/after-registration.component';
+import { AfterConfirmEmailComponent } from './after-confirm-email/after-confirm-email.component';
+import {RouterModule} from '@angular/router';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        AccountRoutingModule
+        RouterModule,
     ],
     declarations: [
-        LayoutComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AfterRegistrationComponent,
+        AfterConfirmEmailComponent,
+        ResetPasswordComponent,
+        NewPasswordComponent
     ]
 })
 export class AccountModule { }

@@ -1,0 +1,114 @@
+<div class="container" *ngIf="user">
+  <h1>All info about user</h1>
+  <hr/>
+  <br>
+
+  <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
+  <div *ngIf="logo">
+    <div *ngIf="userRole === 'ADMIN'">
+      <button class="btn btn-danger btn-sm m-1" (click)="removeUserLogo(user.user_id)">
+        Delete profile image
+      </button>
+    </div>
+  </div>
+
+  <dl class="row">
+    <dt class="col-sm-3">First Name</dt>
+    <dd class="col-sm-9">{{user.firstName}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Last Name</dt>
+    <dd class="col-sm-9">{{user.lastName}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">{{user.email}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Role</dt>
+    <dd class="col-sm-9">{{user.role}}</dd>
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">
+      <div>{{user.userStatus}}</div>
+      <div *ngIf="userRole == 'ADMIN'">
+        <select id="changeStatus" class="form-control changeStatus" (change)="changeStatus()" style="width: 150px" #userStatus>
+          <option selected>Choose status</option>
+          <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>
+          <option [selected]="user.userStatus == 'INACTIVE'" value="INACTIVE">INACTIVE</option>
+          <option [selected]="user.userStatus == 'BANNED'" value="BANNED" >BANNED</option>
+        </select>
+      </div>
+    </dd>
+  </dl>
+
+<div id="sidebar">
+  <p>
+    <a class="btn btn-primary m-1" id="problemButton" data-toggle="collapse" href="#problems" role="button" data-parent="#sidebar" aria-expanded="true" aria-controls="problems">
+      Problems
+    </a>
+    <a class="btn btn-primary m-1" id="commentButton" data-toggle="collapse" href="#comments" role="button" data-parent="#sidebar" aria-expanded="false" aria-controls="comments">
+      Comments
+    </a>
+
+  </p>
+  <div class="collapse" id="comments">
+    <div class="card card-body">
+      <div class="comment-widgets p-1" *ngFor="let comment of comments" >
+            <div class="d-flex flex-row comment-row">
+              <div class="comment-text w-100">
+
+
+<!--                <span class="text-muted float-right">-->
+<!--&lt;!&ndash;                  Problem ID: {{ comment?.problem.id}}&ndash;&gt;-->
+<!--                 Problem title: {{ comment?.problem.title}}</span>-->
+
+                <a [routerLink]="['/problem/', comment?.problem.id]">
+
+                <span class="text-muted float-left">
+                 <strong><u>Problem title: {{ comment?.problem.title}}</u></strong></span>
+                </a>
+                <br>
+                <span class="m-b-15 d-block">{{ comment?.content }} </span>
+                <div class="comment-footer">
+                  <span class="text-muted float-left">{{ comment?.created_at | date: 'dd MMMM yyyy HH:mm' }}</span>
+                  <span class="text-muted float-right">Votes: {{ comment?.votes }} </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+  <div class="collapse" id="problems">
+    <div class="card card-body">
+      <div class="comment-widgets p-1" *ngFor="let problem of problems" >
+        <div class="d-flex flex-row comment-row">
+          <div class="comment-text w-100">
+
+            <a [routerLink]="['/problem/', problem?.id]">
+              <span class="text-muted float-left"><strong><u>Problem title: {{ problem.title}}</u></strong></span>
+            </a>
+
+            <br>
+            <span class="m-b-15 d-block" [innerHTML]="problem?.description"></span>
+            <div class="comment-footer">
+              <span class="text-muted float-left">{{ problem?.createdAt | date: 'dd MMMM yyyy HH:mm' }}</span>
+
+              <span class="text-muted float-right">Votes: {{ problem?.votesCount}} </span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

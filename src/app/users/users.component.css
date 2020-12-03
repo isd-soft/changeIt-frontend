@@ -1,0 +1,16 @@
+h1, th{
+  color: cadetblue;
+}
+
+label {
+  /*color: #B4886B;*/
+  color: cadetblue;
+  font-weight: bold;
+  display: block;
+  width: 150px;
+  /*float: left;*/
+}
+
+button {
+  background-color: cadetblue;
+}

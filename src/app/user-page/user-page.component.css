@@ -1,0 +1,21 @@
+input.hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.bot-border{
+  border-bottom:1px #f8f8f8 solid;
+  margin:5px 0  5px 0;
+}
+
+li {
+  list-style-type: none; /* Убираем маркеры */
+}
+
+.remove {
+  width: 800px;
+}
+
+.fileUpload{
+  width: 20%;
+}

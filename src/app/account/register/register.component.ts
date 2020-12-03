@@ -3,9 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService, AlertService } from '../../services';
+import { AccountService, AlertService } from '../../service';
 
-@Component({ templateUrl: 'register.component.html',   styleUrls: ['./register.component.css'] })
+@Component({
+  selector: 'app-register',
+  templateUrl: 'register.component.html',
+  styleUrls: ['./register.component.css'] })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
@@ -21,10 +24,10 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            firstName: ['', [Validators.required,Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+            lastName: ['', [Validators.required,Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+            email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+            password: ['', [Validators.required, Validators.minLength(8)]]
         });
     }
 
@@ -48,7 +51,7 @@ export class RegisterComponent implements OnInit {
             .subscribe({
                 next: () => {
                     this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['../login'], { relativeTo: this.route });
+                    this.router.navigate(['register/confirm']);
                 },
                 error: error => {
                     this.alertService.error(error);
