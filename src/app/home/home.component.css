@@ -50,6 +50,6 @@ p {
 }
 
 .activeLink {
-  border: 2px solid #6610f2;
+  background-color: #6610f2;
 }
 

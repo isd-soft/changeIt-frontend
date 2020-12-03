@@ -93,7 +93,7 @@
   </div>
 
   <div class="d-flex justify-content-center m-1">
-    <a *ngFor="let p of totalPages" class="m-1 p-1" [ngClass]="{'activeLink': p == page}" (click)="changePage(p)">
+    <a *ngFor="let p of totalPages" class="m-1 btn btn-outline-primary text-black-50" [ngClass]="{'activeLink': p == page}" (click)="changePage(p)">
       {{p+1}}
     </a>
   </div>
