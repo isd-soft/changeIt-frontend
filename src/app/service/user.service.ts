@@ -21,6 +21,10 @@ export class UserService {
     return this.sendRequestWithParams<User[]>('GET', environment.apiUrl + '/user/all');
   }
 
+  getUser(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user/${id}`);
+  }
+
   confirmEmail(token: string): Observable<any> {
     const myParams = new HttpParams().set('token', token);
     return this.sendRequestWithParams('GET', `${environment.apiUrl}/user/registrationConfirm`, myParams );

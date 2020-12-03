@@ -89,6 +89,7 @@ export class CommentComponent implements OnInit {
   }
 
   onClick(comment: Comment) {
-        this.router.navigate(['/user-show/' + comment.user.user_id] );
+    console.log(comment.user);
+    this.router.navigate(['/user-show/' + comment.user.user_id] );
   }
 }

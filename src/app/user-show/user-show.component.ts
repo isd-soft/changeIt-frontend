@@ -19,7 +19,6 @@ export class UserShowComponent implements OnInit {
   comments: Comment[];
   problems: Problem[];
   logo: string;
-  userRole: User;
 
 
   constructor(private accountService: AccountService,
@@ -33,28 +32,31 @@ export class UserShowComponent implements OnInit {
     route.params.subscribe(params => {
       const id = params.id;
       if (id != null) {
-        this.user = userModel.getUser(id);
+        this.userService.getUser(id).subscribe(user => {
+          this.user = user;
+
+          this.commentService.getCommentsByUserId(this.user.user_id).subscribe(data => {
+            this.comments = data;
+          });
+
+          this.problemService.getProblemsByUserId(this.user).subscribe(data => {
+            this.problems = data;
+          });
+
+          this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
+            if (data.logo){
+              this.logo = 'data:image/png;base64,' + data.logo;
+            } else {
+              this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
+            }
+          });
+        });
       }
     });
-    this.accountService.user.subscribe(x => this.userRole = x);
+
   }
 
   ngOnInit(): void {
-    this.commentService.getCommentsByUserId(this.user.user_id).subscribe(data => {
-      this.comments = data;
-    });
-
-    this.problemService.getProblemsByUserId(this.user).subscribe(data => {
-      this.problems = data;
-    });
-
-    this.accountService.getUserLogo(this.user.user_id).subscribe(data => {
-      if (data.logo){
-        this.logo = 'data:image/png;base64,' + data.logo;
-      } else {
-        this.logo = 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
-      }
-    });
   }
   changeStatus(): void {
     var status  = (document.getElementById('changeStatus') as HTMLInputElement).value;

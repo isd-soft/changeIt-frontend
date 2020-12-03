@@ -5,7 +5,7 @@
 
   <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
   <div *ngIf="logo">
-    <div *ngIf="userRole?.role === 'ADMIN'">
+    <div *ngIf="user?.role === 'ADMIN'">
       <button class="btn btn-danger btn-sm m-1" (click)="removeUserLogo(user.user_id)">
         Delete profile image
       </button>

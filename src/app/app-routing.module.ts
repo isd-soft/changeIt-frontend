@@ -18,7 +18,6 @@ import {StatisticComponent} from '@app/statistics/statistic.component';
 import {AdminGuard} from '@app/helpers/admin.guard';
 import {UsersComponent} from '@app/users/users.component';
 import {UserShowComponent} from '@app/user-show/user-show.component';
-import {UserShowResolver} from '@app/user-show/user-show.resolver';
 import {UsersResolver} from '@app/users/users.resolver';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -38,7 +37,7 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: 'new-password', component: NewPasswordComponent},
-  {path: 'user-show/:id', component: UserShowComponent, canActivate: [AuthGuard], resolve: {model: UserShowResolver}},
+  {path: 'user-show/:id', component: UserShowComponent},
   {path: 'users', component: UsersComponent, canActivate: [AuthGuard], resolve: {model: UsersResolver}},
   {path: '**', redirectTo: ''}
 ];
