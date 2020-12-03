@@ -29,13 +29,11 @@
       <table class="table table-sm table-striped table-light with-scroll">
         <thead>
         <tr>
-          <th scope="col">id</th>
           <th scope="col">District Name</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let district of getDistricts()">
-          <td>{{ district?.district_id }}</td>
           <td>{{ district?.districtName }}</td>
           <td width="10%">
             <div ngbDropdown container="body">
@@ -93,14 +91,12 @@
       <table class="table table-sm table-striped table-light with-scroll">
         <thead>
         <tr>
-          <th scope="col">id</th>
           <th scope="col">Location Name</th>
           <th scope="col">District</th>
         </tr>
         </thead>
         <tbody>
         <tr class="text" *ngFor="let location of getLocations()">
-          <td>{{ location?.location_id }}</td>
           <td>{{ location?.locationName }}</td>
           <td>{{ location?.district.districtName}}</td>
           <td width="10%">
@@ -167,13 +163,11 @@
       <table class="table table-sm table-striped table-light">
         <thead>
         <tr>
-          <th scope="col">id</th>
           <th scope="col">Domain Name</th>
         </tr>
         </thead>
         <tbody>
         <tr class="text" *ngFor="let domain of getDomains()">
-          <td>{{ domain?.domain_id }}</td>
           <td>{{ domain?.domainName }}</td>
           <td width="10%">
             <div ngbDropdown container="body">
@@ -230,7 +224,6 @@
       <table class="table table-sm table-striped table-light">
         <thead>
         <tr>
-          <th scope="col">id</th>
           <th scope="col">Problem Name</th>
           <th scope="col">Votes</th>
           <th scope="col">Status</th>
@@ -238,7 +231,6 @@
         </thead>
         <tbody>
         <tr class="text" *ngFor="let problem of getProblems()">
-          <td>{{ problem?.id }}</td>
           <td class="nav-link btn-link" (click)="linkToProblem(problem?.id)">{{ problem?.title }}</td>
           <td>{{ problem?.votesCount }}</td>
           <td>{{ problem?.status }}</td>
