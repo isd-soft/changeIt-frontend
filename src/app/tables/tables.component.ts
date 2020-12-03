@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
 export class TablesComponent implements OnInit {
 
   selectedId: number;
-  private problems: Problem[] = [];
+  problems: Problem[];
   private locator = (p: Problem, id: number) => p.id == id;
 
   constructor(private districtModel: DistrictModel,
