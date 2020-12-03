@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" *ngIf="user">
   <h1>All info about user</h1>
   <hr/>
   <br>
 
   <img class="img" *ngIf="logo" [src]="logo" width="150px" height="150px">
   <div *ngIf="logo">
-    <div *ngIf="user?.role === 'ADMIN'">
+    <div *ngIf="userRole === 'ADMIN'">
       <button class="btn btn-danger btn-sm m-1" (click)="removeUserLogo(user.user_id)">
         Delete profile image
       </button>
@@ -35,8 +35,8 @@
   <dl class="row">
     <dt class="col-sm-3">Status</dt>
     <dd class="col-sm-9">
-      <div *ngIf="userRole?.role != 'ADMIN'">{{user.userStatus}}</div>
-      <div *ngIf="userRole?.role == 'ADMIN'">
+      <div>{{user.userStatus}}</div>
+      <div *ngIf="userRole == 'ADMIN'">
         <select id="changeStatus" class="form-control changeStatus" (change)="changeStatus()" style="width: 150px" #userStatus>
           <option selected>Choose status</option>
           <option [selected]="user.userStatus == 'ACTIVE'" value="ACTIVE">ACTIVE</option>

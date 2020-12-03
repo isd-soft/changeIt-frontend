@@ -15,10 +15,11 @@ import {parseStatementForUmdModule} from '@angular/compiler-cli/ngcc/src/host/um
   styleUrls: ['./user-show.component.css']
 })
 export class UserShowComponent implements OnInit {
-  user: User = new User();
+  user: User;
   comments: Comment[];
   problems: Problem[];
   logo: string;
+  userRole: string;
 
 
   constructor(private accountService: AccountService,
@@ -34,7 +35,7 @@ export class UserShowComponent implements OnInit {
       if (id != null) {
         this.userService.getUser(id).subscribe(user => {
           this.user = user;
-
+          console.log(user);
           this.commentService.getCommentsByUserId(this.user.user_id).subscribe(data => {
             this.comments = data;
           });
@@ -53,6 +54,7 @@ export class UserShowComponent implements OnInit {
         });
       }
     });
+    this.userRole = this.accountService.userValue.role;
 
   }
 
