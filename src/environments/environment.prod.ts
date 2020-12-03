@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4000'
+  apiUrl: 'https://changeit-server.herokuapp.com/api/v1'
 };
